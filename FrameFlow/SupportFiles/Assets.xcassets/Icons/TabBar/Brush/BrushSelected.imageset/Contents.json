@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "BrushSelected.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

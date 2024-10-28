@@ -6,17 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		63299F7C2CCFCAB2002609CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63299F782CCFCAB2002609CB /* Assets.xcassets */; };
-		63299F7D2CCFCAB2002609CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63299F792CCFCAB2002609CB /* ContentView.swift */; };
-		63299F7E2CCFCAB2002609CB /* FrameFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63299F7A2CCFCAB2002609CB /* FrameFlowApp.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		63299F652CCFCA23002609CB /* FrameFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		63299F782CCFCAB2002609CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		63299F792CCFCAB2002609CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		63299F7A2CCFCAB2002609CB /* FrameFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameFlowApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -41,9 +32,6 @@
 		63299F5C2CCFCA23002609CB = {
 			isa = PBXGroup;
 			children = (
-				63299F7F2CD003F4002609CB /* Application */,
-				63299F802CD0040B002609CB /* CanvasModule */,
-				63299F882CD0048B002609CB /* SupportFiles */,
 				63299F672CCFCA23002609CB /* FrameFlow */,
 				63299F662CCFCA23002609CB /* Products */,
 			);
@@ -55,38 +43,6 @@
 				63299F652CCFCA23002609CB /* FrameFlow.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		63299F7F2CD003F4002609CB /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				63299F7A2CCFCAB2002609CB /* FrameFlowApp.swift */,
-			);
-			path = Application;
-			sourceTree = "<group>";
-		};
-		63299F802CD0040B002609CB /* CanvasModule */ = {
-			isa = PBXGroup;
-			children = (
-				63299F892CD0055F002609CB /* View */,
-			);
-			path = CanvasModule;
-			sourceTree = "<group>";
-		};
-		63299F882CD0048B002609CB /* SupportFiles */ = {
-			isa = PBXGroup;
-			children = (
-				63299F782CCFCAB2002609CB /* Assets.xcassets */,
-			);
-			path = SupportFiles;
-			sourceTree = "<group>";
-		};
-		63299F892CD0055F002609CB /* View */ = {
-			isa = PBXGroup;
-			children = (
-				63299F792CCFCAB2002609CB /* ContentView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,7 +109,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63299F7C2CCFCAB2002609CB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,8 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63299F7D2CCFCAB2002609CB /* ContentView.swift in Sources */,
-				63299F7E2CCFCAB2002609CB /* FrameFlowApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
