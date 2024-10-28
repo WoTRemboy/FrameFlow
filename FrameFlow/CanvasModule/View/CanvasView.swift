@@ -13,6 +13,7 @@ struct CanvasView: View {
         NavigationStack {
             ZStack {
                 background
+                    .ignoresSafeArea()
                 VStack {
                     CanvasHeaderView()
                     Spacer()
@@ -20,8 +21,8 @@ struct CanvasView: View {
                     Spacer()
                     CanvasTabbarView()
                 }
-                .padding(.vertical, 32)
-                .safeAreaPadding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, hasNotch() ? 60 : 16)
             }
         }
     }
