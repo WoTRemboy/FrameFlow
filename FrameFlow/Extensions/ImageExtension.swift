@@ -57,4 +57,8 @@ extension Image {
         static let pencilInactive = Image("PencilInactive")
         static let pencilSelected = Image("PencilSelected")
     }
+    
+    enum Canvas {
+        static let canvas = Image("Canvas")
+    }
 }

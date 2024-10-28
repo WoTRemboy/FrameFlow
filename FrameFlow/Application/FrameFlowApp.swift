@@ -11,7 +11,7 @@ import SwiftUI
 struct FrameFlowApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CanvasView()
         }
     }
 }

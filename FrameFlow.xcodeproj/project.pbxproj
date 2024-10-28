@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXFileReference section */
@@ -11,11 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		63299F672CCFCA23002609CB /* FrameFlow */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = FrameFlow;
-			sourceTree = "<group>";
-		};
+		63299F672CCFCA23002609CB /* FrameFlow */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = FrameFlow; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +82,7 @@
 				};
 			};
 			buildConfigurationList = 63299F602CCFCA23002609CB /* Build configuration list for PBXProject "FrameFlow" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -94,7 +91,6 @@
 			);
 			mainGroup = 63299F5C2CCFCA23002609CB;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 63299F662CCFCA23002609CB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
