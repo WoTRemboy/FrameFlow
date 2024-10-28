@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Right Active.svg",
+      "filename" : "RightActiveLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Right Active 1.svg",
       "idiom" : "universal"
     }
   ],

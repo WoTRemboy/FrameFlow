@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Arrow Up.svg",
+      "filename" : "ArrowUpLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Arrow Up 1.svg",
       "idiom" : "universal"
     }
   ],

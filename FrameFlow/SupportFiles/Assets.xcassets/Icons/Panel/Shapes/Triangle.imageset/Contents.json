@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "triangle.svg",
+      "filename" : "triangleLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "triangle 1.svg",
       "idiom" : "universal"
     }
   ],

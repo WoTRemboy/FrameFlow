@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "square.svg",
+      "filename" : "squareLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "square 1.svg",
       "idiom" : "universal"
     }
   ],

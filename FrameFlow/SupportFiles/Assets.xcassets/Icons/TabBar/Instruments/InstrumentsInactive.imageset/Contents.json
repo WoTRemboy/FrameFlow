@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "InstrumentsInactive.svg",
+      "filename" : "InstrumentsInactiveLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "InstrumentsInactive 1.svg",
       "idiom" : "universal"
     }
   ],

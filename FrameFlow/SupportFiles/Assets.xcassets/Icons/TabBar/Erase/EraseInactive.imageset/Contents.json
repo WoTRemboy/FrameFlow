@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "EraseInactive.svg",
+      "filename" : "EraseInactiveLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "EraseInactive 1.svg",
       "idiom" : "universal"
     }
   ],

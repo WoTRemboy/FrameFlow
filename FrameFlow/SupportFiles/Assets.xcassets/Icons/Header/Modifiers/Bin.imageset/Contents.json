@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Bin.svg",
+      "filename" : "BinLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Bin 1.svg",
       "idiom" : "universal"
     }
   ],

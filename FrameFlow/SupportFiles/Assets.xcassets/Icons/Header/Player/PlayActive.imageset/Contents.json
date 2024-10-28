@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Active.svg",
+      "filename" : "PlayActiveLisht.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Active 1.svg",
       "idiom" : "universal"
     }
   ],

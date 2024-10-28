@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "PauseActive.svg",
+      "filename" : "PauseActiveLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "PauseActive 1.svg",
       "idiom" : "universal"
     }
   ],

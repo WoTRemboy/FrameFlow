@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Unactive.svg",
+      "filename" : "PlayUnactiveLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Unactive 1.svg",
       "idiom" : "universal"
     }
   ],

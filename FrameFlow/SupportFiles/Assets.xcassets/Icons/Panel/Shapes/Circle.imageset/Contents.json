@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Circle.svg",
+      "filename" : "CircleLight.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Circle 1.svg",
       "idiom" : "universal"
     }
   ],
