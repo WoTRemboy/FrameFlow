@@ -28,7 +28,7 @@ struct EditorView: View {
                         canvas
                     }
                     Spacer()
-                    CanvasTabbarView {
+                    CanvasTabbarView(selectedColor: selectedColor) {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             showColorPicker.toggle()
                         }
@@ -38,7 +38,9 @@ struct EditorView: View {
                 .padding(.vertical, hasNotch() ? 60 : 16)
                 
                 if showColorPicker {
-                    ColorPickerShortView()
+                    ColorPickerShortView { color in
+                        selectedColor = color
+                    }
                         .padding(.bottom, hasNotch() ? 110 : 65)
                         .zIndex(1)
                 }

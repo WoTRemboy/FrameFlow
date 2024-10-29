@@ -38,6 +38,7 @@ extension Color {
     enum SupportColors {
         static let supportNavBar = Color("SupportNavBar")
         static let supportBorder = Color("SupportBorder")
+        static let supportIconBorder = Color("SupportIconBorder")
         static let supportSelection = Color("SupportSelection")
         static let supportOverlay = Color("SupportOverlay")
         static let supportSegmented = Color("SupportSegmented")

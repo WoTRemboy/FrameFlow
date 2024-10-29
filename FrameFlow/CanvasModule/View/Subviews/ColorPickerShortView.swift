@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ColorPickerShortView: View {
     
+    internal var onColorSelected: (Color) -> Void
+    
     internal var body: some View {
         ZStack {
             background
             buttons
         }
-        
     }
     
     private var buttons: some View {
@@ -29,7 +30,9 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    onColorSelected(Color.PaletteColors.whitePalette)
+                }
             } label: {
                 Circle()
                     .scaledToFit()
@@ -38,7 +41,9 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    onColorSelected(Color.PaletteColors.redPalette)
+                }
             } label: {
                 Circle()
                     .scaledToFit()
@@ -47,7 +52,9 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    onColorSelected(Color.PaletteColors.blackPalette)
+                }
             } label: {
                 Circle()
                     .scaledToFit()
@@ -56,7 +63,9 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    onColorSelected(Color.PaletteColors.bluePalette)
+                }
             } label: {
                 Circle()
                     .scaledToFit()
@@ -68,6 +77,8 @@ struct ColorPickerShortView: View {
     
     private var background: some View {
         RoundedRectangle(cornerRadius: 4)
+            .foregroundStyle(Color.SupportColors.supportSelection)
+            .opacity(0.1)
             .frame(width: 256, height: 64)
         
             .overlay(
@@ -81,5 +92,5 @@ struct ColorPickerShortView: View {
 }
 
 #Preview {
-    ColorPickerShortView()
+    ColorPickerShortView { _ in }
 }

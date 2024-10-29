@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct CanvasTabbarView: View {
+    
+    private var selectedColor: Color
     @State private var colorSelected: Bool = false
     
-    internal var onPaletteButtonTap: () -> Void
+    private var onPaletteButtonTap: () -> Void
+    
+    internal init(selectedColor: Color, onPaletteButtonTap: @escaping () -> Void) {
+        self.selectedColor = selectedColor
+        self.onPaletteButtonTap = onPaletteButtonTap
+    }
     
     internal var body: some View {
         HStack(spacing: 16) {
@@ -57,18 +64,22 @@ struct CanvasTabbarView: View {
                 }
             } label: {
                 Circle()
-                    .foregroundStyle(Color.PaletteColors.bluePalette)
+                    .foregroundStyle(selectedColor)
                     .scaledToFit()
                     .frame(width: 32)
                     .overlay(
                         Circle()
-                            .stroke(colorSelected ? Color.PaletteColors.greenPalette : Color.clear, lineWidth: 1)
+                            .stroke(colorSelected ? Color.PaletteColors.greenPalette : Color.SupportColors.supportIconBorder, lineWidth: 1)
                     )
+            }
+            .onChange(of: selectedColor) { _, _ in
+                onPaletteButtonTap()
+                colorSelected.toggle()
             }
         }
     }
 }
 
 #Preview {
-    CanvasTabbarView(onPaletteButtonTap: {})
+    CanvasTabbarView(selectedColor: .red, onPaletteButtonTap: {})
 }
