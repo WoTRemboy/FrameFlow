@@ -61,4 +61,8 @@ extension Image {
     enum Canvas {
         static let canvas = Image("Canvas")
     }
+    
+    enum Opening {
+        static let splashLogo = Image("SplashLogo")
+    }
 }
