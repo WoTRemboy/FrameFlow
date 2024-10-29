@@ -6,5 +6,22 @@
 //
 
 final class Texts {
+    enum OnboardingPage {
+        static let skip = "Skip"
+        static let next = "Next page"
+        static let started = "Get started"
+        
+        static let firstTitle = "Frame Flow"
+        static let firstDescription = "Create your frame-by-frame animation."
+        static let secondTitle = "Draw a masterpiece"
+        static let secondDescription = "Use tools to create an image on canvas."
+        static let thirdTitle = "Create animation"
+        static let thirdDescription = "View the result in the internal player."
+        static let fourthTitle = "Share with friends!"
+        static let fourthDescription = "Send the GIF to various messengers."
+    }
     
+    enum UserDefaults {
+        static let firstLaunch = "firstLaunch"
+    }
 }

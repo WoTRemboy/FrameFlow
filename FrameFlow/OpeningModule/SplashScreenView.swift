@@ -13,7 +13,8 @@ struct SplashScreenView: View {
     
     internal var body: some View {
         if isActive {
-            EditorView()
+            OnboardingScreenView()
+                .environmentObject(OnboardingViewModel())
         } else {
             content
                 .onAppear {

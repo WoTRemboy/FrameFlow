@@ -44,4 +44,10 @@ extension Color {
         static let supportSegmented = Color("SupportSegmented")
         static let supportTextField = Color("SupportTextField")
     }
+    
+    enum Tints {
+        static let orange = Color("OrangeTint")
+        static let green = Color("GreenTint")
+        static let blue = Color("BlueTint")
+    }
 }

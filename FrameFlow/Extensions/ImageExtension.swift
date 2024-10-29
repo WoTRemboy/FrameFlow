@@ -64,5 +64,9 @@ extension Image {
     
     enum Opening {
         static let splashLogo = Image("SplashLogo")
+        static let about = Image("SplashAboutApp")
+        static let draw = Image("SplashDrawFrame")
+        static let animate = Image("SplashCreateAnimation")
+        static let share = Image("SplashShareGif")
     }
 }
