@@ -26,8 +26,7 @@ struct CanvasTabbarView: View {
             } label: {
                 (currentMode == .pencil ? Image.TabBar.pencilSelected : Image.TabBar.pencilInactive)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 32)
+                    .frame(width: 32, height: 32)
             }
             
             Button {
@@ -37,8 +36,7 @@ struct CanvasTabbarView: View {
             } label: {
                 (currentMode == .brush ? Image.TabBar.brushSelected : Image.TabBar.brushInactive)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 32)
+                    .frame(width: 32, height: 32)
             }
             
             Button {
@@ -48,8 +46,7 @@ struct CanvasTabbarView: View {
             } label: {
                 (currentMode == .eraser ? Image.TabBar.eraseSelected : Image.TabBar.eraseInactive)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 32)
+                    .frame(width: 32, height: 32)
             }
             
             Button {
@@ -60,8 +57,7 @@ struct CanvasTabbarView: View {
             } label: {
                 (currentMode == .instruments ? Image.TabBar.instrumentsSelected : Image.TabBar.instrumentsInactive)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 32)
+                    .frame(width: 32, height: 32)
             }
             .onChange(of: selectedShape) { _, _ in
                 onShapeButtonTap()
