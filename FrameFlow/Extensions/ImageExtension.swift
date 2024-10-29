@@ -38,7 +38,7 @@ extension Image {
         
         enum Shapes {
             static let arrowUp = Image("ArrowUp")
-            static let cicle = Image("Cicle")
+            static let cicle = Image("Circle")
             static let square = Image("Square")
             static let triangle = Image("Triangle")
         }

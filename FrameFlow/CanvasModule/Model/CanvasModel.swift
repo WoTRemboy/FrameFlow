@@ -12,3 +12,10 @@ enum CanvasMode {
     case instruments
     case palette
 }
+
+enum Shape {
+    case square
+    case circle
+    case triangle
+    case arrow
+}

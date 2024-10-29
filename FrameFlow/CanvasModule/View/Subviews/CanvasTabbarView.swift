@@ -11,6 +11,9 @@ struct CanvasTabbarView: View {
     
     @Binding var currentMode: CanvasMode
     
+    internal var selectedShape: Shape
+    internal var onShapeButtonTap: () -> Void
+    
     internal var selectedColor: Color
     internal var onPaletteButtonTap: () -> Void
     
@@ -50,6 +53,7 @@ struct CanvasTabbarView: View {
             }
             
             Button {
+                onShapeButtonTap()
                 withAnimation(.easeInOut(duration: 0.2)) {
                     currentMode = .instruments
                 }
@@ -58,6 +62,9 @@ struct CanvasTabbarView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
+            }
+            .onChange(of: selectedShape) { _, _ in
+                onShapeButtonTap()
             }
             
             Button {
@@ -85,5 +92,5 @@ struct CanvasTabbarView: View {
 #Preview {
     @Previewable @State var previewMode: CanvasMode = .pencil
     
-    CanvasTabbarView(currentMode: $previewMode, selectedColor: .red, onPaletteButtonTap: {})
+    CanvasTabbarView(currentMode: $previewMode, selectedShape: .square, onShapeButtonTap: {}, selectedColor: .red, onPaletteButtonTap: {})
 }

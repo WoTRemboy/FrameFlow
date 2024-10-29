@@ -12,9 +12,11 @@ struct EditorView: View {
     @State private var currentLine: Line = Line(points: [], color: .black, lineWidth: 5)
     
     @State private var selectedColor: Color = .black
+    @State private var selectedShape: Shape = .square
     @State private var lineWidth: CGFloat = 5.0
     
     @State private var showColorPicker: Bool = false
+    @State private var showShapePicker: Bool = false
     @State private var currentMode: CanvasMode = .pencil
     
     internal var body: some View {
@@ -29,11 +31,21 @@ struct EditorView: View {
                         canvas
                     }
                     Spacer()
-                    CanvasTabbarView(currentMode: $currentMode, selectedColor: selectedColor) {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            showColorPicker.toggle()
-                        }
-                    }
+                    CanvasTabbarView(
+                        currentMode: $currentMode,
+                        selectedShape: selectedShape,
+                        onShapeButtonTap: {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                showColorPicker = false
+                                showShapePicker.toggle()
+                            }
+                        },
+                        selectedColor: selectedColor, onPaletteButtonTap: {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                showShapePicker = false
+                                showColorPicker.toggle()
+                            }
+                        })
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, hasNotch() ? 60 : 16)
@@ -41,6 +53,12 @@ struct EditorView: View {
                 if showColorPicker {
                     ColorPickerShortView { color in
                         selectedColor = color
+                    }
+                        .padding(.bottom, hasNotch() ? 110 : 65)
+                        .zIndex(1)
+                } else if showShapePicker {
+                    ShapesPickerView { shape in
+                        selectedShape = shape
                     }
                         .padding(.bottom, hasNotch() ? 110 : 65)
                         .zIndex(1)
