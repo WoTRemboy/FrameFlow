@@ -9,49 +9,52 @@ import SwiftUI
 
 struct CanvasTabbarView: View {
     
-    private var selectedColor: Color
-    @State private var colorSelected: Bool = false
+    @Binding var currentMode: CanvasMode
     
-    private var onPaletteButtonTap: () -> Void
-    
-    internal init(selectedColor: Color, onPaletteButtonTap: @escaping () -> Void) {
-        self.selectedColor = selectedColor
-        self.onPaletteButtonTap = onPaletteButtonTap
-    }
+    internal var selectedColor: Color
+    internal var onPaletteButtonTap: () -> Void
     
     internal var body: some View {
         HStack(spacing: 16) {
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    currentMode = .pencil
+                }
             } label: {
-                Image.TabBar.pencilInactive
+                (currentMode == .pencil ? Image.TabBar.pencilSelected : Image.TabBar.pencilInactive)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
             }
             
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    currentMode = .brush
+                }
             } label: {
-                Image.TabBar.brushInactive
+                (currentMode == .brush ? Image.TabBar.brushSelected : Image.TabBar.brushInactive)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
             }
             
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    currentMode = .eraser
+                }
             } label: {
-                Image.TabBar.eraseInactive
+                (currentMode == .eraser ? Image.TabBar.eraseSelected : Image.TabBar.eraseInactive)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
             }
             
             Button {
-                
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    currentMode = .instruments
+                }
             } label: {
-                Image.TabBar.instrumentsInactive
+                (currentMode == .instruments ? Image.TabBar.instrumentsSelected : Image.TabBar.instrumentsInactive)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
@@ -60,7 +63,7 @@ struct CanvasTabbarView: View {
             Button {
                 onPaletteButtonTap()
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    colorSelected.toggle()
+                    currentMode = .palette
                 }
             } label: {
                 Circle()
@@ -69,17 +72,18 @@ struct CanvasTabbarView: View {
                     .frame(width: 32)
                     .overlay(
                         Circle()
-                            .stroke(colorSelected ? Color.PaletteColors.greenPalette : Color.SupportColors.supportIconBorder, lineWidth: 1)
+                            .stroke(currentMode == .palette ? Color.PaletteColors.greenPalette : Color.SupportColors.supportIconBorder, lineWidth: 1)
                     )
             }
             .onChange(of: selectedColor) { _, _ in
                 onPaletteButtonTap()
-                colorSelected.toggle()
             }
         }
     }
 }
 
 #Preview {
-    CanvasTabbarView(selectedColor: .red, onPaletteButtonTap: {})
+    @Previewable @State var previewMode: CanvasMode = .pencil
+    
+    CanvasTabbarView(currentMode: $previewMode, selectedColor: .red, onPaletteButtonTap: {})
 }

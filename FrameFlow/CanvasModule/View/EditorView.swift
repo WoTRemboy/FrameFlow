@@ -15,6 +15,7 @@ struct EditorView: View {
     @State private var lineWidth: CGFloat = 5.0
     
     @State private var showColorPicker: Bool = false
+    @State private var currentMode: CanvasMode = .pencil
     
     internal var body: some View {
         NavigationStack {
@@ -28,7 +29,7 @@ struct EditorView: View {
                         canvas
                     }
                     Spacer()
-                    CanvasTabbarView(selectedColor: selectedColor) {
+                    CanvasTabbarView(currentMode: $currentMode, selectedColor: selectedColor) {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             showColorPicker.toggle()
                         }
