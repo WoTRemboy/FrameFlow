@@ -27,7 +27,7 @@ extension Color {
     }
     
     enum PaletteColors {
-        static let backPalette = Color("BackPalette")
+        static let blackPalette = Color("BlackPalette")
         static let bluePalette = Color("BluePalette")
         static let greenPalette = Color("GreenPalette")
         static let greyPalette = Color("GreyPalette")
@@ -37,6 +37,8 @@ extension Color {
     
     enum SupportColors {
         static let supportNavBar = Color("SupportNavBar")
+        static let supportBorder = Color("SupportBorder")
+        static let supportSelection = Color("SupportSelection")
         static let supportOverlay = Color("SupportOverlay")
         static let supportSegmented = Color("SupportSegmented")
         static let supportTextField = Color("SupportTextField")

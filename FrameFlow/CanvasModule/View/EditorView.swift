@@ -10,23 +10,38 @@ import SwiftUI
 struct EditorView: View {
     @State private var lines: [Line] = []
     @State private var currentLine: Line = Line(points: [], color: .black, lineWidth: 5)
+    
     @State private var selectedColor: Color = .black
     @State private var lineWidth: CGFloat = 5.0
     
+    @State private var showColorPicker: Bool = false
+    
     internal var body: some View {
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 background
                     .ignoresSafeArea()
                 VStack {
                     CanvasHeaderView()
                     Spacer()
-                    canvas
+                    ZStack {
+                        canvas
+                    }
                     Spacer()
-                    CanvasTabbarView()
+                    CanvasTabbarView {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            showColorPicker.toggle()
+                        }
+                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, hasNotch() ? 60 : 16)
+                
+                if showColorPicker {
+                    ColorPickerShortView()
+                        .padding(.bottom, hasNotch() ? 110 : 65)
+                        .zIndex(1)
+                }
             }
         }
     }

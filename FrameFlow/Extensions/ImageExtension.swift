@@ -32,7 +32,7 @@ extension Image {
     
     enum Panel {
         enum Palette {
-            static let paletteInactive = Image("PaletteinActive")
+            static let paletteInactive = Image("PaletteInactive")
             static let paletteSelected = Image("PaletteSelected")
         }
         

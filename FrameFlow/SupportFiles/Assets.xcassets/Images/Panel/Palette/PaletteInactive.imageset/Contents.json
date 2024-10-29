@@ -1,17 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "PaletteInactiveLight.svg",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "PaletteInactive 1.svg",
+      "filename" : "PaletteInactive 2.svg",
       "idiom" : "universal"
     }
   ],
