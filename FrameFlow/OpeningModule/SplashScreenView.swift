@@ -35,7 +35,7 @@ struct SplashScreenView: View {
             Image.Opening.splashLogo
                 .resizable()
                 .scaledToFit()
-                .frame(width: 450)
+                .frame(width: 350)
         }
     }
 }
