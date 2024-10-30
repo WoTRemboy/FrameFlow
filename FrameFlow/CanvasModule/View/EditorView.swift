@@ -45,7 +45,7 @@ struct EditorView: View {
     
     private var canvas: some View {
         GeometryReader { geometry in
-            CanvasView(lines: $viewModel.lines, currentLine: $viewModel.currentLine, canvasSize: geometry.size)
+            CanvasView(lines: $viewModel.lines, currentLine: $viewModel.currentLine, currentEraserLine: $viewModel.currentEraserLine, canvasSize: geometry.size)
                 .background(canvasBackground)
                 .gesture(DragGesture(minimumDistance: 0)
                     .onChanged { value in
