@@ -26,9 +26,14 @@ struct EditorView: View {
                 .padding(.vertical, hasNotch() ? 60 : 16)
                 
                 if viewModel.showColorPicker {
-                    ColorPickerShortView()
-                        .padding(.bottom, hasNotch() ? 110 : 65)
-                        .zIndex(1)
+                    VStack(spacing: 8) {
+                        if viewModel.showColorPalette {
+                            ColorPaletteView()
+                        }
+                        ColorPickerShortView()
+                            .padding(.bottom, hasNotch() ? 110 : 65)
+                            .zIndex(1)
+                    }
                 } else if viewModel.showShapePicker {
                     ShapesPickerView()
                         .padding(.bottom, hasNotch() ? 110 : 65)

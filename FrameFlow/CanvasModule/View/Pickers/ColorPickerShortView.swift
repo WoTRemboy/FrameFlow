@@ -21,9 +21,12 @@ struct ColorPickerShortView: View {
     private var buttons: some View {
         HStack(spacing: 16) {
             Button {
-                
+                viewModel.toggleColorPalette()
             } label: {
-                Image.Panel.Palette.paletteInactive
+                viewModel.selectTrueImage(
+                    isActive: viewModel.showColorPalette,
+                    active: Image.Panel.Palette.paletteSelected,
+                    inactive: Image.Panel.Palette.paletteInactive)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)

@@ -17,6 +17,7 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var selectedColor: Color = .black
     
     @Published internal var showColorPicker: Bool = false
+    @Published internal var showColorPalette: Bool = false
     @Published internal var showShapePicker: Bool = false
     
     internal func selectMode(_ mode: CanvasMode) {
@@ -32,6 +33,12 @@ final class CanvasViewModel: ObservableObject {
             showColorPicker.toggle()
             showShapePicker = false
             currentMode = .palette
+        }
+    }
+    
+    internal func toggleColorPalette() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            showColorPalette.toggle()
         }
     }
     
@@ -68,6 +75,14 @@ final class CanvasViewModel: ObservableObject {
     internal func selectTabbarImage(targetMode: CanvasMode, currentMode: CanvasMode,
                                     active: Image, inactive: Image) -> Image {
         if targetMode == currentMode {
+            return active
+        } else {
+            return inactive
+        }
+    }
+    
+    internal func selectTrueImage(isActive: Bool, active: Image, inactive: Image) -> Image {
+        if isActive {
             return active
         } else {
             return inactive
