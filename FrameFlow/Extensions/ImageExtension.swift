@@ -34,6 +34,7 @@ extension Image {
         enum Palette {
             static let paletteInactive = Image("PaletteInactive")
             static let paletteSelected = Image("PaletteSelected")
+            static let sliderLine = Image("SliderLine")
         }
         
         enum Shapes {

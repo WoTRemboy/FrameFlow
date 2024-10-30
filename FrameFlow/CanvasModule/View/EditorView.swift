@@ -31,6 +31,8 @@ struct EditorView: View {
                             ColorPaletteView()
                         }
                         ColorPickerShortView()
+                        
+                        WidthSliderView()
                             .padding(.bottom, hasNotch() ? 110 : 65)
                     }
                     .zIndex(1)
