@@ -26,9 +26,7 @@ struct CanvasTabbarView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.selectMode(.brush)
-                }
+                viewModel.selectMode(.brush)
             } label: {
                 viewModel.selectTabbarImage(
                     targetMode: .brush,
@@ -40,9 +38,7 @@ struct CanvasTabbarView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.selectMode(.eraser)
-                }
+                viewModel.selectMode(.eraser)
             } label: {
                 viewModel.selectTabbarImage(
                     targetMode: .eraser,
@@ -81,7 +77,7 @@ struct CanvasTabbarView: View {
                     )
             }
             .onChange(of: viewModel.selectedColor) {
-                viewModel.toggleColorPicker()
+                viewModel.selectMode(.pencil)
             }
         }
     }

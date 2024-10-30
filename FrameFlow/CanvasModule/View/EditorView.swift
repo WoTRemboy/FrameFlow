@@ -32,8 +32,8 @@ struct EditorView: View {
                         }
                         ColorPickerShortView()
                             .padding(.bottom, hasNotch() ? 110 : 65)
-                            .zIndex(1)
                     }
+                    .zIndex(1)
                 } else if viewModel.showShapePicker {
                     ShapesPickerView()
                         .padding(.bottom, hasNotch() ? 110 : 65)
