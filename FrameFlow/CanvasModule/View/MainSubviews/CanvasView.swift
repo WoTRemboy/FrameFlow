@@ -5,6 +5,8 @@
 //  Created by Roman Tverdokhleb on 10/29/24.
 //
 
+// CanvasView.swift
+
 import SwiftUI
 
 struct CanvasView: View {
@@ -12,41 +14,62 @@ struct CanvasView: View {
     @Binding internal var currentLine: Line
     @Binding internal var currentEraserLine: Line
     internal var canvasSize: CGSize
-
+    
     internal var body: some View {
         ZStack {
             ForEach(lines.indices, id: \.self) { index in
-                Path { path in
-                    let line = lines[index]
-                    guard let firstPoint = line.points.first else { return }
-                    path.move(to: firstPoint)
-                    for point in line.points.dropFirst() {
-                        path.addLine(to: point)
-                    }
+                let line = lines[index]
+                if line.lineType == .brush {
+                    brushPath(for: line)
+                } else {
+                    pencilPath(for: line)
                 }
-                .stroke(lines[index].color, lineWidth: lines[index].lineWidth)
             }
-
+            
             if currentEraserLine.points.isEmpty {
-                Path { path in
-                    guard let firstPoint = currentLine.points.first else { return }
-                    path.move(to: firstPoint)
-                    for point in currentLine.points.dropFirst() {
-                        path.addLine(to: point)
-                    }
+                if currentLine.lineType == .brush {
+                    brushPath(for: currentLine)
+                } else {
+                    pencilPath(for: currentLine)
                 }
-                .stroke(currentLine.color, lineWidth: currentLine.lineWidth)
             } else {
-                Path { path in
-                    guard let firstPoint = currentEraserLine.points.first else { return }
-                    path.move(to: firstPoint)
-                    for point in currentEraserLine.points.dropFirst() {
-                        path.addLine(to: point)
-                    }
-                }
-                .stroke(Color.gray.opacity(0.5), lineWidth: currentEraserLine.lineWidth)
+                eraserPath(for: currentEraserLine)
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 20))
+    }
+        
+    private func pencilPath(for line: Line) -> some View {
+        Path { path in
+            guard let firstPoint = line.points.first else { return }
+            path.move(to: firstPoint)
+            for point in line.points.dropFirst() {
+                path.addLine(to: point)
+            }
+        }
+        .stroke(line.color, lineWidth: line.lineWidth)
+    }
+    
+    private func brushPath(for line: Line) -> some View {
+        Path { path in
+            guard let firstPoint = line.points.first else { return }
+            path.move(to: firstPoint)
+            for point in line.points.dropFirst() {
+                path.addLine(to: point)
+            }
+        }
+        .stroke(line.color, style: StrokeStyle(lineWidth: line.lineWidth, lineCap: .round, lineJoin: .round))
+        .blur(radius: line.lineWidth / 2)
+    }
+    
+    private func eraserPath(for line: Line) -> some View {
+        Path { path in
+            guard let firstPoint = line.points.first else { return }
+            path.move(to: firstPoint)
+            for point in line.points.dropFirst() {
+                path.addLine(to: point)
+            }
+        }
+        .stroke(Color.gray.opacity(0.5), lineWidth: line.lineWidth)
     }
 }

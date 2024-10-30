@@ -11,4 +11,10 @@ struct Line {
     var points: [CGPoint]
     var color: Color
     var lineWidth: CGFloat
+    var lineType: LineType = .pencil
+}
+
+enum LineType {
+    case pencil
+    case brush
 }

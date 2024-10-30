@@ -84,24 +84,41 @@ extension CanvasViewModel {
     internal func updateCurrentLine(with point: CGPoint, in size: CGSize) {
         if point.x >= lineWidth / 2, point.x <= size.width - lineWidth / 2,
            point.y >= lineWidth / 2, point.y <= size.height - lineWidth / 2 {
-            if currentMode == .eraser {
-                currentEraserLine.points.append(point)
-                currentEraserLine.lineWidth = lineWidth
-            } else {
+            switch currentMode {
+            case .pencil:
                 currentLine.points.append(point)
                 currentLine.color = selectedColor
                 currentLine.lineWidth = lineWidth
+                currentLine.lineType = .pencil
+            case .brush:
+                currentLine.points.append(point)
+                currentLine.color = selectedColor
+                currentLine.lineWidth = lineWidth
+                currentLine.lineType = .brush
+            case .eraser:
+                currentEraserLine.points.append(point)
+                currentEraserLine.lineWidth = lineWidth
+            default:
+                break
             }
         }
     }
     
     internal func finalizeCurrentLine() {
-        if currentMode == .eraser {
+        switch currentMode {
+        case .pencil, .brush:
+            lines.append(currentLine)
+            currentLine = Line(
+                points: [],
+                color: selectedColor,
+                lineWidth: lineWidth,
+                lineType: currentMode == .pencil ? .pencil : .brush
+            )
+        case .eraser:
             eraseLinesIntersectingWithEraser()
             currentEraserLine = Line(points: [], color: .clear, lineWidth: lineWidth)
-        } else {
-            lines.append(currentLine)
-            currentLine = Line(points: [], color: selectedColor, lineWidth: lineWidth)
+        default:
+            break
         }
     }
     
@@ -127,8 +144,15 @@ extension CanvasViewModel {
                 let lineEnd = linePoints[i + 1]
                 var shouldEraseSegment = false
                 
+                let blurRadius: CGFloat = line.lineType == .brush ? (line.lineWidth / 2) : 0
+                let combinedRadius = eraserRadius + (line.lineWidth / 2) + blurRadius
+                
                 for (eraserStart, eraserEnd) in eraserSegments {
-                    if segmentsIntersect(lineStart, lineEnd, eraserStart, eraserEnd, eraserRadius: eraserRadius) {
+                    if segmentsIntersect(
+                        lineStart, lineEnd,
+                        eraserStart, eraserEnd,
+                        eraserRadius: combinedRadius
+                    ) {
                         shouldEraseSegment = true
                         break
                     }
@@ -154,20 +178,34 @@ extension CanvasViewModel {
             
             for segmentPoints in newLineSegments {
                 if segmentPoints.count > 1 {
-                    newLines.append(Line(points: segmentPoints, color: line.color, lineWidth: line.lineWidth))
+                    newLines.append(
+                        Line(
+                            points: segmentPoints,
+                            color: line.color,
+                            lineWidth: line.lineWidth,
+                            lineType: line.lineType
+                        )
+                    )
                 }
             }
         }
         
         lines = newLines
     }
-        
-    private func segmentsIntersect(_ p1: CGPoint, _ p2: CGPoint, _ q1: CGPoint, _ q2: CGPoint, eraserRadius: CGFloat) -> Bool {
+    
+    private func segmentsIntersect(
+        _ p1: CGPoint, _ p2: CGPoint,
+        _ q1: CGPoint, _ q2: CGPoint,
+        eraserRadius: CGFloat
+    ) -> Bool {
         let distance = minDistanceBetweenLineSegments(p1, p2, q1, q2)
         return distance <= eraserRadius
     }
     
-    private func minDistanceBetweenLineSegments(_ p1: CGPoint, _ p2: CGPoint, _ q1: CGPoint, _ q2: CGPoint) -> CGFloat {
+    private func minDistanceBetweenLineSegments(
+        _ p1: CGPoint, _ p2: CGPoint,
+        _ q1: CGPoint, _ q2: CGPoint
+    ) -> CGFloat {
         if linesIntersect(p1, p2, q1, q2) {
             return 0.0
         } else {
