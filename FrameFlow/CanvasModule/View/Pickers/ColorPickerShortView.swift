@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorPickerShortView: View {
     
-    internal var onColorSelected: (Color) -> Void
+    @EnvironmentObject var viewModel: CanvasViewModel
     
     internal var body: some View {
         ZStack {
@@ -30,9 +30,7 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onColorSelected(Color.PaletteColors.whitePalette)
-                }
+                viewModel.selectColor(Color.PaletteColors.whitePalette)
             } label: {
                 Circle()
                     .scaledToFit()
@@ -41,9 +39,7 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onColorSelected(Color.PaletteColors.redPalette)
-                }
+                viewModel.selectColor(Color.PaletteColors.redPalette)
             } label: {
                 Circle()
                     .scaledToFit()
@@ -52,9 +48,7 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onColorSelected(Color.PaletteColors.blackPalette)
-                }
+                viewModel.selectColor(Color.PaletteColors.blackPalette)
             } label: {
                 Circle()
                     .scaledToFit()
@@ -63,9 +57,7 @@ struct ColorPickerShortView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onColorSelected(Color.PaletteColors.bluePalette)
-                }
+                viewModel.selectColor(Color.PaletteColors.bluePalette)
             } label: {
                 Circle()
                     .scaledToFit()
@@ -92,5 +84,6 @@ struct ColorPickerShortView: View {
 }
 
 #Preview {
-    ColorPickerShortView { _ in }
+    ColorPickerShortView()
+        .environmentObject(CanvasViewModel())
 }

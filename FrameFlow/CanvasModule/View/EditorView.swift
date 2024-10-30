@@ -8,16 +8,7 @@
 import SwiftUI
 
 struct EditorView: View {
-    @State private var lines: [Line] = []
-    @State private var currentLine: Line = Line(points: [], color: .black, lineWidth: 5)
-    
-    @State private var selectedColor: Color = .black
-    @State private var selectedShape: Shape = .square
-    @State private var lineWidth: CGFloat = 5.0
-    
-    @State private var showColorPicker: Bool = false
-    @State private var showShapePicker: Bool = false
-    @State private var currentMode: CanvasMode = .pencil
+    @EnvironmentObject private var viewModel: CanvasViewModel
     
     internal var body: some View {
         NavigationStack {
@@ -27,39 +18,19 @@ struct EditorView: View {
                 VStack {
                     CanvasHeaderView()
                     Spacer()
-                    ZStack {
-                        canvas
-                    }
+                    canvas
                     Spacer()
-                    CanvasTabbarView(
-                        currentMode: $currentMode,
-                        selectedShape: selectedShape,
-                        onShapeButtonTap: {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                showColorPicker = false
-                                showShapePicker.toggle()
-                            }
-                        },
-                        selectedColor: selectedColor, onPaletteButtonTap: {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                showShapePicker = false
-                                showColorPicker.toggle()
-                            }
-                        })
+                    CanvasTabbarView()
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, hasNotch() ? 60 : 16)
                 
-                if showColorPicker {
-                    ColorPickerShortView { color in
-                        selectedColor = color
-                    }
+                if viewModel.showColorPicker {
+                    ColorPickerShortView()
                         .padding(.bottom, hasNotch() ? 110 : 65)
                         .zIndex(1)
-                } else if showShapePicker {
-                    ShapesPickerView { shape in
-                        selectedShape = shape
-                    }
+                } else if viewModel.showShapePicker {
+                    ShapesPickerView()
                         .padding(.bottom, hasNotch() ? 110 : 65)
                         .zIndex(1)
                 }
@@ -69,22 +40,14 @@ struct EditorView: View {
     
     private var canvas: some View {
         GeometryReader { geometry in
-            CanvasView(lines: $lines, currentLine: $currentLine, canvasSize: geometry.size)
+            CanvasView(lines: $viewModel.lines, currentLine: $viewModel.currentLine, canvasSize: geometry.size)
                 .background(canvasBackground)
                 .gesture(DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        let newPoint = value.location
-                        
-                        if newPoint.x >= lineWidth / 2, newPoint.x <= geometry.size.width - lineWidth / 2,
-                           newPoint.y >= lineWidth / 2, newPoint.y <= geometry.size.height - lineWidth / 2 {
-                            currentLine.points.append(newPoint)
-                            currentLine.color = selectedColor
-                            currentLine.lineWidth = lineWidth
-                        }
+                        viewModel.updateCurrentLine(with: value.location, in: geometry.size)
                     }
                     .onEnded { _ in
-                        lines.append(currentLine)
-                        currentLine = Line(points: [], color: selectedColor, lineWidth: lineWidth)
+                        viewModel.finalizeCurrentLine()
                     }
                 )
         }
@@ -107,4 +70,5 @@ struct EditorView: View {
 
 #Preview {
     EditorView()
+        .environmentObject(CanvasViewModel())
 }

@@ -14,6 +14,7 @@ struct OnboardingScreenView: View {
     internal var body: some View {
         if viewModel.firstLaunch {
             EditorView()
+                .environmentObject(CanvasViewModel())
         } else {
             VStack {
                 skipButton

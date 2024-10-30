@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShapesPickerView: View {
     
-    internal var onShapeSelected: (Shape) -> Void
+    @EnvironmentObject var viewModel: CanvasViewModel
     
     internal var body: some View {
         ZStack {
@@ -21,9 +21,7 @@ struct ShapesPickerView: View {
     private var buttons: some View {
         HStack(spacing: 16) {
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onShapeSelected(.square)
-                }
+                viewModel.selectShape(.square)
             } label: {
                 Image.Panel.Shapes.square
                     .resizable()
@@ -31,9 +29,7 @@ struct ShapesPickerView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onShapeSelected(.circle)
-                }
+                viewModel.selectShape(.circle)
             } label: {
                 Image.Panel.Shapes.cicle
                     .resizable()
@@ -41,9 +37,7 @@ struct ShapesPickerView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onShapeSelected(.triangle)
-                }
+                viewModel.selectShape(.triangle)
             } label: {
                 Image.Panel.Shapes.triangle
                     .resizable()
@@ -51,9 +45,7 @@ struct ShapesPickerView: View {
             }
             
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    onShapeSelected(.arrow)
-                }
+                viewModel.selectShape(.arrow)
             } label: {
                 Image.Panel.Shapes.arrowUp
                     .resizable()
@@ -79,5 +71,6 @@ struct ShapesPickerView: View {
 }
 
 #Preview {
-    ShapesPickerView { _ in }
+    ShapesPickerView()
+        .environmentObject(CanvasViewModel())
 }
