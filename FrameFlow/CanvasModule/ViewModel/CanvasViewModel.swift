@@ -14,8 +14,11 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var lineWidth: CGFloat = 5.0
     
     @Published internal var currentMode: CanvasMode = .pencil
-    @Published internal var selectedShape: Shape = .square
     @Published internal var selectedColor: Color = .black
+    
+    @Published internal var shapes: [ShapeItem] = []
+    @Published internal var currentShape: ShapeMode? = nil
+    @Published internal var tapLocation: CGPoint = .zero
     
     @Published internal var showColorPicker: Bool = false
     @Published internal var showColorPalette: Bool = false
@@ -47,7 +50,7 @@ final class CanvasViewModel: ObservableObject {
         withAnimation(.easeInOut(duration: 0.2)) {
             showShapePicker.toggle()
             showColorPicker = false
-            currentMode = .instruments
+            currentMode = .shape
         }
     }
     
@@ -55,8 +58,26 @@ final class CanvasViewModel: ObservableObject {
         selectedColor = color
     }
     
-    internal func selectShape(_ shape: Shape) {
-        selectedShape = shape
+    internal func selectShape(_ shape: ShapeMode) {
+        currentShape = shape
+    }
+    
+    internal func addShape(at point: CGPoint) {
+        guard let shape = currentShape else { return }
+        
+        let shapeItem = ShapeItem(
+            shape: shape,
+            position: point,
+            color: selectedColor,
+            lineWidth: lineWidth
+        )
+        
+        shapes.append(shapeItem)
+    }
+    
+    internal func finalizeShape() {
+        currentShape = nil
+        currentMode = .shape
     }
     
     internal func selectTabbarImage(targetMode: CanvasMode, currentMode: CanvasMode,

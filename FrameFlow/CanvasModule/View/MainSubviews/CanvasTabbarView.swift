@@ -53,14 +53,14 @@ struct CanvasTabbarView: View {
                 viewModel.toggleShapePicker()
             } label: {
                 viewModel.selectTabbarImage(
-                    targetMode: .instruments,
+                    targetMode: .shape,
                     currentMode: viewModel.currentMode,
                     active: .TabBar.instrumentsSelected,
                     inactive: .TabBar.instrumentsInactive)
                     .resizable()
                     .frame(width: 32, height: 32)
             }
-            .onChange(of: viewModel.selectedShape) {
+            .onChange(of: viewModel.currentShape) {
                 viewModel.toggleShapePicker()
             }
             

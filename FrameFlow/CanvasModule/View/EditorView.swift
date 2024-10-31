@@ -51,7 +51,12 @@ struct EditorView: View {
                 .background(canvasBackground)
                 .gesture(DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        viewModel.updateCurrentLine(with: value.location, in: geometry.size)
+                        if viewModel.currentMode == .shape {
+                            viewModel.addShape(at: value.location)
+                            viewModel.finalizeShape()
+                        } else {
+                            viewModel.updateCurrentLine(with: value.location, in: geometry.size)
+                        }
                     }
                     .onEnded { _ in
                         viewModel.finalizeCurrentLine()

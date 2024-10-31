@@ -10,6 +10,8 @@
 import SwiftUI
 
 struct CanvasView: View {
+    @EnvironmentObject var viewModel: CanvasViewModel
+
     @Binding internal var lines: [Line]
     @Binding internal var currentLine: Line
     @Binding internal var currentEraserLine: Line
@@ -24,6 +26,11 @@ struct CanvasView: View {
                 } else {
                     pencilPath(for: line)
                 }
+            }
+            
+            ForEach(viewModel.shapes.indices, id: \.self) { index in
+                let shapeItem = viewModel.shapes[index]
+                drawShape(shapeItem)
             }
             
             if currentEraserLine.points.isEmpty {
@@ -71,5 +78,31 @@ struct CanvasView: View {
             }
         }
         .stroke(Color.gray.opacity(0.5), lineWidth: line.lineWidth)
+    }
+    
+    @ViewBuilder
+    private func drawShape(_ shapeItem: ShapeItem) -> some View {
+        switch shapeItem.shape {
+        case .square:
+            Rectangle()
+                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
+                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .position(shapeItem.position)
+        case .circle:
+            Circle()
+                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
+                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .position(shapeItem.position)
+        case .triangle:
+            Triangle()
+                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
+                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .position(shapeItem.position)
+        case .arrow:
+            Arrow()
+                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
+                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .position(shapeItem.position)
+        }
     }
 }
