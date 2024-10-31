@@ -19,7 +19,7 @@ struct ShapeHeightSliderView: View {
     }
     
     private var slider: some View {
-        Slider(value: $viewModel.shapeHeight, in: 10...200)
+        Slider(value: $viewModel.shapeHeight, in: 50...400)
             .background(
                 Image.Panel.Palette.sliderLine
                     .resizable()

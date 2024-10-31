@@ -28,11 +28,6 @@ struct CanvasView: View {
                 }
             }
             
-            ForEach(viewModel.shapes.indices, id: \.self) { index in
-                let shapeItem = viewModel.shapes[index]
-                drawShape(shapeItem)
-            }
-            
             if currentEraserLine.points.isEmpty {
                 if currentLine.lineType == .brush {
                     brushPath(for: currentLine)
@@ -78,31 +73,5 @@ struct CanvasView: View {
             }
         }
         .stroke(Color.gray.opacity(0.5), lineWidth: line.lineWidth)
-    }
-    
-    @ViewBuilder
-    private func drawShape(_ shapeItem: ShapeItem) -> some View {
-        switch shapeItem.shape {
-        case .square:
-            Rectangle()
-                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.height, height: shapeItem.height)
-                .position(shapeItem.position)
-        case .circle:
-            Circle()
-                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.height, height: shapeItem.height)
-                .position(shapeItem.position)
-        case .triangle:
-            Triangle()
-                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.height, height: shapeItem.height)
-                .position(shapeItem.position)
-        case .arrow:
-            Arrow()
-                .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.height, height: shapeItem.height)
-                .position(shapeItem.position)
-        }
     }
 }
