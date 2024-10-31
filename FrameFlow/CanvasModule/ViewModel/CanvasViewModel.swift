@@ -94,7 +94,7 @@ final class CanvasViewModel: ObservableObject {
             lines += createSegmentedLine(from: bottomLeft, to: topLeft, color: color, lineWidth: lineWidth)
             
         case .circle:
-            let segments = 72
+            let segments = Int(height / 2)
             let radius = size / 2
             var circlePoints: [CGPoint] = []
             
