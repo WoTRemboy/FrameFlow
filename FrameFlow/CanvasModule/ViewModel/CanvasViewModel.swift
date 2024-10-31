@@ -26,6 +26,9 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var showColorPalette: Bool = false
     @Published internal var showShapePicker: Bool = false
     
+    @Published internal var undoStack: [Action] = []
+    @Published internal var redoStack: [Action] = []
+    
     internal func selectMode(_ mode: CanvasMode) {
         withAnimation(.easeInOut(duration: 0.2)) {
             showColorPicker = false
@@ -69,6 +72,9 @@ final class CanvasViewModel: ObservableObject {
         
         let shapeLines = createLinesForShape(shape, at: point, color: selectedColor, lineWidth: lineWidth, height: shapeHeight)
         lines.append(contentsOf: shapeLines)
+        
+        undoStack.append(Action(type: .addShape(shapeLines)))
+        redoStack.removeAll()
     }
     
     private func createLinesForShape(_ shape: ShapeMode, at point: CGPoint, color: Color, lineWidth: CGFloat, height: CGFloat) -> [Line] {
@@ -117,7 +123,7 @@ final class CanvasViewModel: ObservableObject {
             let bottom = CGPoint(x: point.x, y: point.y + size / 2)
             let leftWing = CGPoint(x: point.x - size / 4, y: point.y - size / 4)
             let rightWing = CGPoint(x: point.x + size / 4, y: point.y - size / 4)
-           
+            
             lines += createSegmentedLine(from: top, to: bottom, color: color, lineWidth: lineWidth)
             lines += createSegmentedLine(from: leftWing, to: top, color: color, lineWidth: lineWidth)
             lines += createSegmentedLine(from: rightWing, to: top, color: color, lineWidth: lineWidth)
@@ -170,6 +176,58 @@ final class CanvasViewModel: ObservableObject {
             return inactive
         }
     }
+    
+    internal func undo() {
+        guard let lastAction = undoStack.popLast() else { return }
+        
+        switch lastAction.type {
+        case .addLine(let line):
+            lines.removeAll { $0 == line }
+            redoStack.append(lastAction)
+            
+        case .addShape(let shapeLines):
+            lines.removeAll { shapeLines.contains($0) }
+            redoStack.append(lastAction)
+        }
+    }
+    
+    internal func undoAvailable() -> Bool {
+        !undoStack.isEmpty
+    }
+    
+    internal func undoAvailableImage() -> Image {
+        if undoStack.isEmpty {
+            Image.Header.Arrows.rightInactive
+        } else {
+            Image.Header.Arrows.rightActive
+        }
+    }
+    
+    internal func redo() {
+        guard let lastUndoneAction = redoStack.popLast() else { return }
+        
+        switch lastUndoneAction.type {
+        case .addLine(let line):
+            lines.append(line)
+            undoStack.append(lastUndoneAction)
+            
+        case .addShape(let shapeLines):
+            lines.append(contentsOf: shapeLines)
+            undoStack.append(lastUndoneAction)
+        }
+    }
+    
+    internal func redoAvailable() -> Bool {
+        !redoStack.isEmpty
+    }
+    
+    internal func redoAvailableImage() -> Image {
+        if redoStack.isEmpty {
+            Image.Header.Arrows.leftInactive
+        } else {
+            Image.Header.Arrows.leftActive
+        }
+    }
 }
 
 
@@ -203,6 +261,9 @@ extension CanvasViewModel {
         switch currentMode {
         case .pencil, .brush:
             lines.append(currentLine)
+            undoStack.append(Action(type: .addLine(currentLine)))
+            redoStack.removeAll()
+            
             currentLine = Line(
                 points: [],
                 color: selectedColor,

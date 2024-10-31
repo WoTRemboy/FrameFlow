@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CanvasHeaderView: View {
     
+    @EnvironmentObject var viewModel: CanvasViewModel
+    
     internal var body: some View {
         HStack {
             backForward
@@ -22,22 +24,24 @@ struct CanvasHeaderView: View {
     private var backForward: some View {
         HStack(spacing: 8) {
             Button {
-                
+                viewModel.undo()
             } label: {
-                Image.Header.Arrows.rightActive
+                viewModel.undoAvailableImage()
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24)
             }
+            .disabled(!viewModel.undoAvailable())
             
             Button {
-                
+                viewModel.redo()
             } label: {
-                Image.Header.Arrows.leftInactive
+                viewModel.redoAvailableImage()
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24)
             }
+            .disabled(!viewModel.redoAvailable())
         }
     }
     
@@ -97,4 +101,5 @@ struct CanvasHeaderView: View {
 
 #Preview {
     CanvasHeaderView()
+        .environmentObject(CanvasViewModel())
 }
