@@ -73,8 +73,10 @@ final class CanvasViewModel: ObservableObject {
         let shapeLines = createLinesForShape(shape, at: point, color: selectedColor, lineWidth: lineWidth, height: shapeHeight)
         lines.append(contentsOf: shapeLines)
         
-        undoStack.append(Action(type: .addShape(shapeLines)))
-        redoStack.removeAll()
+        withAnimation(.easeInOut(duration: 0.2)) {
+            undoStack.append(Action(type: .addShape(shapeLines)))
+            redoStack.removeAll()
+        }
     }
     
     private func createLinesForShape(_ shape: ShapeMode, at point: CGPoint, color: Color, lineWidth: CGFloat, height: CGFloat) -> [Line] {
@@ -106,7 +108,7 @@ final class CanvasViewModel: ObservableObject {
             }
             
             for i in 0..<segments {
-                lines += createSegmentedLine(from: circlePoints[i], to: circlePoints[i + 1], color: color, lineWidth: lineWidth)
+                lines += createSegmentedLine(from: circlePoints[i], to: circlePoints[i + 1], color: color, lineWidth: lineWidth, isCircle: true)
             }
             
         case .triangle:
@@ -132,22 +134,29 @@ final class CanvasViewModel: ObservableObject {
         return lines
     }
     
-    private func createSegmentedLine(from start: CGPoint, to end: CGPoint, color: Color, lineWidth: CGFloat, segmentLength: CGFloat = 5.0) -> [Line] {
+    private func createSegmentedLine(from start: CGPoint, to end: CGPoint, color: Color, lineWidth: CGFloat, segmentLength: CGFloat = 5.0, isCircle: Bool = false) -> [Line] {
         var segments: [Line] = []
         
         let dx = end.x - start.x
         let dy = end.y - start.y
         let distance = hypot(dx, dy)
+        let offset = lineWidth * (isCircle ? 0.2 : 0.35) / distance
+        
+        let extendedStart = CGPoint(x: start.x - dx * offset, y: start.y - dy * offset)
+        let extendedEnd = CGPoint(x: end.x + dx * offset, y: end.y + dy * offset)
+        
+        let extendedDx = extendedEnd.x - extendedStart.x
+        let extendedDy = extendedEnd.y - extendedStart.y
         let segmentCount = Int(distance / segmentLength)
         
         for i in 0..<segmentCount {
             let t1 = CGFloat(i) / CGFloat(segmentCount)
             let t2 = CGFloat(i + 1) / CGFloat(segmentCount)
             
-            let x1 = start.x + t1 * dx
-            let y1 = start.y + t1 * dy
-            let x2 = start.x + t2 * dx
-            let y2 = start.y + t2 * dy
+            let x1 = extendedStart.x + t1 * extendedDx
+            let y1 = extendedStart.y + t1 * extendedDy
+            let x2 = extendedStart.x + t2 * extendedDx
+            let y2 = extendedStart.y + t2 * extendedDy
             
             segments.append(Line(points: [CGPoint(x: x1, y: y1), CGPoint(x: x2, y: y2)], color: color, lineWidth: lineWidth))
         }
@@ -183,15 +192,21 @@ final class CanvasViewModel: ObservableObject {
         switch lastAction.type {
         case .addLine(let line):
             lines.removeAll { $0 == line }
-            redoStack.append(lastAction)
+            withAnimation(.easeInOut(duration: 0.2)) {
+                redoStack.append(lastAction)
+            }
             
         case .removeLine(let originalLines):
             lines = originalLines
-            redoStack.append(lastAction)
+            withAnimation(.easeInOut(duration: 0.2)) {
+                redoStack.append(lastAction)
+            }
             
         case .addShape(let shapeLines):
             lines.removeAll { shapeLines.contains($0) }
-            redoStack.append(lastAction)
+            withAnimation(.easeInOut(duration: 0.2)) {
+                redoStack.append(lastAction)
+            }
         }
     }
     
@@ -213,15 +228,21 @@ final class CanvasViewModel: ObservableObject {
         switch lastUndoneAction.type {
         case .addLine(let line):
             lines.append(line)
-            undoStack.append(lastUndoneAction)
+            withAnimation(.easeInOut(duration: 0.2)) {
+                undoStack.append(lastUndoneAction)
+            }
             
         case .removeLine(let originalLines):
             lines = originalLines
-            undoStack.append(lastUndoneAction)
+            withAnimation(.easeInOut(duration: 0.2)) {
+                undoStack.append(lastUndoneAction)
+            }
             
         case .addShape(let shapeLines):
             lines.append(contentsOf: shapeLines)
-            undoStack.append(lastUndoneAction)
+            withAnimation(.easeInOut(duration: 0.2)) {
+                undoStack.append(lastUndoneAction)
+            }
         }
     }
     
@@ -269,8 +290,10 @@ extension CanvasViewModel {
         switch currentMode {
         case .pencil, .brush:
             lines.append(currentLine)
-            undoStack.append(Action(type: .addLine(currentLine)))
-            redoStack.removeAll()
+            withAnimation(.easeInOut(duration: 0.2)) {
+                undoStack.append(Action(type: .addLine(currentLine)))
+                redoStack.removeAll()
+            }
             
             currentLine = Line(points: [], color: selectedColor, lineWidth: lineWidth)
             
@@ -279,8 +302,10 @@ extension CanvasViewModel {
             eraseLinesIntersectingWithEraser()
             
             if !originalLines.isEmpty {
-                undoStack.append(Action(type: .removeLine(originalLines)))
-                redoStack.removeAll()
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    undoStack.append(Action(type: .removeLine(originalLines)))
+                    redoStack.removeAll()
+                }
             }
             
             currentEraserLine = Line(points: [], color: .clear, lineWidth: lineWidth)
