@@ -86,22 +86,22 @@ struct CanvasView: View {
         case .square:
             Rectangle()
                 .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .frame(width: shapeItem.height, height: shapeItem.height)
                 .position(shapeItem.position)
         case .circle:
             Circle()
                 .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .frame(width: shapeItem.height, height: shapeItem.height)
                 .position(shapeItem.position)
         case .triangle:
             Triangle()
                 .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .frame(width: shapeItem.height, height: shapeItem.height)
                 .position(shapeItem.position)
         case .arrow:
             Arrow()
                 .stroke(shapeItem.color, lineWidth: shapeItem.lineWidth)
-                .frame(width: shapeItem.lineWidth * 20, height: shapeItem.lineWidth * 20)
+                .frame(width: shapeItem.height, height: shapeItem.height)
                 .position(shapeItem.position)
         }
     }

@@ -19,6 +19,7 @@ struct ShapeItem {
     var position: CGPoint
     var color: Color
     var lineWidth: CGFloat
+    var height: CGFloat
 }
 
 struct Triangle: Shape {

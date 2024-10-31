@@ -31,15 +31,17 @@ struct EditorView: View {
                             ColorPaletteView()
                         }
                         ColorPickerShortView()
-                        
                         WidthSliderView()
-                            .padding(.bottom, hasNotch() ? 110 : 65)
                     }
+                    .padding(.bottom, hasNotch() ? 110 : 65)
                     .zIndex(1)
                 } else if viewModel.showShapePicker {
-                    ShapesPickerView()
-                        .padding(.bottom, hasNotch() ? 110 : 65)
-                        .zIndex(1)
+                    VStack(spacing: 8) {
+                        ShapesPickerView()
+                        ShapeHeightSliderView()
+                    }
+                    .padding(.bottom, hasNotch() ? 110 : 65)
+                    .zIndex(1)
                 }
             }
         }

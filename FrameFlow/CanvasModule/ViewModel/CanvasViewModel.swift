@@ -11,7 +11,9 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var lines: [Line] = []
     @Published internal var currentLine: Line = Line(points: [], color: .black, lineWidth: 5)
     @Published internal var currentEraserLine: Line = Line(points: [], color: .clear, lineWidth: 5)
+    
     @Published internal var lineWidth: CGFloat = 5.0
+    @Published internal var shapeHeight: CGFloat = 50.0
     
     @Published internal var currentMode: CanvasMode = .pencil
     @Published internal var selectedColor: Color = .black
@@ -69,7 +71,8 @@ final class CanvasViewModel: ObservableObject {
             shape: shape,
             position: point,
             color: selectedColor,
-            lineWidth: lineWidth
+            lineWidth: lineWidth,
+            height: shapeHeight
         )
         
         shapes.append(shapeItem)
