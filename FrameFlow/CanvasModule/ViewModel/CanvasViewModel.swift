@@ -185,6 +185,10 @@ final class CanvasViewModel: ObservableObject {
             lines.removeAll { $0 == line }
             redoStack.append(lastAction)
             
+        case .removeLine(let originalLines):
+            lines = originalLines
+            redoStack.append(lastAction)
+            
         case .addShape(let shapeLines):
             lines.removeAll { shapeLines.contains($0) }
             redoStack.append(lastAction)
@@ -209,6 +213,10 @@ final class CanvasViewModel: ObservableObject {
         switch lastUndoneAction.type {
         case .addLine(let line):
             lines.append(line)
+            undoStack.append(lastUndoneAction)
+            
+        case .removeLine(let originalLines):
+            lines = originalLines
             undoStack.append(lastUndoneAction)
             
         case .addShape(let shapeLines):
@@ -264,23 +272,29 @@ extension CanvasViewModel {
             undoStack.append(Action(type: .addLine(currentLine)))
             redoStack.removeAll()
             
-            currentLine = Line(
-                points: [],
-                color: selectedColor,
-                lineWidth: lineWidth,
-                lineType: currentMode == .pencil ? .pencil : .brush
-            )
+            currentLine = Line(points: [], color: selectedColor, lineWidth: lineWidth)
+            
         case .eraser:
+            let originalLines = lines.map { $0 }
             eraseLinesIntersectingWithEraser()
+            
+            if !originalLines.isEmpty {
+                undoStack.append(Action(type: .removeLine(originalLines)))
+                redoStack.removeAll()
+            }
+            
             currentEraserLine = Line(points: [], color: .clear, lineWidth: lineWidth)
+            
         default:
             break
         }
     }
     
+    
     private func eraseLinesIntersectingWithEraser() {
         let eraserRadius = currentEraserLine.lineWidth / 2
         var newLines: [Line] = []
+        var removedLines: [Line] = []
         
         var eraserSegments: [(CGPoint, CGPoint)] = []
         let eraserPoints = currentEraserLine.points
@@ -295,20 +309,15 @@ extension CanvasViewModel {
             var newLineSegments: [[CGPoint]] = []
             
             let linePoints = line.points
+            var isLineRemoved = false
+            
             for i in 0..<linePoints.count - 1 {
                 let lineStart = linePoints[i]
                 let lineEnd = linePoints[i + 1]
                 var shouldEraseSegment = false
                 
-                let blurRadius: CGFloat = line.lineType == .brush ? (line.lineWidth / 2) : 0
-                let combinedRadius = eraserRadius + (line.lineWidth / 2) + blurRadius
-                
                 for (eraserStart, eraserEnd) in eraserSegments {
-                    if segmentsIntersect(
-                        lineStart, lineEnd,
-                        eraserStart, eraserEnd,
-                        eraserRadius: combinedRadius
-                    ) {
+                    if segmentsIntersect(lineStart, lineEnd, eraserStart, eraserEnd, eraserRadius: eraserRadius) {
                         shouldEraseSegment = true
                         break
                     }
@@ -320,6 +329,7 @@ extension CanvasViewModel {
                         newLineSegments.append(currentSegmentPoints)
                         currentSegmentPoints = []
                     }
+                    isLineRemoved = true
                 } else {
                     if currentSegmentPoints.isEmpty {
                         currentSegmentPoints.append(lineStart)
@@ -332,16 +342,13 @@ extension CanvasViewModel {
                 newLineSegments.append(currentSegmentPoints)
             }
             
+            if isLineRemoved {
+                removedLines.append(line)
+            }
+            
             for segmentPoints in newLineSegments {
                 if segmentPoints.count > 1 {
-                    newLines.append(
-                        Line(
-                            points: segmentPoints,
-                            color: line.color,
-                            lineWidth: line.lineWidth,
-                            lineType: line.lineType
-                        )
-                    )
+                    newLines.append(Line(points: segmentPoints, color: line.color, lineWidth: line.lineWidth, lineType: line.lineType))
                 }
             }
         }

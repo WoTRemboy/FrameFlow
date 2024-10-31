@@ -11,5 +11,6 @@ struct Action {
 
 enum ActionType {
     case addLine(Line)
+    case removeLine([Line])
     case addShape([Line])
 }
