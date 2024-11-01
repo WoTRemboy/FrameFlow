@@ -11,7 +11,7 @@ import SwiftUI
 
 struct CanvasView: View {
     @EnvironmentObject var viewModel: CanvasViewModel
-
+    
     @Binding internal var lines: [Line]
     @Binding internal var currentLine: Line
     @Binding internal var currentEraserLine: Line
@@ -19,14 +19,26 @@ struct CanvasView: View {
     
     internal var body: some View {
         ZStack {
-            ForEach(lines.indices, id: \.self) { index in
-                let line = lines[index]
+            if viewModel.currentLayerIndex > 0 {
+                let previousLayerIndex = viewModel.currentLayerIndex - 1
+                ForEach(viewModel.layers[previousLayerIndex]) { line in
+                    if line.lineType == .brush {
+                        brushPath(for: line)
+                    } else {
+                        pencilPath(for: line)
+                    }
+                }
+                .opacity(0.3)
+            }
+            
+            ForEach(viewModel.currentLayer) { line in
                 if line.lineType == .brush {
                     brushPath(for: line)
                 } else {
                     pencilPath(for: line)
                 }
             }
+            .opacity(1.0)
             
             if currentEraserLine.points.isEmpty {
                 if currentLine.lineType == .brush {
@@ -40,7 +52,7 @@ struct CanvasView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
-        
+    
     private func pencilPath(for line: Line) -> some View {
         Path { path in
             guard let firstPoint = line.points.first else { return }

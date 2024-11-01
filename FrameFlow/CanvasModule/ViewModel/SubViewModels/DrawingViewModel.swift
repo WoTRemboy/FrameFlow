@@ -34,23 +34,19 @@ extension CanvasViewModel {
     internal func finalizeCurrentLine() {
         switch currentMode {
         case .pencil, .brush:
-            lines.append(currentLine)
-            withAnimation(.easeInOut(duration: 0.2)) {
-                undoStack.append(Action(type: .addLine(currentLine)))
-                redoStack.removeAll()
-            }
+            currentLayer.append(currentLine)
+            undoStack.append(Action(type: .addLine(currentLine, layerIndex: currentLayerIndex)))
+            redoStack.removeAll()
             
             currentLine = Line(points: [], color: selectedColor, lineWidth: lineWidth)
             
         case .eraser:
-            let originalLines = lines.map { $0 }
+            let originalLines = currentLayer
             eraseLinesIntersectingWithEraser()
             
             if !originalLines.isEmpty {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    undoStack.append(Action(type: .removeLine(originalLines)))
-                    redoStack.removeAll()
-                }
+                undoStack.append(Action(type: .removeLine(originalLines, layerIndex: currentLayerIndex)))
+                redoStack.removeAll()
             }
             
             currentEraserLine = Line(points: [], color: .clear, lineWidth: lineWidth)
@@ -74,7 +70,7 @@ extension CanvasViewModel {
             eraserSegments.append((eraserStart, eraserEnd))
         }
         
-        for line in lines {
+        for line in currentLayer {
             var currentSegmentPoints: [CGPoint] = []
             var newLineSegments: [[CGPoint]] = []
             
@@ -123,7 +119,7 @@ extension CanvasViewModel {
             }
         }
         
-        lines = newLines
+        currentLayer = newLines
     }
     
     private func segmentsIntersect(

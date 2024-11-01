@@ -10,7 +10,10 @@ struct Action {
 }
 
 enum ActionType {
-    case addLine(Line)
-    case removeLine([Line])
-    case addShape([Line])
+    case addLine(Line, layerIndex: Int)
+    case removeLine([Line], layerIndex: Int)
+    case addShape([Line], layerIndex: Int)
+    case addLayer
+    case removeLayer(layerIndex: Int, removedLines: [Line])
+    case switchLayer(from: Int, to: Int)
 }

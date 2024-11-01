@@ -8,6 +8,9 @@
 import SwiftUI
 
 final class CanvasViewModel: ObservableObject {
+    @Published internal var layers: [[Line]] = [[]]
+    @Published internal var currentLayerIndex: Int = 0
+    
     @Published internal var lines: [Line] = []
     @Published internal var currentLine: Line = Line(points: [], color: .black, lineWidth: 5)
     @Published internal var currentEraserLine: Line = Line(points: [], color: .clear, lineWidth: 5)
@@ -28,6 +31,15 @@ final class CanvasViewModel: ObservableObject {
     
     @Published internal var undoStack: [Action] = []
     @Published internal var redoStack: [Action] = []
+    
+    internal var currentLayer: [Line] {
+        get {
+            layers[currentLayerIndex]
+        }
+        set {
+            layers[currentLayerIndex] = newValue
+        }
+    }
     
     internal func selectMode(_ mode: CanvasMode) {
         withAnimation(.easeInOut(duration: 0.2)) {

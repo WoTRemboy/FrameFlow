@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Line: Equatable {
+struct Line: Equatable, Identifiable {
+    let id = UUID()
     var points: [CGPoint]
     var color: Color
     var lineWidth: CGFloat

@@ -24,10 +24,10 @@ extension CanvasViewModel {
         guard let shape = currentShape else { return }
         
         let shapeLines = createLinesForShape(shape, at: point, color: selectedColor, lineWidth: lineWidth, height: shapeHeight)
-        lines.append(contentsOf: shapeLines)
+        currentLayer.append(contentsOf: shapeLines)
         
         withAnimation(.easeInOut(duration: 0.2)) {
-            undoStack.append(Action(type: .addShape(shapeLines)))
+            undoStack.append(Action(type: .addShape(shapeLines, layerIndex: currentLayerIndex)))
             redoStack.removeAll()
         }
     }
