@@ -122,4 +122,5 @@ struct OnboardingScreenView: View {
 
 #Preview {
     OnboardingScreenView()
+        .environmentObject(OnboardingViewModel())
 }
