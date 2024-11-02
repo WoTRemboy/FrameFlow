@@ -61,7 +61,7 @@ struct CanvasView: View {
                 path.addLine(to: point)
             }
         }
-        .stroke(line.color, lineWidth: line.lineWidth)
+        .stroke(line.color, style: StrokeStyle(lineWidth: line.lineWidth, lineCap: .round, lineJoin: .round))
     }
     
     private func brushPath(for line: Line) -> some View {
@@ -84,6 +84,6 @@ struct CanvasView: View {
                 path.addLine(to: point)
             }
         }
-        .stroke(Color.gray.opacity(0.5), lineWidth: line.lineWidth)
+        .stroke(Color.gray.opacity(0.5), style: StrokeStyle(lineWidth: line.lineWidth, lineCap: .round, lineJoin: .round))
     }
 }

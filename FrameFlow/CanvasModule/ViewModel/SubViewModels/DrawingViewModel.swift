@@ -58,7 +58,7 @@ extension CanvasViewModel {
     
     
     private func eraseLinesIntersectingWithEraser() {
-        let eraserRadius = currentEraserLine.lineWidth / 2
+        let eraserRadius = currentEraserLine.lineWidth / 1.5
         var newLines: [Line] = []
         var removedLines: [Line] = []
         
