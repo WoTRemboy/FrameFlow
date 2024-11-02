@@ -48,7 +48,9 @@ struct CanvasHeaderView: View {
     private var binNewCopy: some View {
         HStack(spacing: 16) {
             Button {
-                viewModel.deleteCurrentLayer()
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.deleteCurrentLayer()
+                }
             } label: {
                 Image.Header.Modifiers.bin
                     .resizable()
@@ -57,7 +59,9 @@ struct CanvasHeaderView: View {
             }
             
             Button {
-                viewModel.addLayer()
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.addLayer()
+                }
             } label: {
                 Image.Header.Modifiers.filePlus
                     .resizable()
