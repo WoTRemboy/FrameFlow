@@ -44,6 +44,11 @@ struct EditorView: View {
                     .zIndex(1)
                 }
             }
+            .sheet(isPresented: $viewModel.isLayerSheetPresented) {
+                LayerSheetView()
+                    .environmentObject(viewModel)
+                    .presentationDetents([.medium])
+            }
         }
     }
     

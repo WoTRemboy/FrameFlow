@@ -28,6 +28,7 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var showColorPicker: Bool = false
     @Published internal var showColorPalette: Bool = false
     @Published internal var showShapePicker: Bool = false
+    @Published internal var isLayerSheetPresented = false
     
     @Published internal var undoStack: [Action] = []
     @Published internal var redoStack: [Action] = []
@@ -39,6 +40,10 @@ final class CanvasViewModel: ObservableObject {
         set {
             layers[currentLayerIndex] = newValue
         }
+    }
+    
+    internal func toggleLayerSheet() {
+        isLayerSheetPresented.toggle()
     }
     
     internal func selectMode(_ mode: CanvasMode) {

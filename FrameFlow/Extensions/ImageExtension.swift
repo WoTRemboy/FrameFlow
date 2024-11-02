@@ -63,6 +63,11 @@ extension Image {
         static let canvas = Image("Canvas")
     }
     
+    enum LayerSheet {
+        static let fill = Image(systemName: "checkmark.circle.fill")
+        static let circle = Image(systemName: "circle")
+    }
+    
     enum Opening {
         static let splashLogo = Image("SplashLogo")
         static let about = Image("SplashAboutApp")

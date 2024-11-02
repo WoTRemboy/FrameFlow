@@ -21,6 +21,13 @@ final class Texts {
         static let fourthDescription = "Send the GIF to various messengers."
     }
     
+    enum LayerSheet {
+        static let title = "Storyboard"
+        static let done = "Done"
+        static let frame = "Frame"
+        static let add = "Add frame"
+    }
+    
     enum UserDefaults {
         static let firstLaunch = "firstLaunch"
     }

@@ -66,7 +66,7 @@ struct CanvasHeaderView: View {
             }
             
             Button {
-                
+                viewModel.toggleLayerSheet()
             } label: {
                 Image.Header.Modifiers.layers
                     .resizable()
