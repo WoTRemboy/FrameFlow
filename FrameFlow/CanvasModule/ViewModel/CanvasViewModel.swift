@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import Combine
 
 final class CanvasViewModel: ObservableObject {
     @Published internal var layers: [[Line]] = [[]]
     @Published internal var currentLayerIndex: Int = 0
+    
+    @Published internal var isAnimating = false
+    @Published internal var animationSpeed: Double = 0.1
     
     @Published internal var lines: [Line] = []
     @Published internal var currentLine: Line = Line(points: [], color: .black, lineWidth: 5)
@@ -32,6 +36,8 @@ final class CanvasViewModel: ObservableObject {
     
     @Published internal var undoStack: [Action] = []
     @Published internal var redoStack: [Action] = []
+    
+    internal var animationCancellable: AnyCancellable?
     
     internal var currentLayer: [Line] {
         get {

@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct LayerMiniatureView: View {
-    let lines: [Line]
-    let scaleFactor: CGFloat
+    private let lines: [Line]
+    private let scaleFactor: CGFloat
 
     init(lines: [Line], scaleFactor: CGFloat = 0.13) {
         self.lines = lines
         self.scaleFactor = scaleFactor
     }
 
-    var body: some View {
+    internal var body: some View {
         ZStack {
             ForEach(lines) { line in
                 Path { path in

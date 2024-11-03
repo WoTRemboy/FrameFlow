@@ -13,9 +13,11 @@ struct CanvasHeaderView: View {
     
     internal var body: some View {
         HStack {
-            backForward
-            Spacer()
-            binNewCopy
+            if !viewModel.isAnimating {
+                backForward
+                Spacer()
+                binNewStory
+            }
             Spacer()
             playStop
         }
@@ -45,7 +47,7 @@ struct CanvasHeaderView: View {
         }
     }
     
-    private var binNewCopy: some View {
+    private var binNewStory: some View {
         HStack(spacing: 16) {
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -57,6 +59,7 @@ struct CanvasHeaderView: View {
                     .scaledToFit()
                     .frame(width: 32)
             }
+            .disabled(viewModel.isLayersEmpty())
             
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -83,22 +86,24 @@ struct CanvasHeaderView: View {
     private var playStop: some View {
         HStack(spacing: 16) {
             Button {
-                
+                viewModel.stopAnimation()
             } label: {
-                Image.Header.Player.pauseInactive
+                (viewModel.isAnimating ? Image.Header.Player.pauseActive : Image.Header.Player.pauseInactive)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
             }
+            .disabled(!viewModel.isAnimating)
             
             Button {
-                
+                viewModel.startAnimation()
             } label: {
-                Image.Header.Player.playActive
+                (viewModel.isAnimating || viewModel.isLayersEmpty() ? Image.Header.Player.playInactive : Image.Header.Player.playActive)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
             }
+            .disabled(viewModel.isAnimating || viewModel.isLayersEmpty())
         }
     }
 }

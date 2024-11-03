@@ -19,7 +19,7 @@ struct CanvasView: View {
     
     internal var body: some View {
         ZStack {
-            if viewModel.currentLayerIndex > 0 {
+            if viewModel.currentLayerIndex > 0, !viewModel.isAnimating {
                 let previousLayerIndex = viewModel.currentLayerIndex - 1
                 ForEach(viewModel.layers[previousLayerIndex]) { line in
                     if line.lineType == .brush {
