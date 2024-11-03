@@ -38,7 +38,7 @@ final class Texts {
         static let speed = "Change speed"
         static let gif = "Share GIF"
         static let copy = "Copy frame"
-        static let delete = "Delete frames"
+        static let delete = "Delete all frames"
     }
     
     enum UserDefaults {

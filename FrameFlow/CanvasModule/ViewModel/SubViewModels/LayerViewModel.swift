@@ -92,7 +92,7 @@ extension CanvasViewModel {
         }
     }
     
-    @MainActor func miniatureForLayer(at index: Int, size: CGSize = CGSize(width: 50, height: 85)) -> Image {
+    @MainActor internal func miniatureForLayer(at index: Int, size: CGSize = CGSize(width: 50, height: 85)) -> Image {
         let layer = layers[index]
         
         let renderer = ImageRenderer(content: LayerMiniatureView(lines: layer)

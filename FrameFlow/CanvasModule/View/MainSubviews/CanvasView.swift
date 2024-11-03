@@ -51,6 +51,9 @@ struct CanvasView: View {
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 20))
+        .onAppear {
+            viewModel.canvasSize = canvasSize
+        }
     }
     
     private func pencilPath(for line: Line) -> some View {

@@ -137,7 +137,9 @@ struct CanvasHeaderView: View {
             Button(Texts.ContextMenu.speed, action: {
                 viewModel.toggleSpeedOverlay()
             })
-            Button(Texts.ContextMenu.gif, action: {})
+            Button(Texts.ContextMenu.gif, action: {
+                viewModel.shareGIF()
+            })
         }
     }
 }

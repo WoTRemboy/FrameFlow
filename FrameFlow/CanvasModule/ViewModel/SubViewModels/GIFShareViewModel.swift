@@ -6,63 +6,55 @@
 //
 
 import SwiftUI
-import ImageIO
 import UniformTypeIdentifiers
-import MobileCoreServices
 
 extension CanvasViewModel {
-    func generateGIF(completion: @escaping (URL?) -> Void) {
-        let tempDirectory = FileManager.default.temporaryDirectory
-        let gifURL = tempDirectory.appendingPathComponent("animation.gif")
-
-        guard let destination = CGImageDestinationCreateWithURL(gifURL as CFURL, UTType.gif.identifier as CFString, layers.count, nil) else {
+    @MainActor private func createGIF(from layers: [[Line]], frameDelay: Double, completion: @escaping (URL?) -> Void) {
+        let fileProperties: [String: Any] = [
+            kCGImagePropertyGIFDictionary as String: [
+                kCGImagePropertyGIFLoopCount as String: 0
+            ]
+        ]
+        
+        let frameProperties: [String: Any] = [
+            kCGImagePropertyGIFDictionary as String: [
+                kCGImagePropertyGIFDelayTime as String: frameDelay
+            ]
+        ]
+        
+        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("animation.gif")
+        
+        guard let destination = CGImageDestinationCreateWithURL(tempURL as CFURL, UTType.gif.identifier as CFString, layers.count, nil) else {
             completion(nil)
             return
         }
-
-        let frameDuration = animationSpeed
-        let gifProperties = [
-            kCGImagePropertyGIFDictionary: [
-                kCGImagePropertyGIFLoopCount: 0
-            ]
-        ] as CFDictionary
-        CGImageDestinationSetProperties(destination, gifProperties)
-
+        
+        CGImageDestinationSetProperties(destination, fileProperties as CFDictionary)
+        
         for layer in layers {
-            if let image = imageFromLayer(layer) {
-                let frameProperties = [
-                    kCGImagePropertyGIFDictionary: [
-                        kCGImagePropertyGIFDelayTime: frameDuration
-                    ]
-                ] as CFDictionary
-
-                if let cgImage = image.cgImage {
-                    CGImageDestinationAddImage(destination, cgImage, frameProperties)
-                }
+            let renderer = ImageRenderer(content: GIFShareView(lines: layer, width: canvasSize.width, height: canvasSize.height))
+            renderer.scale = UIScreen.main.scale
+            if let cgImage = renderer.cgImage {
+                CGImageDestinationAddImage(destination, cgImage, frameProperties as CFDictionary)
             }
         }
-
+        
         if CGImageDestinationFinalize(destination) {
-            completion(gifURL)
+            completion(tempURL)
         } else {
             completion(nil)
         }
     }
-
-    private func imageFromLayer(_ layer: [Line]) -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 340, height: 570))
-        return renderer.image { context in
-            for line in layer {
-                context.cgContext.setStrokeColor(line.color.cgColor!)
-                context.cgContext.setLineWidth(line.lineWidth)
-                context.cgContext.setLineCap(.round)
-                
-                guard let firstPoint = line.points.first else { continue }
-                context.cgContext.move(to: firstPoint)
-                for point in line.points.dropFirst() {
-                    context.cgContext.addLine(to: point)
+    
+    @MainActor internal func shareGIF() {
+        createGIF(from: layers, frameDelay: animationSpeed) { url in
+            guard let url = url else { return }
+            DispatchQueue.main.async {
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootViewController = windowScene.windows.first?.rootViewController {
+                    let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                    rootViewController.present(activityVC, animated: true, completion: nil)
                 }
-                context.cgContext.strokePath()
             }
         }
     }

@@ -12,6 +12,7 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var layers: [[Line]] = [[]]
     @Published internal var currentLayerIndex: Int = 0
     @Published internal var lastLayerIndex: Int = 0
+    @Published internal var canvasSize: CGSize = CGSize(width: 0, height: 0)
     
     @Published internal var isAnimating = false
     @Published internal var animationSpeed: Double = 0.1
