@@ -16,4 +16,5 @@ enum ActionType {
     case addLayer
     case removeLayer(layerIndex: Int, removedLines: [Line])
     case switchLayer(from: Int, to: Int)
+    case duplicateLayer(originalIndex: Int, duplicatedIndex: Int)
 }

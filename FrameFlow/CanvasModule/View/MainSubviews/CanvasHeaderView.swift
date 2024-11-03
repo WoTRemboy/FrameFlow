@@ -71,6 +71,9 @@ struct CanvasHeaderView: View {
                     .scaledToFit()
                     .frame(width: 32)
             }
+            .contextMenu {
+                copyMenu
+            }
             
             Button {
                 viewModel.toggleLayerSheet()
@@ -80,6 +83,14 @@ struct CanvasHeaderView: View {
                     .scaledToFit()
                     .frame(width: 32)
             }
+        }
+    }
+    
+    private var copyMenu: some View {
+        Group {
+            Button(Texts.ContextMenu.copy, action: {
+                viewModel.duplicateCurrentLayer()
+            })
         }
     }
     
@@ -105,12 +116,12 @@ struct CanvasHeaderView: View {
             }
             .disabled(viewModel.isAnimating || viewModel.isLayersEmpty())
             .contextMenu {
-                menuItems
+                speedGifMenu
             }
         }
     }
     
-    private var menuItems: some View {
+    private var speedGifMenu: some View {
         Group {
             Button(Texts.ContextMenu.speed, action: {
                 viewModel.toggleSpeedOverlay()

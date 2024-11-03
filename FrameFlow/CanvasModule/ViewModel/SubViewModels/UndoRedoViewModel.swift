@@ -30,8 +30,8 @@ extension CanvasViewModel {
                 redoStack.append(lastAction)
             }
         case .addLayer:
-            layers.removeLast()
-            currentLayerIndex = layers.count - 1
+            layers.remove(at: currentLayerIndex)
+            currentLayerIndex -= 1
             withAnimation(.easeInOut(duration: 0.2)) {
                 redoStack.append(lastAction)
             }
@@ -45,6 +45,13 @@ extension CanvasViewModel {
             
         case .switchLayer(let from, _):
             currentLayerIndex = from
+            withAnimation(.easeInOut(duration: 0.2)) {
+                redoStack.append(lastAction)
+            }
+            
+        case .duplicateLayer(let originalIndex, let duplicatedIndex):
+            layers.remove(at: duplicatedIndex)
+            currentLayerIndex = originalIndex
             withAnimation(.easeInOut(duration: 0.2)) {
                 redoStack.append(lastAction)
             }
@@ -86,8 +93,8 @@ extension CanvasViewModel {
             }
             
         case .addLayer:
-            layers.append([])
-            currentLayerIndex = layers.count - 1
+            layers.insert([], at: currentLayerIndex + 1)
+            currentLayerIndex += 1
             withAnimation(.easeInOut(duration: 0.2)) {
                 undoStack.append(lastUndoneAction)
             }
@@ -103,6 +110,14 @@ extension CanvasViewModel {
             
         case .switchLayer(_, let to):
             currentLayerIndex = to
+            withAnimation(.easeInOut(duration: 0.2)) {
+                undoStack.append(lastUndoneAction)
+            }
+        
+        case .duplicateLayer(let originalIndex, let duplicatedIndex):
+            let copiedLayer = layers[originalIndex]
+            layers.insert(copiedLayer, at: duplicatedIndex)
+            currentLayerIndex = duplicatedIndex
             withAnimation(.easeInOut(duration: 0.2)) {
                 undoStack.append(lastUndoneAction)
             }

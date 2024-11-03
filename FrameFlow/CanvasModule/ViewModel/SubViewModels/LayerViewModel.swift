@@ -14,10 +14,23 @@ extension CanvasViewModel {
     }
     
     internal func addLayer() {
-        layers.append([])
+        layers.insert([], at: currentLayerIndex + 1)
         undoStack.append(Action(type: .addLayer))
         redoStack.removeAll()
-        currentLayerIndex = layers.count - 1
+        currentLayerIndex += 1
+    }
+    
+    internal func duplicateCurrentLayer() {
+        guard currentLayerIndex >= 0 && currentLayerIndex < layers.count else { return }
+        
+        let copiedLayer = layers[currentLayerIndex]
+        let newLayerIndex = currentLayerIndex + 1
+        
+        layers.insert(copiedLayer, at: newLayerIndex)
+        undoStack.append(Action(type: .duplicateLayer(originalIndex: currentLayerIndex, duplicatedIndex: newLayerIndex)))
+        redoStack.removeAll()
+        
+        currentLayerIndex = newLayerIndex
     }
 
     internal func deleteCurrentLayer() {
