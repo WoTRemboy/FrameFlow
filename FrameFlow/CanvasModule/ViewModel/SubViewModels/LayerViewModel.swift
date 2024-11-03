@@ -56,12 +56,15 @@ extension CanvasViewModel {
         }
     }
 
-    internal func switchToLayer(at index: Int) {
+    internal func switchToLayer(at index: Int, fromAnimation: Bool = false) {
         guard index >= 0 && index < layers.count, index != currentLayerIndex else { return }
-        let previousIndex = currentLayerIndex
+        let previousIndex = fromAnimation ? lastLayerIndex : currentLayerIndex
         currentLayerIndex = index
-        undoStack.append(Action(type: .switchLayer(from: previousIndex, to: index)))
-        redoStack.removeAll()
+        
+        if lastLayerIndex != index {
+            undoStack.append(Action(type: .switchLayer(from: previousIndex, to: index)))
+            redoStack.removeAll()
+        }
     }
     
     @MainActor func miniatureForLayer(at index: Int, size: CGSize = CGSize(width: 50, height: 85)) -> Image {

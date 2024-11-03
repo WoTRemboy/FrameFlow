@@ -9,6 +9,8 @@ import SwiftUI
 
 extension CanvasViewModel {
     internal func updateCurrentLine(with point: CGPoint, in size: CGSize) {
+        guard !isAnimating else { return }
+        
         if point.x >= lineWidth / 2, point.x <= size.width - lineWidth / 2,
            point.y >= lineWidth / 2, point.y <= size.height - lineWidth / 2 {
             switch currentMode {
@@ -32,6 +34,8 @@ extension CanvasViewModel {
     }
     
     internal func finalizeCurrentLine() {
+        guard !isAnimating else { return }
+        
         switch currentMode {
         case .pencil, .brush:
             currentLayer.append(currentLine)
@@ -58,6 +62,8 @@ extension CanvasViewModel {
     
     
     private func eraseLinesIntersectingWithEraser() {
+        guard !isAnimating else { return }
+        
         let eraserRadius = currentEraserLine.lineWidth / 1.5
         var newLines: [Line] = []
         var removedLines: [Line] = []

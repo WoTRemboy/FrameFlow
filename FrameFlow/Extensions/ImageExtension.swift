@@ -18,6 +18,7 @@ extension Image {
         
         enum Modifiers {
             static let bin = Image("Bin")
+            static let binInactive = Image("BinInactive")
             static let filePlus = Image("FilePlus")
             static let layers = Image("Layers")
         }

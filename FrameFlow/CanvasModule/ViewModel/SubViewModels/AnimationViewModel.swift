@@ -11,6 +11,7 @@ import SwiftUI
 extension CanvasViewModel {
     internal func startAnimation() {
         guard layers.count > 1, !isAnimating else { return }
+        lastLayerIndex = currentLayerIndex
         
         withAnimation(.easeInOut(duration: 0.2)) {
             isAnimating = true
@@ -31,6 +32,11 @@ extension CanvasViewModel {
         }
         animationCancellable?.cancel()
         animationCancellable = nil
+        
+        if !layers.isEmpty, currentLayerIndex != layers.count - 1 {
+            switchToLayer(at: layers.count - 1, fromAnimation: true)
+            lastLayerIndex = currentLayerIndex
+        }
     }
     
     private func nextFrame() {

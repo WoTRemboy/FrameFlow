@@ -21,7 +21,7 @@ extension CanvasViewModel {
     }
     
     internal func addShape(at point: CGPoint) {
-        guard let shape = currentShape else { return }
+        guard let shape = currentShape, !isAnimating else { return }
         
         let shapeLines = createLinesForShape(shape, at: point, color: selectedColor, lineWidth: lineWidth, height: shapeHeight)
         currentLayer.append(contentsOf: shapeLines)

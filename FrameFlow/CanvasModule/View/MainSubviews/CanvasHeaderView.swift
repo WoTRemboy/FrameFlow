@@ -54,7 +54,7 @@ struct CanvasHeaderView: View {
                     viewModel.deleteCurrentLayer()
                 }
             } label: {
-                Image.Header.Modifiers.bin
+                (viewModel.isLayersEmpty() ? Image.Header.Modifiers.binInactive : Image.Header.Modifiers.bin)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32)
