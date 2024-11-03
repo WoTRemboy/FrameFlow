@@ -66,6 +66,7 @@ extension Image {
     enum LayerSheet {
         static let fill = Image(systemName: "checkmark.circle.fill")
         static let circle = Image(systemName: "circle")
+        static let xmark = Image(systemName: "xmark.circle")
     }
     
     enum Opening {

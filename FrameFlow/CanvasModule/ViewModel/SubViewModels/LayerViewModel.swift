@@ -63,4 +63,19 @@ extension CanvasViewModel {
         undoStack.append(Action(type: .switchLayer(from: previousIndex, to: index)))
         redoStack.removeAll()
     }
+    
+    @MainActor func miniatureForLayer(at index: Int, size: CGSize = CGSize(width: 50, height: 85)) -> Image {
+        let layer = layers[index]
+        
+        let renderer = ImageRenderer(content: LayerMiniatureView(lines: layer)
+            .frame(width: size.width, height: size.height)
+            .scaleEffect(0.8)
+        )
+
+        if let uiImage = renderer.uiImage {
+            return Image(uiImage: uiImage)
+        } else {
+            return Image.LayerSheet.xmark
+        }
+    }
 }

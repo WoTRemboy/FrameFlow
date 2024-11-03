@@ -32,19 +32,31 @@ struct LayerSheetView: View {
     private var frameRows: some View {
         ForEach(viewModel.layers.indices, id: \.self) { index in
             HStack {
+                viewModel.miniatureForLayer(at: index)
+                    .resizable()
+                    .frame(width: 50, height: 85)
+                    .cornerRadius(10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 1)
+                            .fill(Color.PaletteColors.whitePalette)
+                    )
+                    .padding([.trailing, .vertical])
+                
                 Text("\(Texts.LayerSheet.frame) \(index + 1)")
                     .font(.regularBody())
                     .foregroundColor(index == viewModel.currentLayerIndex ? Color.PaletteColors.bluePalette : Color.LabelColors.labelPrimary)
                 Spacer()
                 
                 Button(action: {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        viewModel.switchToLayer(at: index)
-                    }
+                    viewModel.switchToLayer(at: index)
                     viewModel.isLayerSheetPresented.toggle()
                 }) {
                     (index == viewModel.currentLayerIndex ? Image.LayerSheet.fill : Image.LayerSheet.circle)
+                        .resizable()
+                        .scaledToFit()
                         .foregroundColor(index == viewModel.currentLayerIndex ? .blue : .gray)
+                        .frame(width: 20)
                 }
             }
             

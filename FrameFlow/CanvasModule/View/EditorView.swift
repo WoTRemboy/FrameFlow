@@ -47,7 +47,6 @@ struct EditorView: View {
             .sheet(isPresented: $viewModel.isLayerSheetPresented) {
                 LayerSheetView()
                     .environmentObject(viewModel)
-                    .presentationDetents([.medium])
             }
         }
     }
