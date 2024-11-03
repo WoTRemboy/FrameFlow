@@ -55,6 +55,13 @@ extension CanvasViewModel {
             withAnimation(.easeInOut(duration: 0.2)) {
                 redoStack.append(lastAction)
             }
+            
+        case .removeAllLayers(let previousLayers):
+            layers = previousLayers
+            currentLayerIndex = layers.count - 1
+            withAnimation(.easeInOut(duration: 0.2)) {
+                redoStack.append(lastAction)
+            }
         }
     }
     
@@ -118,6 +125,13 @@ extension CanvasViewModel {
             let copiedLayer = layers[originalIndex]
             layers.insert(copiedLayer, at: duplicatedIndex)
             currentLayerIndex = duplicatedIndex
+            withAnimation(.easeInOut(duration: 0.2)) {
+                undoStack.append(lastUndoneAction)
+            }
+            
+        case .removeAllLayers:
+            layers = [[]]
+            currentLayerIndex = 0
             withAnimation(.easeInOut(duration: 0.2)) {
                 undoStack.append(lastUndoneAction)
             }

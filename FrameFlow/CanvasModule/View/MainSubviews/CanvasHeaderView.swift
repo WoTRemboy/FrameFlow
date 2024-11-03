@@ -60,6 +60,9 @@ struct CanvasHeaderView: View {
                     .frame(width: 32)
             }
             .disabled(viewModel.isLayersEmpty())
+            .contextMenu {
+                deleteMenu
+            }
             
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -83,6 +86,14 @@ struct CanvasHeaderView: View {
                     .scaledToFit()
                     .frame(width: 32)
             }
+        }
+    }
+    
+    private var deleteMenu: some View {
+        Group {
+            Button(Texts.ContextMenu.delete, action: {
+                viewModel.deleteAllLayers()
+            })
         }
     }
     

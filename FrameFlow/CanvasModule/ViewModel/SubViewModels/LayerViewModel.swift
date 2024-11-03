@@ -68,6 +68,18 @@ extension CanvasViewModel {
             }
         }
     }
+    
+    internal func deleteAllLayers() {
+        guard !layers.isEmpty else { return }
+        
+        let previousLayers = layers
+        
+        layers = [[]]
+        currentLayerIndex = 0
+        
+        undoStack.append(Action(type: .removeAllLayers(previousLayers: previousLayers)))
+        redoStack.removeAll()
+    }
 
     internal func switchToLayer(at index: Int, fromAnimation: Bool = false) {
         guard index >= 0 && index < layers.count, index != currentLayerIndex else { return }
