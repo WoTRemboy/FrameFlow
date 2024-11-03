@@ -25,6 +25,10 @@ struct EditorView: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, hasNotch() ? 60 : 16)
                 
+                if viewModel.isSpeedOverlayVisible {
+                    speedSlider
+                }
+                
                 if viewModel.showColorPicker {
                     VStack(spacing: 8) {
                         if viewModel.showColorPalette {
@@ -70,6 +74,24 @@ struct EditorView: View {
                 )
         }
         .padding(.vertical)
+    }
+    
+    private var speedSlider: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewModel.isSpeedOverlayVisible = false
+                    }
+                }
+            VStack {
+                Spacer()
+                SpeedSliderOverlay()
+                Spacer()
+            }
+        }
+        .zIndex(1)
     }
     
     private var canvasBackground: some View {

@@ -28,6 +28,19 @@ final class Texts {
         static let add = "Add frame"
     }
     
+    enum AnimationOverlay {
+        static let title = "Animation Speed"
+        static let units = "sec/frame"
+        static let done = "Done"
+    }
+    
+    enum ContextMenu {
+        static let speed = "Change speed"
+        static let gif = "Share GIF"
+        static let copy = "Copy frame"
+        static let delete = "Delete frames"
+    }
+    
     enum UserDefaults {
         static let firstLaunch = "firstLaunch"
     }

@@ -104,6 +104,18 @@ struct CanvasHeaderView: View {
                     .frame(width: 32)
             }
             .disabled(viewModel.isAnimating || viewModel.isLayersEmpty())
+            .contextMenu {
+                menuItems
+            }
+        }
+    }
+    
+    private var menuItems: some View {
+        Group {
+            Button(Texts.ContextMenu.speed, action: {
+                viewModel.toggleSpeedOverlay()
+            })
+            Button(Texts.ContextMenu.gif, action: {})
         }
     }
 }
