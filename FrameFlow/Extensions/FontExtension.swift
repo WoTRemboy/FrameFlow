@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension Font {
+    
+    // MARK: - Titles
+    
     static func largeTitle() -> Font? {
         Font.system(size: 35, weight: .bold)
     }
@@ -24,6 +27,8 @@ extension Font {
         Font.system(size: 17, weight: .medium)
     }
     
+    // MARK: - Body
+    
     static func regularBody() -> Font? {
         Font.system(size: 17, weight: .regular)
     }
@@ -31,6 +36,8 @@ extension Font {
     static func body() -> Font? {
         Font.system(size: 17, weight: .light)
     }
+    
+    // MARK: - Subhead & Footnote
     
     static func subhead() -> Font? {
         Font.system(size: 15, weight: .light)

@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+/// View displaying the onboarding process or the main `EditorView` if onboarding is complete.
 struct OnboardingScreenView: View {
     
+    /// View model controlling the onboarding state.
     @EnvironmentObject private var viewModel: OnboardingViewModel
+    
+    // MARK: - Body
     
     internal var body: some View {
         if viewModel.firstLaunch {
@@ -25,6 +29,9 @@ struct OnboardingScreenView: View {
         }
     }
     
+    // MARK: - Skip Button
+    
+    /// Button allowing users to skip to the last onboarding step.
     private var skipButton: some View {
         HStack {
             Spacer()
@@ -42,6 +49,9 @@ struct OnboardingScreenView: View {
         .animation(.easeInOut, value: viewModel.buttonType)
     }
     
+    // MARK: - Content
+    
+    /// Displays the onboarding steps as a tab view.
     private var content: some View {
         TabView(selection: $viewModel.currentStep) {
             ForEach(0 ..< viewModel.stepsCount, id: \.self) { index in
@@ -66,6 +76,9 @@ struct OnboardingScreenView: View {
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
+    // MARK: - Progress Circles
+    
+    /// Displays the progress indicator for the onboarding steps.
     private var progressCircles: some View {
         HStack {
             ForEach(0 ..< viewModel.stepsCount, id: \.self) { step in
@@ -87,6 +100,9 @@ struct OnboardingScreenView: View {
         .animation(.easeInOut, value: viewModel.currentStep)
     }
     
+    // MARK: - Action Button
+    
+    /// Button for advancing to the next step or completing onboarding.
     private var actionButton: some View {
         Button {
             switch viewModel.buttonType {
@@ -119,6 +135,8 @@ struct OnboardingScreenView: View {
         .animation(.easeInOut, value: viewModel.buttonType)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     OnboardingScreenView()

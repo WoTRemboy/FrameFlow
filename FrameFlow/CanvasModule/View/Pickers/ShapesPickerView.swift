@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+/// A view that displays a picker for selecting shapes to draw on the canvas.
 struct ShapesPickerView: View {
     
+    /// The view model that controls the state and actions of the canvas.
     @EnvironmentObject var viewModel: CanvasViewModel
     
+    // MARK: - Body
+    
+    /// The main content of the view, including shape selection buttons and a styled background.
     internal var body: some View {
         ZStack {
             background
@@ -18,6 +23,9 @@ struct ShapesPickerView: View {
         }
     }
     
+    // MARK: - Buttons
+    
+    /// Buttons to select specific shapes (square, circle, triangle, arrow).
     private var buttons: some View {
         HStack(spacing: 16) {
             Button {
@@ -54,6 +62,9 @@ struct ShapesPickerView: View {
         }
     }
     
+    // MARK: - Background
+    
+    /// Background styling for the picker, including a border and material overlay for a subtle visual effect.
     private var background: some View {
         RoundedRectangle(cornerRadius: 4)
             .foregroundStyle(Color.SupportColors.supportSelection)
@@ -69,6 +80,8 @@ struct ShapesPickerView: View {
             .opacity(0.96)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     ShapesPickerView()

@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+/// A view overlay for adjusting the animation speed, featuring a slider and a completion button.
 struct SpeedSliderOverlay: View {
+    
+    /// The view model that controls the state and actions of the canvas.
     @EnvironmentObject private var viewModel: CanvasViewModel
 
+    // MARK: - Body
+    
+    /// The main content of the overlay, including the title, speed display, slider, and "Done" button.
     internal var body: some View {
         VStack(spacing: 16) {
             title
@@ -27,17 +33,26 @@ struct SpeedSliderOverlay: View {
         )
     }
     
+    // MARK: - Title
+    
+    /// Displays the title text for the overlay, providing context for the speed adjustment.
     private var title: some View {
         Text(Texts.AnimationOverlay.title)
             .font(.headline())
             .padding(.top)
     }
     
+    // MARK: - Speed Display
+    
+    /// Shows the current animation speed in a formatted string, updating with slider changes.
     private var units: some View {
         Text("\(String(format: "%.2f", viewModel.animationSpeed)) \(Texts.AnimationOverlay.units)")
             .font(.subhead())
     }
     
+    // MARK: - Speed Slider
+    
+    /// A slider for setting animation speed, with a custom track image and step increments.
     private var slider: some View {
         Slider(value: $viewModel.animationSpeed, in: 0.01...1.0, step: 0.01)
             .background(
@@ -49,6 +64,9 @@ struct SpeedSliderOverlay: View {
             .padding(.horizontal)
     }
     
+    // MARK: - Done Button
+    
+    /// A button that toggles the visibility of the overlay.
     private var doneButton: some View {
         Button {
             viewModel.toggleSpeedOverlay()
@@ -65,6 +83,8 @@ struct SpeedSliderOverlay: View {
         .padding([.horizontal, .bottom])
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     SpeedSliderOverlay()

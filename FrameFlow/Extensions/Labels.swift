@@ -8,6 +8,9 @@
 import Foundation
 
 final class Texts {
+    
+    // MARK: - Onboarding Texts
+    
     enum OnboardingPage {
         static let skip = NSLocalizedString("OnboardingPageSkip", comment: "Skip")
         static let next = NSLocalizedString("OnboardingPageNextPage", comment: "Next page")
@@ -23,6 +26,8 @@ final class Texts {
         static let fourthDescription = NSLocalizedString("OnboardingPageFourthDescription", comment: "Send the GIF to various messengers.")
     }
     
+    // MARK: - Layer sheet Texts
+    
     enum LayerSheet {
         static let title = NSLocalizedString("LayerSheetTitle", comment: "Storyboard")
         static let done = NSLocalizedString("LayerSheetDone", comment: "Done")
@@ -30,11 +35,15 @@ final class Texts {
         static let add = NSLocalizedString("LayerSheetAdd", comment: "Add frame")
     }
     
+    // MARK: - Animation overlay Texts
+    
     enum AnimationOverlay {
         static let title = NSLocalizedString("AnimationOverlayTitle", comment: "Animation Speed")
         static let units = NSLocalizedString("AnimationOverlayUnits", comment: "sec/frame")
         static let done = NSLocalizedString("AnimationOverlayDone", comment: "Done")
     }
+    
+    // MARK: - Context menu Texts
     
     enum ContextMenu {
         static let speed = NSLocalizedString("ContextMenuSpeed", comment: "Change speed")
@@ -43,6 +52,8 @@ final class Texts {
         static let delete = NSLocalizedString("ContextMenuDelete", comment: "Delete all frames")
         static let color = NSLocalizedString("ContextMenuColor", comment: "Select the color")
     }
+    
+    // MARK: - UserDefaults Keys
     
     enum UserDefaults {
         static let firstLaunch = "firstLaunch"

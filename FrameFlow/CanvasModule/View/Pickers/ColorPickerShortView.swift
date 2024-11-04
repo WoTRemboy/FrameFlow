@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ColorPickerShortView: View {
     
+    /// The view model that controls the state and actions of the canvas.
     @EnvironmentObject var viewModel: CanvasViewModel
     
+    /// The main content of the view, consisting of a color picker with quick-access color buttons.
     internal var body: some View {
         ZStack {
             background
@@ -18,8 +20,12 @@ struct ColorPickerShortView: View {
         }
     }
     
+    // MARK: - Buttons
+    
+    /// A horizontal row of color buttons for quick color selection, including a button to open the full color palette.
     private var buttons: some View {
         HStack(spacing: 16) {
+            // Button to toggle the full color palette
             Button {
                 viewModel.toggleColorPalette()
             } label: {
@@ -32,6 +38,7 @@ struct ColorPickerShortView: View {
                     .frame(width: 32)
             }
             
+            // Quick-access buttons for specific colors
             Button {
                 viewModel.selectColor(Color.PaletteColors.whitePalette)
             } label: {
@@ -70,6 +77,9 @@ struct ColorPickerShortView: View {
         }
     }
     
+    // MARK: - Background
+    
+    /// The background view with rounded corners, a border, and a subtle opacity effect to highlight the color picker.
     private var background: some View {
         RoundedRectangle(cornerRadius: 4)
             .foregroundStyle(Color.SupportColors.supportSelection)
@@ -85,6 +95,8 @@ struct ColorPickerShortView: View {
             .opacity(0.96)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     ColorPickerShortView()

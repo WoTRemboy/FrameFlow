@@ -7,12 +7,18 @@
 
 import SwiftUI
 
+/// The header view of the canvas editor, providing controls for undo/redo, layer management, and animation play/stop functions.
 struct CanvasHeaderView: View {
     
+    /// The view model that controls the state and actions of the canvas.
     @EnvironmentObject var viewModel: CanvasViewModel
     
+    // MARK: - Body
+    
+    /// The main content of the header, which displays various tool buttons and play/stop controls.
     internal var body: some View {
         HStack {
+            // Display undo, redo, and layer management buttons when animation is not active.
             if !viewModel.isAnimating {
                 backForward
                 Spacer()
@@ -23,8 +29,12 @@ struct CanvasHeaderView: View {
         }
     }
     
+    // MARK: - Undo/Redo Controls
+    
+    /// Contains undo and redo buttons.
     private var backForward: some View {
         HStack(spacing: 8) {
+            // Undo button
             Button {
                 viewModel.undo()
             } label: {
@@ -35,6 +45,7 @@ struct CanvasHeaderView: View {
             }
             .disabled(!viewModel.undoAvailable())
             
+            // Redo button
             Button {
                 viewModel.redo()
             } label: {
@@ -47,8 +58,12 @@ struct CanvasHeaderView: View {
         }
     }
     
+    // MARK: - Layer Management Controls
+    
+    /// Contains buttons for managing layers: delete current layer, add a new layer, and open layer sheet.
     private var binNewStory: some View {
         HStack(spacing: 16) {
+            // Delete current layer button with a context menu option to delete all layers
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.deleteCurrentLayer()
@@ -66,6 +81,7 @@ struct CanvasHeaderView: View {
                 }
             }
             
+            // Add a new layer button with a context menu option to duplicate the current layer
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     viewModel.addLayer()
@@ -80,6 +96,7 @@ struct CanvasHeaderView: View {
                 copyMenu
             }
             
+            // Open storyboard sheet button
             Button {
                 viewModel.toggleLayerSheet()
             } label: {
@@ -91,6 +108,7 @@ struct CanvasHeaderView: View {
         }
     }
     
+    /// Context menu option for deleting all layers.
     private var deleteMenu: some View {
         Group {
             Button(Texts.ContextMenu.delete, action: {
@@ -99,6 +117,7 @@ struct CanvasHeaderView: View {
         }
     }
     
+    /// Context menu option for duplicating the current layer.
     private var copyMenu: some View {
         Group {
             Button(Texts.ContextMenu.copy, action: {
@@ -107,8 +126,12 @@ struct CanvasHeaderView: View {
         }
     }
     
+    // MARK: - Animation Controls
+    
+    /// Contains play and stop buttons for controlling animation playback, with additional options for adjusting speed and sharing as GIF.
     private var playStop: some View {
         HStack(spacing: 16) {
+            // Stop animation button
             Button {
                 viewModel.stopAnimation()
             } label: {
@@ -119,6 +142,7 @@ struct CanvasHeaderView: View {
             }
             .disabled(!viewModel.isAnimating)
             
+            // Start animation button with a context menu for speed and GIF options
             Button {
                 viewModel.startAnimation()
             } label: {
@@ -136,17 +160,23 @@ struct CanvasHeaderView: View {
         }
     }
     
+    /// Context menu for adjusting animation speed and sharing as GIF.
     private var speedGifMenu: some View {
         Group {
+            // Button to adjust animation speed
             Button(Texts.ContextMenu.speed, action: {
                 viewModel.toggleSpeedOverlay()
             })
+            
+            // Button to share animation as a GIF
             Button(Texts.ContextMenu.gif, action: {
                 viewModel.shareGIF()
             })
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     CanvasHeaderView()

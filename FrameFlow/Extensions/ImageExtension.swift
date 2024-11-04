@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension Image {
+    
+    // MARK: - Header Images
+    
     enum Header {
         enum Arrows {
             static let leftActive = Image("LeftActive")
@@ -31,6 +34,8 @@ extension Image {
         }
     }
     
+    // MARK: - Panel Images
+    
     enum Panel {
         enum Palette {
             static let paletteInactive = Image("PaletteInactive")
@@ -46,6 +51,8 @@ extension Image {
         }
     }
     
+    // MARK: - Tabbar Images
+    
     enum TabBar {
         static let brushInactive = Image("BrushInactive")
         static let brushSelected = Image("BrushSelected")
@@ -60,6 +67,8 @@ extension Image {
         static let pencilSelected = Image("PencilSelected")
     }
     
+    // MARK: - Canvas & Storyboard Images
+    
     enum Canvas {
         static let canvas = Image("Canvas")
     }
@@ -69,6 +78,8 @@ extension Image {
         static let circle = Image(systemName: "circle")
         static let xmark = Image(systemName: "xmark.circle")
     }
+    
+    // MARK: - Opening Images
     
     enum Opening {
         enum SplashScreen {

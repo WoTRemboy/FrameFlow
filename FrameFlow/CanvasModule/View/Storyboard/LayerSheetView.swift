@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct LayerSheetView: View {
+    
+    /// The view model that controls the state and actions of the canvas.
     @EnvironmentObject var viewModel: CanvasViewModel
+    
+    // MARK: - Body
     
     internal var body: some View {
         NavigationView {
@@ -29,6 +33,9 @@ struct LayerSheetView: View {
         }
     }
     
+    // MARK: - Frame Rows
+    
+    /// A view displaying each layer as a row with a miniature preview and selection button.
     private var frameRows: some View {
         ForEach(viewModel.layers.indices, id: \.self) { index in
             HStack {
@@ -62,6 +69,9 @@ struct LayerSheetView: View {
         }
     }
     
+    // MARK: - Add Frame Row
+    
+    /// A button row to add a new layer at the end of the layer list.
     private var addFrameRow: some View {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.2)) {
@@ -74,6 +84,8 @@ struct LayerSheetView: View {
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     LayerSheetView()

@@ -9,10 +9,16 @@ import Foundation
 import SwiftUI
 
 extension CanvasViewModel {
+    
+    /// Checks if the layer list is empty or only contains a single layer.
+    /// - Returns: `true` if there is only one or no layers, otherwise `false`.
     internal func isLayersEmpty() -> Bool {
         layers.count <= 1
     }
     
+    // MARK: - Adding Layers
+    
+    /// Adds a new layer after the current layer and makes it the active layer.
     internal func addLayer() {
         layers.insert([], at: currentLayerIndex + 1)
         undoStack.append(Action(type: .addLayer))
@@ -20,6 +26,7 @@ extension CanvasViewModel {
         currentLayerIndex += 1
     }
     
+    /// Adds a new layer to the end of the layer list and sets it as the active layer.
     internal func addLayerToEnd() {
         layers.append([])
         undoStack.append(Action(type: .addLayerToEnd))
@@ -27,6 +34,9 @@ extension CanvasViewModel {
         currentLayerIndex = layers.count - 1
     }
     
+    // MARK: - Duplicating Layers
+    
+    /// Creates a duplicate of the current layer and inserts it directly after the original.
     internal func duplicateCurrentLayer() {
         guard currentLayerIndex >= 0 && currentLayerIndex < layers.count else { return }
         
@@ -39,7 +49,10 @@ extension CanvasViewModel {
         
         currentLayerIndex = newLayerIndex
     }
-
+    
+    // MARK: - Deleting Layers
+    
+    /// Deletes the current layer if there is more than one layer available.
     internal func deleteCurrentLayer() {
         guard layers.count > 1 else { return }
         let removedLines = layers[currentLayerIndex]
@@ -52,6 +65,8 @@ extension CanvasViewModel {
         }
     }
     
+    /// Deletes a layer at a specific index and updates the current layer index if necessary.
+    /// - Parameter index: The index of the layer to be deleted.
     internal func deleteLayer(at index: Int) {
         guard layers.count > 1 else { return }
         
@@ -68,6 +83,8 @@ extension CanvasViewModel {
         }
     }
     
+    /// Deletes multiple layers based on specified offsets.
+    /// - Parameter offsets: The indices of layers to be deleted.
     internal func deleteLayers(at offsets: IndexSet) {
         offsets.forEach { index in
             withAnimation {
@@ -76,6 +93,7 @@ extension CanvasViewModel {
         }
     }
     
+    /// Deletes all layers, resetting the view to a single empty layer.
     internal func deleteAllLayers() {
         guard !layers.isEmpty else { return }
         
@@ -87,7 +105,13 @@ extension CanvasViewModel {
         undoStack.append(Action(type: .removeAllLayers(previousLayers: previousLayers)))
         redoStack.removeAll()
     }
+    
+    // MARK: - Layer Switching
 
+    /// Switches the active layer to a specified index, allowing animation layers to revert back to the last index after playback.
+    /// - Parameters:
+    ///   - index: The target layer index to switch to.
+    ///   - fromAnimation: If `true`, the switch does not add an action to the undo stack.
     internal func switchToLayer(at index: Int, fromAnimation: Bool = false) {
         guard index >= 0 && index < layers.count, index != currentLayerIndex else { return }
         let previousIndex = fromAnimation ? lastLayerIndex : currentLayerIndex
@@ -99,6 +123,14 @@ extension CanvasViewModel {
         }
     }
     
+    // MARK: - Layer Miniatures
+    
+    
+    /// Generates a miniature image of a specified layer for display, with a white background if the layer is empty.
+    /// - Parameters:
+    ///   - index: The index of the layer for which the miniature is generated.
+    ///   - size: The size of the miniature image.
+    /// - Returns: A SwiftUI `Image` representing the layer’s content or a blank placeholder if it fails.
     @MainActor internal func miniatureForLayer(at index: Int, size: CGSize = CGSize(width: 50, height: 85)) -> Image {
         let layer = layers[index]
         
@@ -118,6 +150,9 @@ extension CanvasViewModel {
         }
     }
     
+    /// Generates a blank white image, used as a placeholder when a layer has no content.
+    /// - Parameter size: The size of the generated image.
+    /// - Returns: A `UIImage` filled with white color.
     private func generateWhiteImage(size: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { context in

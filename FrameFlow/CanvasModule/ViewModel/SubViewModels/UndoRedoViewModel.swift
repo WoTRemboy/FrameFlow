@@ -8,6 +8,10 @@
 import SwiftUI
 
 extension CanvasViewModel {
+    
+    // MARK: - Undo Functionality
+    
+    /// Reverts the last action taken by the user.
     internal func undo() {
         guard let lastAction = undoStack.popLast() else { return }
         
@@ -73,10 +77,12 @@ extension CanvasViewModel {
         }
     }
     
+    /// Checks if there are actions available for undo.
     internal func undoAvailable() -> Bool {
         !undoStack.isEmpty
     }
     
+    /// Returns the appropriate image for the undo button, based on availability.
     internal func undoAvailableImage() -> Image {
         if undoStack.isEmpty {
             Image.Header.Arrows.rightInactive
@@ -85,6 +91,9 @@ extension CanvasViewModel {
         }
     }
     
+    // MARK: - Redo Functionality
+    
+    /// Reapplies the last undone action, restoring the user's previous change.
     internal func redo() {
         guard let lastUndoneAction = redoStack.popLast() else { return }
         
@@ -153,10 +162,12 @@ extension CanvasViewModel {
         }
     }
     
+    /// Checks if there are actions available for redo.
     internal func redoAvailable() -> Bool {
         !redoStack.isEmpty
     }
     
+    /// Returns the appropriate image for the redo button, based on availability.
     internal func redoAvailableImage() -> Image {
         if redoStack.isEmpty {
             Image.Header.Arrows.leftInactive

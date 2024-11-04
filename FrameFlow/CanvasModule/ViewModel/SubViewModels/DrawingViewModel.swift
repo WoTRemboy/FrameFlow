@@ -8,11 +8,21 @@
 import SwiftUI
 
 extension CanvasViewModel {
+    
+    // MARK: - Update Current Line
+    
+    /// Updates the `currentLine` with a new point while ensuring the canvas is not in animation mode.
+    /// - Parameters:
+    ///   - point: The new point to add.
+    ///   - size: The size of the canvas, used to ensure points remain within the drawable area.
     internal func updateCurrentLine(with point: CGPoint, in size: CGSize) {
         guard !isAnimating else { return }
         
+        // Check if the point is within the canvas bounds before adding it
         if point.x >= lineWidth / 2, point.x <= size.width - lineWidth / 2,
            point.y >= lineWidth / 2, point.y <= size.height - lineWidth / 2 {
+            
+            // Depending on the current mode, update the line with the new point
             switch currentMode {
             case .pencil:
                 currentLine.points.append(point)
@@ -33,11 +43,17 @@ extension CanvasViewModel {
         }
     }
     
+    // MARK: - Finalize Current Line
+    
+    /// Finalizes the `currentLine` by adding it to the active layer.
+    ///
+    /// Also manages undo/redo stacks, stores actions, and resets line data based on the current mode.
     internal func finalizeCurrentLine() {
         guard !isAnimating else { return }
         
         switch currentMode {
         case .pencil, .brush:
+            // Append the current line to the active layer
             currentLayer.append(currentLine)
             undoStack.append(Action(type: .addLine(currentLine, layerIndex: currentLayerIndex)))
             redoStack.removeAll()
@@ -45,9 +61,11 @@ extension CanvasViewModel {
             currentLine = Line(points: [], color: selectedColor, lineWidth: lineWidth)
             
         case .eraser:
+            // Save the original lines before erasing for undo/redo functionality
             let originalLines = currentLayer
             eraseLinesIntersectingWithEraser()
             
+            // Record the erasing action if any lines were removed
             if !originalLines.isEmpty {
                 undoStack.append(Action(type: .removeLine(originalLines, layerIndex: currentLayerIndex)))
                 redoStack.removeAll()
@@ -60,7 +78,11 @@ extension CanvasViewModel {
         }
     }
     
+    // MARK: - Erase Lines Intersecting with Eraser
     
+    /// Removes or segments lines that intersect with the `currentEraserLine`, allowing partial erasing.
+    ///
+    /// Evaluates each line against the eraser's path and segments lines when intersections occur.
     private func eraseLinesIntersectingWithEraser() {
         guard !isAnimating else { return }
         
@@ -68,6 +90,7 @@ extension CanvasViewModel {
         var newLines: [Line] = []
         var removedLines: [Line] = []
         
+        // Break eraser path into segments for intersection checks
         var eraserSegments: [(CGPoint, CGPoint)] = []
         let eraserPoints = currentEraserLine.points
         for i in 0..<eraserPoints.count - 1 {
@@ -76,6 +99,7 @@ extension CanvasViewModel {
             eraserSegments.append((eraserStart, eraserEnd))
         }
         
+        // Process each line in the current layer
         for line in currentLayer {
             var currentSegmentPoints: [CGPoint] = []
             var newLineSegments: [[CGPoint]] = []
@@ -83,11 +107,13 @@ extension CanvasViewModel {
             let linePoints = line.points
             var isLineRemoved = false
             
+            // Check each segment of the line for intersections
             for i in 0..<linePoints.count - 1 {
                 let lineStart = linePoints[i]
                 let lineEnd = linePoints[i + 1]
                 var shouldEraseSegment = false
                 
+                // Check intersection with each eraser segment
                 for (eraserStart, eraserEnd) in eraserSegments {
                     if segmentsIntersect(lineStart, lineEnd, eraserStart, eraserEnd, eraserRadius: eraserRadius) {
                         shouldEraseSegment = true
@@ -96,6 +122,7 @@ extension CanvasViewModel {
                 }
                 
                 if shouldEraseSegment {
+                    // Finalize the current segment if it's not empty
                     if !currentSegmentPoints.isEmpty {
                         currentSegmentPoints.append(lineStart)
                         newLineSegments.append(currentSegmentPoints)
@@ -103,6 +130,7 @@ extension CanvasViewModel {
                     }
                     isLineRemoved = true
                 } else {
+                    // Continue building the current segment
                     if currentSegmentPoints.isEmpty {
                         currentSegmentPoints.append(lineStart)
                     }
@@ -110,14 +138,17 @@ extension CanvasViewModel {
                 }
             }
             
+            // Add the last segment if it wasn't erased
             if !currentSegmentPoints.isEmpty {
                 newLineSegments.append(currentSegmentPoints)
             }
             
+            // Record the removed line for undo/redo tracking
             if isLineRemoved {
                 removedLines.append(line)
             }
             
+            // Add new line segments to the collection
             for segmentPoints in newLineSegments {
                 if segmentPoints.count > 1 {
                     newLines.append(Line(points: segmentPoints, color: line.color, lineWidth: line.lineWidth, lineType: line.lineType))
@@ -125,9 +156,13 @@ extension CanvasViewModel {
             }
         }
         
+        // Update the current layer with the new segmented lines
         currentLayer = newLines
     }
     
+    // MARK: - Geometry Utility Functions
+    
+    /// Checks if two line segments intersect within a given radius, used for erasing interactions.
     private func segmentsIntersect(
         _ p1: CGPoint, _ p2: CGPoint,
         _ q1: CGPoint, _ q2: CGPoint,
@@ -137,6 +172,7 @@ extension CanvasViewModel {
         return distance <= eraserRadius
     }
     
+    /// Calculates the minimum distance between two line segments, which is zero if they intersect.
     private func minDistanceBetweenLineSegments(
         _ p1: CGPoint, _ p2: CGPoint,
         _ q1: CGPoint, _ q2: CGPoint
@@ -153,6 +189,7 @@ extension CanvasViewModel {
         }
     }
     
+    /// Determines if two lines intersect based on their endpoints.
     private func linesIntersect(_ p1: CGPoint, _ p2: CGPoint, _ q1: CGPoint, _ q2: CGPoint) -> Bool {
         func ccw(_ a: CGPoint, _ b: CGPoint, _ c: CGPoint) -> Bool {
             return (c.y - a.y)*(b.x - a.x) > (b.y - a.y)*(c.x - a.x)
@@ -161,6 +198,7 @@ extension CanvasViewModel {
         return (ccw(p1, q1, q2) != ccw(p2, q1, q2)) && (ccw(p1, p2, q1) != ccw(p1, p2, q2))
     }
     
+    /// Calculates the distance from a point to a line segment.
     private func distancePointToSegment(_ point: CGPoint, _ segmentStart: CGPoint, _ segmentEnd: CGPoint) -> CGFloat {
         let dx = segmentEnd.x - segmentStart.x
         let dy = segmentEnd.y - segmentStart.y
