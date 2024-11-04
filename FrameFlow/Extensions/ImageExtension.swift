@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension Image {
+    
+    // MARK: - Header Images
+    
     enum Header {
         enum Arrows {
             static let leftActive = Image("LeftActive")
@@ -18,6 +21,7 @@ extension Image {
         
         enum Modifiers {
             static let bin = Image("Bin")
+            static let binInactive = Image("BinInactive")
             static let filePlus = Image("FilePlus")
             static let layers = Image("Layers")
         }
@@ -30,19 +34,24 @@ extension Image {
         }
     }
     
+    // MARK: - Panel Images
+    
     enum Panel {
         enum Palette {
-            static let paletteInactive = Image("PaletteinActive")
+            static let paletteInactive = Image("PaletteInactive")
             static let paletteSelected = Image("PaletteSelected")
+            static let sliderLine = Image("SliderLine")
         }
         
         enum Shapes {
             static let arrowUp = Image("ArrowUp")
-            static let cicle = Image("Cicle")
+            static let cicle = Image("Circle")
             static let square = Image("Square")
             static let triangle = Image("Triangle")
         }
     }
+    
+    // MARK: - Tabbar Images
     
     enum TabBar {
         static let brushInactive = Image("BrushInactive")
@@ -58,7 +67,31 @@ extension Image {
         static let pencilSelected = Image("PencilSelected")
     }
     
+    // MARK: - Canvas & Storyboard Images
+    
     enum Canvas {
         static let canvas = Image("Canvas")
+    }
+    
+    enum LayerSheet {
+        static let fill = Image(systemName: "checkmark.circle.fill")
+        static let circle = Image(systemName: "circle")
+        static let xmark = Image(systemName: "xmark.circle")
+    }
+    
+    // MARK: - Opening Images
+    
+    enum Opening {
+        enum SplashScreen {
+            static let splashLogo = Image("SplashLogo")
+            static let splashText = Image("SplashText")
+        }
+        
+        enum OnboardingPage {
+            static let about = Image("SplashAboutApp")
+            static let draw = Image("SplashDrawFrame")
+            static let animate = Image("SplashCreateAnimation")
+            static let share = Image("SplashShareGif")
+        }
     }
 }

@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension Color {
+    
+    // MARK: - Back Colors
+    
     enum BackColors {
         static let backElevated = Color("BackElevated")
         static let backiOSPrimary = Color("BackiOSPrimary")
@@ -18,6 +21,8 @@ extension Color {
         static let backDefault = Color("BackDefault")
     }
     
+    // MARK: - Label Colors
+    
     enum LabelColors {
         static let labelDisable = Color("LabelDisable")
         static let labelDetails = Color("LabelDetails")
@@ -26,8 +31,10 @@ extension Color {
         static let labelTertiary = Color("LabelTertiary")
     }
     
+    // MARK: - Palette Colors
+    
     enum PaletteColors {
-        static let backPalette = Color("BackPalette")
+        static let blackPalette = Color("BlackPalette")
         static let bluePalette = Color("BluePalette")
         static let greenPalette = Color("GreenPalette")
         static let greyPalette = Color("GreyPalette")
@@ -35,10 +42,23 @@ extension Color {
         static let whitePalette = Color("WhitePalette")
     }
     
+    // MARK: - Support Colors
+    
     enum SupportColors {
         static let supportNavBar = Color("SupportNavBar")
+        static let supportBorder = Color("SupportBorder")
+        static let supportIconBorder = Color("SupportIconBorder")
+        static let supportSelection = Color("SupportSelection")
         static let supportOverlay = Color("SupportOverlay")
         static let supportSegmented = Color("SupportSegmented")
         static let supportTextField = Color("SupportTextField")
+    }
+    
+    // MARK: - Tint Colors
+    
+    enum Tints {
+        static let orange = Color("OrangeTint")
+        static let green = Color("GreenTint")
+        static let blue = Color("BlueTint")
     }
 }
