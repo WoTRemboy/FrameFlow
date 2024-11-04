@@ -20,6 +20,8 @@ extension CanvasViewModel {
     
     /// Adds a new layer after the current layer and makes it the active layer.
     internal func addLayer() {
+        guard layers.count < Int.max else { return }
+            
         layers.insert([], at: currentLayerIndex + 1)
         undoStack.append(Action(type: .addLayer))
         redoStack.removeAll()
@@ -28,6 +30,8 @@ extension CanvasViewModel {
     
     /// Adds a new layer to the end of the layer list and sets it as the active layer.
     internal func addLayerToEnd() {
+        guard layers.count < Int.max else { return }
+        
         layers.append([])
         undoStack.append(Action(type: .addLayerToEnd))
         redoStack.removeAll()
