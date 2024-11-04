@@ -6,16 +6,35 @@
 	objectVersion = 70;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		6374328E2CD8F8E900495572 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63299F5D2CCFCA23002609CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63299F642CCFCA23002609CB;
+			remoteInfo = FrameFlow;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		63299F652CCFCA23002609CB /* FrameFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrameFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		63299F672CCFCA23002609CB /* FrameFlow */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = FrameFlow; sourceTree = "<group>"; };
+		6374328B2CD8F8E900495572 /* FrameFlowTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = FrameFlowTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		63299F622CCFCA23002609CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		637432872CD8F8E900495572 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -29,6 +48,7 @@
 			isa = PBXGroup;
 			children = (
 				63299F672CCFCA23002609CB /* FrameFlow */,
+				6374328B2CD8F8E900495572 /* FrameFlowTests */,
 				63299F662CCFCA23002609CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -37,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				63299F652CCFCA23002609CB /* FrameFlow.app */,
+				6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +87,29 @@
 			productReference = 63299F652CCFCA23002609CB /* FrameFlow.app */;
 			productType = "com.apple.product-type.application";
 		};
+		637432892CD8F8E900495572 /* FrameFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 637432902CD8F8E900495572 /* Build configuration list for PBXNativeTarget "FrameFlowTests" */;
+			buildPhases = (
+				637432862CD8F8E900495572 /* Sources */,
+				637432872CD8F8E900495572 /* Frameworks */,
+				637432882CD8F8E900495572 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6374328F2CD8F8E900495572 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6374328B2CD8F8E900495572 /* FrameFlowTests */,
+			);
+			name = FrameFlowTests;
+			packageProductDependencies = (
+			);
+			productName = FrameFlowTests;
+			productReference = 6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -73,11 +117,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					63299F642CCFCA23002609CB = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					637432892CD8F8E900495572 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 63299F642CCFCA23002609CB;
 					};
 				};
 			};
@@ -97,12 +145,20 @@
 			projectRoot = "";
 			targets = (
 				63299F642CCFCA23002609CB /* FrameFlow */,
+				637432892CD8F8E900495572 /* FrameFlowTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		63299F632CCFCA23002609CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		637432882CD8F8E900495572 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -119,7 +175,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		637432862CD8F8E900495572 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6374328F2CD8F8E900495572 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63299F642CCFCA23002609CB /* FrameFlow */;
+			targetProxy = 6374328E2CD8F8E900495572 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		63299F712CCFCA25002609CB /* Debug */ = {
@@ -315,6 +386,52 @@
 			};
 			name = Release;
 		};
+		637432912CD8F8E900495572 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.FrameFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FrameFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FrameFlow";
+			};
+			name = Debug;
+		};
+		637432922CD8F8E900495572 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.FrameFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FrameFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FrameFlow";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -332,6 +449,15 @@
 			buildConfigurations = (
 				63299F742CCFCA25002609CB /* Debug */,
 				63299F752CCFCA25002609CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		637432902CD8F8E900495572 /* Build configuration list for PBXNativeTarget "FrameFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				637432912CD8F8E900495572 /* Debug */,
+				637432922CD8F8E900495572 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
