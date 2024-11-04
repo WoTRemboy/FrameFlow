@@ -61,7 +61,9 @@ struct CanvasHeaderView: View {
             }
             .disabled(viewModel.isLayersEmpty())
             .contextMenu {
-                deleteMenu
+                if !viewModel.isLayersEmpty() {
+                    deleteMenu
+                }
             }
             
             Button {
@@ -127,7 +129,9 @@ struct CanvasHeaderView: View {
             }
             .disabled(viewModel.isAnimating || viewModel.isLayersEmpty())
             .contextMenu {
-                speedGifMenu
+                if !viewModel.isAnimating && !viewModel.isLayersEmpty() {
+                    speedGifMenu
+                }
             }
         }
     }

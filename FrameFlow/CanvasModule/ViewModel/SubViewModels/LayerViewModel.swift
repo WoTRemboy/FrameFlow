@@ -95,6 +95,10 @@ extension CanvasViewModel {
     @MainActor internal func miniatureForLayer(at index: Int, size: CGSize = CGSize(width: 50, height: 85)) -> Image {
         let layer = layers[index]
         
+        if layer.isEmpty {
+            return Image(uiImage: generateWhiteImage(size: size))
+        }
+        
         let renderer = ImageRenderer(content: LayerMiniatureView(lines: layer)
             .frame(width: size.width, height: size.height)
             .scaleEffect(0.8)
@@ -104,6 +108,14 @@ extension CanvasViewModel {
             return Image(uiImage: uiImage)
         } else {
             return Image.LayerSheet.xmark
+        }
+    }
+    
+    private func generateWhiteImage(size: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { context in
+            UIColor.white.setFill()
+            context.fill(CGRect(origin: .zero, size: size))
         }
     }
 }
