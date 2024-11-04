@@ -38,11 +38,11 @@
 
 <h2 id="menus">Contextual Menus 📋</h2>
 
-### Layer Management
+### Layer Management (Bin & Add Layer buttons)
 - **Delete All Layers:** Quickly removes all layers at once. This option is available within the layers menu, enabling users to reset their workspace efficiently.
 - **Duplicate Layer:** Copies the selected layer to create an identical one in sequence, which is useful for creating incremental changes or animations based on previous frames.
 
-### Animation Controls
+### Animation Controls (Play button)
 - **Change Speed:** A quick-access option to modify the playback speed of the animation. This menu provides a slider to adjust the speed for precise control.
 - **Export GIF:** Allows the user to export the current animation as a GIF directly from the animation controls. This menu makes sharing animations easy and fast.
 
