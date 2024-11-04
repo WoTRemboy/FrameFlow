@@ -19,7 +19,7 @@ struct ColorPaletteView: View {
     }
     
     private var picker: some View {
-        ColorPicker("Set the color", selection: $viewModel.selectedColor)
+        ColorPicker(Texts.ContextMenu.color, selection: $viewModel.selectedColor)
             .padding(.horizontal)
             .frame(width: 256, height: 56)
     }

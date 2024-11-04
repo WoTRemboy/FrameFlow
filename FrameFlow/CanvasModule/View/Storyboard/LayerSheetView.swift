@@ -59,9 +59,7 @@ struct LayerSheetView: View {
                         .frame(width: 20)
                 }
             }
-            
         }
-        .onDelete(perform: !viewModel.isLayersEmpty() ? viewModel.deleteLayers : nil)
     }
     
     private var addFrameRow: some View {
