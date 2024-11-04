@@ -36,6 +36,14 @@ extension CanvasViewModel {
                 redoStack.append(lastAction)
             }
             
+        case .addLayerToEnd:
+            layers.removeLast()
+            currentLayerIndex = layers.count - 1
+            withAnimation(.easeInOut(duration: 0.2)) {
+                redoStack.append(lastAction)
+            }
+            
+            
         case .removeLayer(let layerIndex, let removedLines):
             layers.insert(removedLines, at: layerIndex)
             currentLayerIndex = layerIndex
@@ -102,6 +110,13 @@ extension CanvasViewModel {
         case .addLayer:
             layers.insert([], at: currentLayerIndex + 1)
             currentLayerIndex += 1
+            withAnimation(.easeInOut(duration: 0.2)) {
+                undoStack.append(lastUndoneAction)
+            }
+            
+        case .addLayerToEnd:
+            layers.append([])
+            currentLayerIndex = layers.count - 1
             withAnimation(.easeInOut(duration: 0.2)) {
                 undoStack.append(lastUndoneAction)
             }

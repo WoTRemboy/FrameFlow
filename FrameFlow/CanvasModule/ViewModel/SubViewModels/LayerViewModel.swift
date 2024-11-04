@@ -20,6 +20,13 @@ extension CanvasViewModel {
         currentLayerIndex += 1
     }
     
+    internal func addLayerToEnd() {
+        layers.append([])
+        undoStack.append(Action(type: .addLayerToEnd))
+        redoStack.removeAll()
+        currentLayerIndex = layers.count - 1
+    }
+    
     internal func duplicateCurrentLayer() {
         guard currentLayerIndex >= 0 && currentLayerIndex < layers.count else { return }
         

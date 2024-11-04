@@ -65,7 +65,7 @@ struct LayerSheetView: View {
     private var addFrameRow: some View {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.2)) {
-                viewModel.addLayer()
+                viewModel.addLayerToEnd()
             }
         }) {
             Text(Texts.LayerSheet.add)
