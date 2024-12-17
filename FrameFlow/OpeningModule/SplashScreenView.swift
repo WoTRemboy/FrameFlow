@@ -32,19 +32,10 @@ struct SplashScreenView: View {
             Color.BackColors.backDefault
                 .ignoresSafeArea()
             
-            VStack {
-                Spacer()
-                Image.Opening.SplashScreen.splashLogo
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 350)
-                
-                Spacer()
-                Image.Opening.SplashScreen.splashText
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 35)
-            }
+            Image.Opening.SplashScreen.splashLogo
+                .resizable()
+                .scaledToFit()
+                .frame(width: 350)
         }
     }
 }

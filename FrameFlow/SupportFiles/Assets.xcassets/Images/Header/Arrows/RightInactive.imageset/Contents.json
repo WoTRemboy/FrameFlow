@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "RightUnactiveLight.svg",
+      "filename" : "arrowshape.turn.up.left 2.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Right Unactive 1.svg",
+      "filename" : "arrowshape.turn.up.left 1.svg",
       "idiom" : "universal"
     }
   ],
