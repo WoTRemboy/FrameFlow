@@ -58,7 +58,7 @@ struct CanvasTabbarView: View {
                 active: .TabBar.brushSelected,
                 inactive: .TabBar.brushInactive)
                 .resizable()
-                .frame(width: 32, height: 32)
+                .frame(width: 26, height: 26)
         }
     }
     
@@ -73,7 +73,7 @@ struct CanvasTabbarView: View {
                 active: .TabBar.eraseSelected,
                 inactive: .TabBar.eraseInactive)
                 .resizable()
-                .frame(width: 32, height: 32)
+                .frame(width: 26, height: 26)
         }
     }
     
