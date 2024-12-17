@@ -60,6 +60,7 @@
 /* Begin PBXFileReference section */
 		63299F652CCFCA23002609CB /* FrameFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrameFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		63A358172D123B6600280605 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63CD35622D084AFC00067343 /* FrameFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameFlowApp.swift; sourceTree = "<group>"; };
 		63CD35632D084AFC00067343 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		63CD35652D084AFC00067343 /* ActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionModel.swift; sourceTree = "<group>"; };
@@ -307,11 +308,12 @@
 			isa = PBXGroup;
 			children = (
 				63CD35642D084AFC00067343 /* Application */,
+				63CD35932D084AFC00067343 /* OpeningModule */,
 				63CD35842D084AFC00067343 /* CanvasModule */,
 				63CD358A2D084AFC00067343 /* Extensions */,
-				63CD35932D084AFC00067343 /* OpeningModule */,
-				63CD35952D084AFC00067343 /* Preview Content */,
 				63CD35972D084AFC00067343 /* SupportFiles */,
+				63CD35952D084AFC00067343 /* Preview Content */,
+				63A358172D123B6600280605 /* Info.plist */,
 			);
 			path = FrameFlow;
 			sourceTree = "<group>";
@@ -621,6 +623,7 @@
 				DEVELOPMENT_TEAM = ZFH6DW7S4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FrameFlow/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Frame Flow";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -656,6 +659,7 @@
 				DEVELOPMENT_TEAM = ZFH6DW7S4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FrameFlow/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Frame Flow";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
