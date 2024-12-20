@@ -78,8 +78,13 @@ extension CanvasViewModel {
     /// - Returns: An array of `Line` objects representing the shape.
     private func createLinesForShape(_ shape: ShapeMode, at center: CGPoint, size: CGSize, rotation: CGFloat) -> [Line] {
         var lines: [Line] = []
-        let halfWidth = size.width / 2
-        let halfHeight = size.height / 2
+        let limitedSize = CGSize(
+            width: max(size.width, 30),
+            height: max(size.height, 30)
+        )
+        
+        let halfWidth = limitedSize.width / 2
+        let halfHeight = limitedSize.height / 2
         
         // Helper to rotate points around the center
         func rotatePoint(_ point: CGPoint, around center: CGPoint, by angle: CGFloat) -> CGPoint {
@@ -112,8 +117,8 @@ extension CanvasViewModel {
             lines += createSegmentedLine(from: rotatedPoints[3], to: rotatedPoints[0], color: selectedColor, lineWidth: lineWidth)
             
         case .circle:
-            let radius = size.width / 2
-            let segments = Int(radius / 2)
+            let radius = max(limitedSize.width / 2, 10)
+            let segments = max(Int(radius / 2), 18)
             var circlePoints: [CGPoint] = []
             
             for i in 0...segments {
