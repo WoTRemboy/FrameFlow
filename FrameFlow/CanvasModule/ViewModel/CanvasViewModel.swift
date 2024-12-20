@@ -22,6 +22,13 @@ final class CanvasViewModel: ObservableObject {
     /// The size of the canvas, which determines the rendering bounds.
     @Published internal var canvasSize: CGSize = CGSize(width: 0, height: 0)
     
+    // MARK: - Shape Properties
+        
+    /// The initial touch point when starting to draw a shape.
+    @Published internal var initialShapePoint: CGPoint = .zero
+    /// A preview of the shape being adjusted.
+    @Published internal var previewShapeLines: [Line] = []
+    
     // MARK: - Animation Properties
     
     /// Indicates whether an animation is currently playing.

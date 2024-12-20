@@ -47,12 +47,9 @@ struct EditorView: View {
                     .padding(.bottom, hasNotch() ? 110 : 65)
                     .zIndex(1)
                 } else if viewModel.showShapePicker {
-                    VStack(spacing: 8) {
-                        ShapesPickerView()
-                        ShapeHeightSliderView()
-                    }
-                    .padding(.bottom, hasNotch() ? 110 : 65)
-                    .zIndex(1)
+                    ShapesPickerView()
+                        .padding(.bottom, hasNotch() ? 110 : 65)
+                        .zIndex(1)
                 }
             }
             .sheet(isPresented: $viewModel.isLayerSheetPresented) {
@@ -72,15 +69,21 @@ struct EditorView: View {
                 .gesture(DragGesture(minimumDistance: 0)
                     .onChanged { value in
                         if viewModel.currentMode == .shape {
-                            viewModel.addShape(at: value.location)
-                            viewModel.finalizeShape()
+                            viewModel.tapLocation = value.startLocation
+                            viewModel.updateShape(to: value.location, in: geometry.size)
+//                            viewModel.finalizeShape()
                         } else {
                             viewModel.updateCurrentLine(with: value.location, in: geometry.size)
                         }
                     }
                     .onEnded { _ in
-                        viewModel.finalizeCurrentLine()
+                        if viewModel.currentMode == .shape {
+                            viewModel.finalizeShape()
+                        } else {
+                            viewModel.finalizeCurrentLine()
+                        }
                     }
+                         
                 )
         }
         .padding(.vertical)
