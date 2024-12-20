@@ -42,7 +42,7 @@ extension CanvasViewModel {
         let proportionalSize = CGSize(width: maxDelta * 2, height: maxDelta * 2)
         
         // Calculate the angle for rotation
-        let angle = atan2(deltaY, deltaX)
+        let angle = atan2(-deltaX, deltaY)
         
         // Create the updated shape with rotation
         let updatedShapeLines = createLinesForShape(
