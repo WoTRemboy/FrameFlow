@@ -71,7 +71,6 @@ struct EditorView: View {
                         if viewModel.currentMode == .shape {
                             viewModel.tapLocation = value.startLocation
                             viewModel.updateShape(to: value.location, in: geometry.size)
-//                            viewModel.finalizeShape()
                         } else {
                             viewModel.updateCurrentLine(with: value.location, in: geometry.size)
                         }
