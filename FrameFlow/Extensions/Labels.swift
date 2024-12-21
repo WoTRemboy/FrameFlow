@@ -35,6 +35,21 @@ final class Texts {
         static let add = NSLocalizedString("LayerSheetAdd", comment: "Add frame")
     }
     
+    // MARK: - Generate params Texts
+    
+    enum GenerateParams {
+        static let title = NSLocalizedString("GenerateParamsTitle", comment: "Generate Parameters")
+        static let shapeSelected = NSLocalizedString("GenerateParamsShapeSelected", comment: "Shape selected")
+        static let framesCount = NSLocalizedString("GenerateParamsFramesCount", comment: "Frames count")
+        static let done = NSLocalizedString("GenerateParamsShapeDone", comment: "Done")
+        
+        static let shape = NSLocalizedString("GenerateParamsShape", comment: "Shape")
+        static let triangle = NSLocalizedString("GenerateParamsTriangle", comment: "Triangle")
+        static let square = NSLocalizedString("GenerateParamsSquare", comment: "Square")
+        static let circle = NSLocalizedString("GenerateParamsCircle", comment: "Circle")
+        static let arrow = NSLocalizedString("GenerateParamsArrow", comment: "Arrow")
+    }
+    
     // MARK: - Animation overlay Texts
     
     enum AnimationOverlay {

@@ -20,7 +20,6 @@ extension CanvasViewModel {
         canvasSize: CGSize
     ) {
         guard frameCount > 0 else { return }
-        deleteAllLayers()
         
         // Initial parameters for the shape
         var startPosition = CGPoint(
@@ -110,12 +109,9 @@ extension CanvasViewModel {
     
     /// Generates an animation sequence for a predefined shape, frame count, and canvas size.
     internal func generateAnimationSequence() {
-        let shape: ShapeMode = .circle
-        let frameCount = 200
-        
         generateFramesWithLayers(
-            shape: shape,
-            frameCount: frameCount,
+            shape: generateShapeSelected,
+            frameCount: Int(generateFramesCount),
             canvasSize: canvasSize
         )
     }

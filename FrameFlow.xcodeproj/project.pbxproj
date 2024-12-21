@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		637B9CD12D16E7A100FBDAC4 /* GenerateFramesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */; };
+		637B9CD32D1706FA00FBDAC4 /* GenerateParamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */; };
 		63CD35992D084AFC00067343 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35632D084AFC00067343 /* Localizable.xcstrings */; };
 		63CD359A2D084AFC00067343 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35942D084AFC00067343 /* Preview Assets.xcassets */; };
 		63CD359B2D084AFC00067343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35962D084AFC00067343 /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 		63299F652CCFCA23002609CB /* FrameFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrameFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateFramesViewModel.swift; sourceTree = "<group>"; };
+		637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateParamsView.swift; sourceTree = "<group>"; };
 		63A358172D123B6600280605 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63CD35622D084AFC00067343 /* FrameFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameFlowApp.swift; sourceTree = "<group>"; };
 		63CD35632D084AFC00067343 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				63CD35712D084AFC00067343 /* ShapesPickerView.swift */,
 				63CD35722D084AFC00067343 /* SpeedSliderView.swift */,
 				63CD35732D084AFC00067343 /* WidthSliderView.swift */,
+				637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */,
 			);
 			path = Pickers;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				63CD35A12D084AFC00067343 /* CanvasHeaderView.swift in Sources */,
 				63CD35A22D084AFC00067343 /* CanvasTabbarView.swift in Sources */,
 				63CD35A32D084AFC00067343 /* CanvasView.swift in Sources */,
+				637B9CD32D1706FA00FBDAC4 /* GenerateParamsView.swift in Sources */,
 				63CD35A42D084AFC00067343 /* ColorPaletteView.swift in Sources */,
 				63CD35A52D084AFC00067343 /* ColorPickerShortView.swift in Sources */,
 				63CD35A62D084AFC00067343 /* ShapeHeightSliderView.swift in Sources */,

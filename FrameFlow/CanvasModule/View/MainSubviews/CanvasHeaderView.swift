@@ -135,7 +135,7 @@ struct CanvasHeaderView: View {
         }
     }
     
-    /// Context menu option for duplicating the current layer.
+    /// Context menu option for creating, duplicating & generations layers.
     private var copyMenu: some View {
         Group {
             Button {
@@ -163,7 +163,7 @@ struct CanvasHeaderView: View {
             }
             
             Button {
-                viewModel.generateAnimationSequence()
+                viewModel.toggleGenerateParams()
             } label: {
                 Label {
                     Text(Texts.ContextMenu.generate)
