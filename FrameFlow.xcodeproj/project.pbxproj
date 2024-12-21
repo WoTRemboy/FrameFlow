@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		637B9CD12D16E7A100FBDAC4 /* GenerateFramesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */; };
 		63CD35992D084AFC00067343 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35632D084AFC00067343 /* Localizable.xcstrings */; };
 		63CD359A2D084AFC00067343 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35942D084AFC00067343 /* Preview Assets.xcassets */; };
 		63CD359B2D084AFC00067343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35962D084AFC00067343 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		63299F652CCFCA23002609CB /* FrameFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrameFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateFramesViewModel.swift; sourceTree = "<group>"; };
 		63A358172D123B6600280605 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63CD35622D084AFC00067343 /* FrameFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameFlowApp.swift; sourceTree = "<group>"; };
 		63CD35632D084AFC00067343 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				63CD357B2D084AFC00067343 /* AnimationViewModel.swift */,
 				63CD357C2D084AFC00067343 /* DrawingViewModel.swift */,
+				637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */,
 				63CD357D2D084AFC00067343 /* GIFShareViewModel.swift */,
 				63CD357E2D084AFC00067343 /* LayerViewModel.swift */,
 				63CD357F2D084AFC00067343 /* ShapeViewModel.swift */,
@@ -435,6 +438,7 @@
 			files = (
 				63CD359C2D084AFC00067343 /* FrameFlowApp.swift in Sources */,
 				63CD359D2D084AFC00067343 /* ActionModel.swift in Sources */,
+				637B9CD12D16E7A100FBDAC4 /* GenerateFramesViewModel.swift in Sources */,
 				63CD359E2D084AFC00067343 /* CanvasModel.swift in Sources */,
 				63CD359F2D084AFC00067343 /* LineModel.swift in Sources */,
 				63CD35A02D084AFC00067343 /* ShapeModel.swift in Sources */,

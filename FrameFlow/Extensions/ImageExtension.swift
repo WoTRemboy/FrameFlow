@@ -24,10 +24,17 @@ extension Image {
             static let binInactive = Image("BinInactive")
             static let filePlus = Image("FilePlus")
             static let layers = Image("Layers")
+            
+            static let play = Image(systemName: "play")
             static let speed = Image(systemName: "gauge.with.dots.needle.67percent")
             static let share = Image(systemName: "square.and.arrow.up")
+            
+            static let add = Image(systemName: "plus.rectangle.portrait")
             static let copy = Image(systemName: "rectangle.portrait.on.rectangle.portrait")
-            static let deleteAll = Image(systemName: "delete.left")
+            static let generate = Image(systemName: "rectangle.portrait.on.rectangle.portrait.angled")
+            
+            static let delete = Image(systemName: "rectangle.portrait.slash")
+            static let deleteAll = Image(systemName: "rectangle.portrait.on.rectangle.portrait.slash")
         }
         
         enum Player {

@@ -84,6 +84,23 @@
         }
       }
     },
+    "ContextMenuAdd" : {
+      "comment" : "Add frame",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add frame"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить кадр"
+          }
+        }
+      }
+    },
     "ContextMenuColor" : {
       "comment" : "Select the color",
       "localizations" : {
@@ -135,6 +152,40 @@
         }
       }
     },
+    "ContextMenuDeleteCurrent" : {
+      "comment" : "Delete frame",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete frame"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить кадр"
+          }
+        }
+      }
+    },
+    "ContextMenuGenerate" : {
+      "comment" : "Generate frames",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate frames"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сгенерировать кадры"
+          }
+        }
+      }
+    },
     "ContextMenuGIF" : {
       "comment" : "Share GIF",
       "localizations" : {
@@ -148,6 +199,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поделиться GIF"
+          }
+        }
+      }
+    },
+    "ContextMenuPlay" : {
+      "comment" : "Play animation",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play animation"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запустить анимацию"
           }
         }
       }

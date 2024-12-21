@@ -72,7 +72,7 @@ extension CanvasViewModel {
     ///   - lineWidth: The line width for each line segment of the shape.
     ///   - height: The size of the shape.
     /// - Returns: An array of `Line` objects representing the shape.
-    private func createPreviewLinesForShape(_ shape: ShapeMode, at center: CGPoint, size: CGSize, rotation: CGFloat) -> [Line] {
+    internal func createPreviewLinesForShape(_ shape: ShapeMode, at center: CGPoint, size: CGSize, rotation: CGFloat) -> [Line] {
         var lines: [Line] = []
         let limitedSize = CGSize(
             width: max(size.width, 30),

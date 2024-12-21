@@ -46,10 +46,16 @@ final class Texts {
     // MARK: - Context menu Texts
     
     enum ContextMenu {
+        static let play = NSLocalizedString("ContextMenuPlay", comment: "Play animation")
         static let speed = NSLocalizedString("ContextMenuSpeed", comment: "Change speed")
         static let gif = NSLocalizedString("ContextMenuGIF", comment: "Share GIF")
+        
+        static let add = NSLocalizedString("ContextMenuAdd", comment: "Add frame")
         static let copy = NSLocalizedString("ContextMenuCopy", comment: "Copy frame")
-        static let delete = NSLocalizedString("ContextMenuDelete", comment: "Delete all frames")
+        static let generate = NSLocalizedString("ContextMenuGenerate", comment: "Generate frames")
+        
+        static let delete = NSLocalizedString("ContextMenuDeleteCurrent", comment: "Delete frame")
+        static let deleteAll = NSLocalizedString("ContextMenuDelete", comment: "Delete all frames")
         static let color = NSLocalizedString("ContextMenuColor", comment: "Select the color")
     }
     
