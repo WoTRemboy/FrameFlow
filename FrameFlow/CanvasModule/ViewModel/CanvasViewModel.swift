@@ -34,7 +34,7 @@ final class CanvasViewModel: ObservableObject {
     /// Indicates whether an animation is currently playing.
     @Published internal var isAnimating = false
     /// Controls the speed of animation playback.
-    @Published internal var animationSpeed: Double = 0.1
+    @Published internal var animationSpeed: Double = 0.01
     
     // MARK: - Drawing Properties
     
@@ -49,6 +49,11 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var lineWidth: CGFloat = 5.0
     /// Sets the height for shapes added to the canvas.
     @Published internal var shapeHeight: CGFloat = 100.0
+    
+    /// Defines the generation shape.
+    @Published internal var generateShapeSelected: ShapeMode = .triangle
+    /// Defines the generation frames count.
+    @Published internal var generateFramesCount: Float = 200
     
     // MARK: - Mode and Color Properties
     
@@ -75,9 +80,11 @@ final class CanvasViewModel: ObservableObject {
     /// Controls the visibility of the shape picker.
     @Published internal var showShapePicker: Bool = false
     /// Indicates if the layer selection sheet is currently presented.
-    @Published internal var isLayerSheetPresented = false
+    @Published internal var isLayerSheetPresented: Bool = false
     /// Indicates if the speed overlay for animation is currently visible.
-    @Published internal var isSpeedOverlayVisible = false
+    @Published internal var isSpeedOverlayVisible: Bool = false
+    /// Indicates if the generation params overlay is currently visible.
+    @Published internal var isGenerateParamsVisible: Bool = false
     
     // MARK: - Undo/Redo Properties
     
@@ -112,6 +119,13 @@ final class CanvasViewModel: ObservableObject {
     internal func toggleSpeedOverlay() {
         withAnimation(.easeInOut(duration: 0.2)) {
             isSpeedOverlayVisible.toggle()
+        }
+    }
+    
+    /// Toggles the visibility of the generation params overlay with an animation.
+    internal func toggleGenerateParams() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            isGenerateParamsVisible.toggle()
         }
     }
     

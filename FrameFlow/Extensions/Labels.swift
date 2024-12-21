@@ -35,6 +35,21 @@ final class Texts {
         static let add = NSLocalizedString("LayerSheetAdd", comment: "Add frame")
     }
     
+    // MARK: - Generate params Texts
+    
+    enum GenerateParams {
+        static let title = NSLocalizedString("GenerateParamsTitle", comment: "Generate Parameters")
+        static let shapeSelected = NSLocalizedString("GenerateParamsShapeSelected", comment: "Shape selected")
+        static let framesCount = NSLocalizedString("GenerateParamsFramesCount", comment: "Frames count")
+        static let done = NSLocalizedString("GenerateParamsShapeDone", comment: "Done")
+        
+        static let shape = NSLocalizedString("GenerateParamsShape", comment: "Shape")
+        static let triangle = NSLocalizedString("GenerateParamsTriangle", comment: "Triangle")
+        static let square = NSLocalizedString("GenerateParamsSquare", comment: "Square")
+        static let circle = NSLocalizedString("GenerateParamsCircle", comment: "Circle")
+        static let arrow = NSLocalizedString("GenerateParamsArrow", comment: "Arrow")
+    }
+    
     // MARK: - Animation overlay Texts
     
     enum AnimationOverlay {
@@ -46,10 +61,16 @@ final class Texts {
     // MARK: - Context menu Texts
     
     enum ContextMenu {
+        static let play = NSLocalizedString("ContextMenuPlay", comment: "Play animation")
         static let speed = NSLocalizedString("ContextMenuSpeed", comment: "Change speed")
         static let gif = NSLocalizedString("ContextMenuGIF", comment: "Share GIF")
+        
+        static let add = NSLocalizedString("ContextMenuAdd", comment: "Add frame")
         static let copy = NSLocalizedString("ContextMenuCopy", comment: "Copy frame")
-        static let delete = NSLocalizedString("ContextMenuDelete", comment: "Delete all frames")
+        static let generate = NSLocalizedString("ContextMenuGenerate", comment: "Generate frames")
+        
+        static let delete = NSLocalizedString("ContextMenuDeleteCurrent", comment: "Delete frame")
+        static let deleteAll = NSLocalizedString("ContextMenuDelete", comment: "Delete all frames")
         static let color = NSLocalizedString("ContextMenuColor", comment: "Select the color")
     }
     

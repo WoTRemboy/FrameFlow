@@ -33,6 +33,20 @@
         }
       }
     },
+    "%@:" : {
+      "shouldTranslate" : false
+    },
+    "%@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
     "AnimationOverlayDone" : {
       "comment" : "Done",
       "localizations" : {
@@ -80,6 +94,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "сек/кадр"
+          }
+        }
+      }
+    },
+    "ContextMenuAdd" : {
+      "comment" : "Add frame",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add frame"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить кадр"
           }
         }
       }
@@ -135,6 +166,40 @@
         }
       }
     },
+    "ContextMenuDeleteCurrent" : {
+      "comment" : "Delete frame",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete frame"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить кадр"
+          }
+        }
+      }
+    },
+    "ContextMenuGenerate" : {
+      "comment" : "Generate frames",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate frames"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сгенерировать кадры"
+          }
+        }
+      }
+    },
     "ContextMenuGIF" : {
       "comment" : "Share GIF",
       "localizations" : {
@@ -152,6 +217,23 @@
         }
       }
     },
+    "ContextMenuPlay" : {
+      "comment" : "Play animation",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play animation"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запустить анимацию"
+          }
+        }
+      }
+    },
     "ContextMenuSpeed" : {
       "comment" : "Change speed",
       "localizations" : {
@@ -165,6 +247,159 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Изменить скорость"
+          }
+        }
+      }
+    },
+    "GenerateParamsArrow" : {
+      "comment" : "Arrow",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrow"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стрела"
+          }
+        }
+      }
+    },
+    "GenerateParamsCircle" : {
+      "comment" : "Circle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Circle"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Круг"
+          }
+        }
+      }
+    },
+    "GenerateParamsFramesCount" : {
+      "comment" : "Frames count",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frames count"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Количество кадров"
+          }
+        }
+      }
+    },
+    "GenerateParamsShape" : {
+      "comment" : "Shape",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shape"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Квадрат"
+          }
+        }
+      }
+    },
+    "GenerateParamsShapeDone" : {
+      "comment" : "Done",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
+          }
+        }
+      }
+    },
+    "GenerateParamsShapeSelected" : {
+      "comment" : "Shape selected",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shape selected"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрана фигура"
+          }
+        }
+      }
+    },
+    "GenerateParamsSquare" : {
+      "comment" : "Square",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Square"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Квадрат"
+          }
+        }
+      }
+    },
+    "GenerateParamsTitle" : {
+      "comment" : "Generate Parameters",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generation Parameters"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Параметры генерации"
+          }
+        }
+      }
+    },
+    "GenerateParamsTriangle" : {
+      "comment" : "Triangle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Triangle"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Треугольник"
           }
         }
       }

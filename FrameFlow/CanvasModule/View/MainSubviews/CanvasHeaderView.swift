@@ -112,10 +112,21 @@ struct CanvasHeaderView: View {
     private var deleteMenu: some View {
         Group {
             Button {
-                viewModel.deleteAllLayers()
+                viewModel.deleteCurrentLayer()
             } label: {
                 Label {
                     Text(Texts.ContextMenu.delete)
+                } icon: {
+                    Image.Header.Modifiers.delete
+                }
+
+            }
+            
+            Button {
+                viewModel.deleteAllLayers()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.deleteAll)
                 } icon: {
                     Image.Header.Modifiers.deleteAll
                 }
@@ -124,18 +135,41 @@ struct CanvasHeaderView: View {
         }
     }
     
-    /// Context menu option for duplicating the current layer.
+    /// Context menu option for creating, duplicating & generations layers.
     private var copyMenu: some View {
         Group {
             Button {
-                viewModel.duplicateCurrentLayer()
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.addLayer()
+                }
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.add)
+                } icon: {
+                    Image.Header.Modifiers.add
+                }
+            }
+            
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.duplicateCurrentLayer()
+                }
             } label: {
                 Label {
                     Text(Texts.ContextMenu.copy)
                 } icon: {
                     Image.Header.Modifiers.copy
                 }
-
+            }
+            
+            Button {
+                viewModel.toggleGenerateParams()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.generate)
+                } icon: {
+                    Image.Header.Modifiers.generate
+                }
             }
         }
     }
@@ -177,6 +211,17 @@ struct CanvasHeaderView: View {
     /// Context menu for adjusting animation speed and sharing as GIF.
     private var speedGifMenu: some View {
         Group {
+            // Button to play animation
+            Button {
+                viewModel.startAnimation()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.play)
+                } icon: {
+                    Image.Header.Modifiers.play
+                }
+            }
+            
             // Button to adjust animation speed
             Button {
                 viewModel.toggleSpeedOverlay()

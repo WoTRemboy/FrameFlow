@@ -35,6 +35,11 @@ struct EditorView: View {
                     speedSlider
                 }
                 
+                // Overlay for generate parameters
+                if viewModel.isGenerateParamsVisible {
+                    generateParams
+                }
+                
                 // Color and shape pickers
                 if viewModel.showColorPicker {
                     VStack(spacing: 8) {
@@ -71,7 +76,6 @@ struct EditorView: View {
                         if viewModel.currentMode == .shape {
                             viewModel.tapLocation = value.startLocation
                             viewModel.updateShape(to: value.location, in: geometry.size)
-//                            viewModel.finalizeShape()
                         } else {
                             viewModel.updateCurrentLine(with: value.location, in: geometry.size)
                         }
@@ -104,6 +108,27 @@ struct EditorView: View {
             VStack {
                 Spacer()
                 SpeedSliderOverlay()
+                Spacer()
+            }
+        }
+        .zIndex(1)
+    }
+    
+    // MARK: - Generate Params Overlay
+    
+    /// An overlay to setup generations params with a tap-to-dismiss background.
+    private var generateParams: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewModel.isGenerateParamsVisible = false
+                    }
+                }
+            VStack {
+                Spacer()
+                GenerateParamsView()
                 Spacer()
             }
         }

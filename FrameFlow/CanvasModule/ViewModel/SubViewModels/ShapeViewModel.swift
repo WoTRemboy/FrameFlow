@@ -33,34 +33,30 @@ extension CanvasViewModel {
     internal func updateShape(to location: CGPoint, in size: CGSize) {
         guard let shape = currentShape else { return }
         
-        // Calculate the distance and angle from the initial tap location
         let deltaX = location.x - tapLocation.x
         let deltaY = location.y - tapLocation.y
         let maxDelta = max(abs(deltaX), abs(deltaY))
-        
-        // Calculate the size proportionally
         let proportionalSize = CGSize(width: maxDelta * 2, height: maxDelta * 2)
-        
-        // Calculate the angle for rotation
         let angle = atan2(-deltaX, deltaY)
         
-        // Create the updated shape with rotation
-        let updatedShapeLines = createLinesForShape(
+        previewShapeLines = createPreviewLinesForShape(
             shape,
             at: tapLocation,
             size: proportionalSize,
             rotation: angle
         )
-        
-        // Update the current layer with the new shape
-        previewShapeLines = updatedShapeLines
     }
     
     /// Finalizes the shape drawing by adding it to the current layer.
     internal func finalizeShape() {
-        currentLayer.append(contentsOf: previewShapeLines)
-        undoStack.append(Action(type: .addShape(previewShapeLines, layerIndex: currentLayerIndex)))
+        let segmentedLines = previewShapeLines.flatMap { line in
+            createSegmentedLine(from: line.points.first!, to: line.points.last!, color: line.color, lineWidth: line.lineWidth)
+        }
+        
+        currentLayer.append(contentsOf: segmentedLines)
+        undoStack.append(Action(type: .addShape(segmentedLines, layerIndex: currentLayerIndex)))
         redoStack.removeAll()
+        
         previewShapeLines.removeAll()
         currentShape = nil
         currentMode = .shape
@@ -76,7 +72,7 @@ extension CanvasViewModel {
     ///   - lineWidth: The line width for each line segment of the shape.
     ///   - height: The size of the shape.
     /// - Returns: An array of `Line` objects representing the shape.
-    private func createLinesForShape(_ shape: ShapeMode, at center: CGPoint, size: CGSize, rotation: CGFloat) -> [Line] {
+    internal func createPreviewLinesForShape(_ shape: ShapeMode, at center: CGPoint, size: CGSize, rotation: CGFloat) -> [Line] {
         var lines: [Line] = []
         let limitedSize = CGSize(
             width: max(size.width, 30),
@@ -86,7 +82,6 @@ extension CanvasViewModel {
         let halfWidth = limitedSize.width / 2
         let halfHeight = limitedSize.height / 2
         
-        // Helper to rotate points around the center
         func rotatePoint(_ point: CGPoint, around center: CGPoint, by angle: CGFloat) -> CGPoint {
             let dx = point.x - center.x
             let dy = point.y - center.y
@@ -111,10 +106,10 @@ extension CanvasViewModel {
                 rotatePoint(bottomLeft, around: center, by: rotation)
             ]
             
-            lines += createSegmentedLine(from: rotatedPoints[0], to: rotatedPoints[1], color: selectedColor, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rotatedPoints[1], to: rotatedPoints[2], color: selectedColor, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rotatedPoints[2], to: rotatedPoints[3], color: selectedColor, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rotatedPoints[3], to: rotatedPoints[0], color: selectedColor, lineWidth: lineWidth)
+            lines.append(Line(points: [rotatedPoints[0], rotatedPoints[1]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[1], rotatedPoints[2]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[2], rotatedPoints[3]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[3], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
             
         case .circle:
             let radius = max(limitedSize.width / 2, 10)
@@ -129,7 +124,7 @@ extension CanvasViewModel {
             }
             
             for i in 0..<segments {
-                lines += createSegmentedLine(from: circlePoints[i], to: circlePoints[i + 1], color: selectedColor, lineWidth: lineWidth)
+                lines.append(Line(points: [circlePoints[i], circlePoints[i + 1]], color: selectedColor, lineWidth: lineWidth))
             }
             
         case .triangle:
@@ -143,9 +138,9 @@ extension CanvasViewModel {
                 rotatePoint(bottomRight, around: center, by: rotation)
             ]
             
-            lines += createSegmentedLine(from: rotatedPoints[0], to: rotatedPoints[1], color: selectedColor, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rotatedPoints[1], to: rotatedPoints[2], color: selectedColor, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rotatedPoints[2], to: rotatedPoints[0], color: selectedColor, lineWidth: lineWidth)
+            lines.append(Line(points: [rotatedPoints[0], rotatedPoints[1]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[1], rotatedPoints[2]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[2], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
             
         case .arrow:
             let top = CGPoint(x: center.x, y: center.y - halfHeight)
@@ -160,9 +155,9 @@ extension CanvasViewModel {
                 rotatePoint(rightWing, around: center, by: rotation)
             ]
             
-            lines += createSegmentedLine(from: rotatedPoints[0], to: rotatedPoints[1], color: selectedColor, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rotatedPoints[2], to: rotatedPoints[0], color: selectedColor, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rotatedPoints[3], to: rotatedPoints[0], color: selectedColor, lineWidth: lineWidth)
+            lines.append(Line(points: [rotatedPoints[0], rotatedPoints[1]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[2], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[3], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
         }
         
         return lines
