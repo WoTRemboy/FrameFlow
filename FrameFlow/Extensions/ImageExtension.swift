@@ -103,6 +103,7 @@ extension Image {
             static let draw = Image("SplashDrawFrame")
             static let animate = Image("SplashCreateAnimation")
             static let share = Image("SplashShareGif")
+            static let context = Image("SplashContextMenu")
         }
     }
 }

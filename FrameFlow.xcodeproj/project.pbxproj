@@ -10,6 +10,7 @@
 		637B9CD12D16E7A100FBDAC4 /* GenerateFramesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */; };
 		637B9CD32D1706FA00FBDAC4 /* GenerateParamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */; };
 		63B2AF1D2D184BBC0059E03C /* CreatingGIFOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2AF1C2D184BB00059E03C /* CreatingGIFOverlay.swift */; };
+		63B2AF202D18834F0059E03C /* GifWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2AF1F2D18833D0059E03C /* GifWarningView.swift */; };
 		63CD35992D084AFC00067343 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35632D084AFC00067343 /* Localizable.xcstrings */; };
 		63CD359A2D084AFC00067343 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35942D084AFC00067343 /* Preview Assets.xcassets */; };
 		63CD359B2D084AFC00067343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63CD35962D084AFC00067343 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateParamsView.swift; sourceTree = "<group>"; };
 		63A358172D123B6600280605 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B2AF1C2D184BB00059E03C /* CreatingGIFOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingGIFOverlay.swift; sourceTree = "<group>"; };
+		63B2AF1F2D18833D0059E03C /* GifWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifWarningView.swift; sourceTree = "<group>"; };
 		63CD35622D084AFC00067343 /* FrameFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameFlowApp.swift; sourceTree = "<group>"; };
 		63CD35632D084AFC00067343 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		63CD35652D084AFC00067343 /* ActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionModel.swift; sourceTree = "<group>"; };
@@ -170,6 +172,15 @@
 			path = Sliders;
 			sourceTree = "<group>";
 		};
+		63B2AF1E2D1883280059E03C /* GIFOverlays */ = {
+			isa = PBXGroup;
+			children = (
+				63B2AF1F2D18833D0059E03C /* GifWarningView.swift */,
+				63B2AF1C2D184BB00059E03C /* CreatingGIFOverlay.swift */,
+			);
+			path = GIFOverlays;
+			sourceTree = "<group>";
+		};
 		63CD35642D084AFC00067343 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +217,7 @@
 				63B2AF182D1838DA0059E03C /* ColorsPickers */,
 				63B2AF192D1838EC0059E03C /* ShapesPickers */,
 				63B2AF1A2D1839050059E03C /* Sliders */,
-				63B2AF1C2D184BB00059E03C /* CreatingGIFOverlay.swift */,
+				63B2AF1E2D1883280059E03C /* GIFOverlays */,
 				637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */,
 			);
 			path = Pickers;
@@ -494,6 +505,7 @@
 				63CD35B22D084AFC00067343 /* ShapeViewModel.swift in Sources */,
 				63CD35B32D084AFC00067343 /* UndoRedoViewModel.swift in Sources */,
 				63CD35B42D084AFC00067343 /* CanvasViewModel.swift in Sources */,
+				63B2AF202D18834F0059E03C /* GifWarningView.swift in Sources */,
 				63CD35B52D084AFC00067343 /* ColorExtension.swift in Sources */,
 				63CD35B62D084AFC00067343 /* FontExtension.swift in Sources */,
 				63CD35B72D084AFC00067343 /* ImageExtension.swift in Sources */,

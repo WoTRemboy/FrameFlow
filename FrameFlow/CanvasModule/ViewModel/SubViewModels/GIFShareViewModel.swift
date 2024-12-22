@@ -80,6 +80,10 @@ extension CanvasViewModel {
     
     /// Creates a GIF from the current layers and presents a share sheet for sharing the GIF file.
     @MainActor internal func shareGIF() {
+        guard layers.count < 102 else {
+            isCreatingGIFWarningVisible = true
+            return
+        }
         // Shows the creating gif overlay
         toggleCreatingGIF()
         

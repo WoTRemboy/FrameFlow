@@ -1,0 +1,19 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M100 0H0V100H100V0Z" fill="#5751FF"/>
+<path d="M26 84V60H50V84H26Z" stroke="white" stroke-width="4"/>
+<circle cx="32.5" cy="67.5" r="2.5" fill="white"/>
+<circle cx="32.5" cy="77.5" r="2.5" fill="white"/>
+<circle cx="43.5" cy="77.5" r="2.5" fill="white"/>
+<path d="M34 36V12H58V36H34Z" stroke="white" stroke-width="4"/>
+<circle cx="40.5" cy="19.5" r="2.5" fill="white"/>
+<circle cx="40.5" cy="29.5" r="2.5" fill="white"/>
+<circle cx="51.5" cy="29.5" r="2.5" fill="white"/>
+<circle cx="51.5" cy="19.5" r="2.5" fill="white"/>
+<rect x="40" y="46" width="37" height="24" fill="#5751FF" stroke="white" stroke-width="4"/>
+<circle cx="47.5" cy="62.5" r="2.5" fill="white"/>
+<circle cx="47.5" cy="53.5" r="2.5" fill="white"/>
+<circle cx="58.5" cy="62.5" r="2.5" fill="white"/>
+<circle cx="58.5" cy="53.5" r="2.5" fill="white"/>
+<circle cx="69.5" cy="62.5" r="2.5" fill="white"/>
+<circle cx="69.5" cy="53.5" r="2.5" fill="white"/>
+</svg>

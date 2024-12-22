@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// A view overlay for show creating gif process.
+/// A view overlay to show creating gif process.
 struct CreatingGIFOverlay: View {
     
     /// The view model that controls the state and actions of the canvas.
@@ -35,7 +35,7 @@ struct CreatingGIFOverlay: View {
     /// Shows the label & progress view.
     private var content: some View {
         HStack {
-            Text("\(Texts.ContextMenu.creatingGif)...")
+            Text("\(Texts.CreatingGif.title)...")
                 .font(.regularBody())
                 .padding(.leading)
             Spacer()

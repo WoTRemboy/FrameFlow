@@ -45,6 +45,11 @@ struct EditorView: View {
                     creatingGIF
                 }
                 
+                // Overlay for warning gif message
+                if viewModel.isCreatingGIFWarningVisible {
+                    warningGIF
+                }
+                
                 // Color and shape pickers
                 if viewModel.showColorPicker {
                     VStack(spacing: 8) {
@@ -150,6 +155,27 @@ struct EditorView: View {
             VStack {
                 Spacer()
                 CreatingGIFOverlay()
+                Spacer()
+            }
+        }
+        .zIndex(1)
+    }
+    
+    // MARK: - Warning GIF Overlay
+    
+    /// An overlay to show frame limit for generating gif.
+    private var warningGIF: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewModel.isCreatingGIFWarningVisible = false
+                    }
+                }
+            VStack {
+                Spacer()
+                GifWarningView()
                 Spacer()
             }
         }
