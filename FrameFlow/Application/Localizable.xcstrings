@@ -47,6 +47,9 @@
       },
       "shouldTranslate" : false
     },
+    "%@..." : {
+      "shouldTranslate" : false
+    },
     "AnimationOverlayDone" : {
       "comment" : "Done",
       "localizations" : {
@@ -145,6 +148,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скопировать кадр"
+          }
+        }
+      }
+    },
+    "ContextMenuCreatingGif" : {
+      "comment" : "Creating GIF",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creating GIF"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создание GIF"
           }
         }
       }
@@ -251,6 +271,57 @@
         }
       }
     },
+    "CreatingGifNotCreatedDescription" : {
+      "comment" : "100 frames is maximum.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 frames is maximum."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 кадров - максимум."
+          }
+        }
+      }
+    },
+    "CreatingGifNotCreateGif" : {
+      "comment" : "Restriction",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restriction"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Внимание"
+          }
+        }
+      }
+    },
+    "CreatingGifOk" : {
+      "comment" : "OK",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ОК"
+          }
+        }
+      }
+    },
     "GenerateParamsArrow" : {
       "comment" : "Arrow",
       "localizations" : {
@@ -325,13 +396,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Start"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Готово"
+            "value" : "Начать"
           }
         }
       }
@@ -342,13 +413,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shape selected"
+            "value" : "Shape"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Выбрана фигура"
+            "value" : "Фигура"
           }
         }
       }
@@ -468,6 +539,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Раскадровка"
+          }
+        }
+      }
+    },
+    "OnboardingPageFifthDescription" : {
+      "comment" : "Use context menus to find these features.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use long press to find some features."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Возможности в контекстном меню."
+          }
+        }
+      }
+    },
+    "OnboardingPageFifthTitle" : {
+      "comment" : "Context menus",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Context menus"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Контекст"
           }
         }
       }

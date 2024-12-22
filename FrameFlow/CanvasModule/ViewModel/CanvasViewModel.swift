@@ -53,7 +53,7 @@ final class CanvasViewModel: ObservableObject {
     /// Defines the generation shape.
     @Published internal var generateShapeSelected: ShapeMode = .triangle
     /// Defines the generation frames count.
-    @Published internal var generateFramesCount: Float = 200
+    @Published internal var generateFramesCount: Float = 100
     
     // MARK: - Mode and Color Properties
     
@@ -85,6 +85,10 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var isSpeedOverlayVisible: Bool = false
     /// Indicates if the generation params overlay is currently visible.
     @Published internal var isGenerateParamsVisible: Bool = false
+    /// Indicates if the creating gif overlay is currently visible.
+    @Published internal var isCreatingGIFOverlayVisible: Bool = false
+    /// Indicates if the warning gif overlay is currently visible.
+    @Published internal var isCreatingGIFWarningVisible: Bool = false
     
     // MARK: - Undo/Redo Properties
     
@@ -126,6 +130,20 @@ final class CanvasViewModel: ObservableObject {
     internal func toggleGenerateParams() {
         withAnimation(.easeInOut(duration: 0.2)) {
             isGenerateParamsVisible.toggle()
+        }
+    }
+    
+    /// Toggles the visibility of the creating gif overlay with an animation.
+    internal func toggleCreatingGIF() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            isCreatingGIFOverlayVisible.toggle()
+        }
+    }
+    
+    /// Toggles the visibility of the warning gif overlay with an animation.
+    internal func toggleGIFWarning() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            isCreatingGIFWarningVisible.toggle()
         }
     }
     

@@ -24,6 +24,8 @@ final class Texts {
         static let thirdDescription = NSLocalizedString("OnboardingPageThirdDescription", comment: "View the result in the internal player.")
         static let fourthTitle = NSLocalizedString("OnboardingPageFourthTitle", comment: "Share with friends!")
         static let fourthDescription = NSLocalizedString("OnboardingPageFourthDescription", comment: "Send the GIF to various messengers.")
+        static let fifthTitle = NSLocalizedString("OnboardingPageFifthTitle", comment: "Context menus")
+        static let fifthDescription = NSLocalizedString("OnboardingPageFifthDescription", comment: "Use context menus to find these features.")
     }
     
     // MARK: - Layer sheet Texts
@@ -72,6 +74,13 @@ final class Texts {
         static let delete = NSLocalizedString("ContextMenuDeleteCurrent", comment: "Delete frame")
         static let deleteAll = NSLocalizedString("ContextMenuDelete", comment: "Delete all frames")
         static let color = NSLocalizedString("ContextMenuColor", comment: "Select the color")
+    }
+    
+    enum CreatingGif {
+        static let title = NSLocalizedString("ContextMenuCreatingGif", comment: "Creating GIF")
+        static let notCreatedGif = NSLocalizedString("CreatingGifNotCreateGif", comment: "Restriction")
+        static let notCreatedDescription = NSLocalizedString("CreatingGifNotCreatedDescription", comment: "100 frames is maximum.")
+        static let ok = NSLocalizedString("CreatingGifOk", comment: "OK")
     }
     
     // MARK: - UserDefaults Keys
