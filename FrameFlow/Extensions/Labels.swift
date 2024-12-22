@@ -64,6 +64,7 @@ final class Texts {
         static let play = NSLocalizedString("ContextMenuPlay", comment: "Play animation")
         static let speed = NSLocalizedString("ContextMenuSpeed", comment: "Change speed")
         static let gif = NSLocalizedString("ContextMenuGIF", comment: "Share GIF")
+        static let creatingGif = NSLocalizedString("ContextMenuCreatingGif", comment: "Creating GIF")
         
         static let add = NSLocalizedString("ContextMenuAdd", comment: "Add frame")
         static let copy = NSLocalizedString("ContextMenuCopy", comment: "Copy frame")

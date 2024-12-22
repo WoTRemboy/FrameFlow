@@ -47,6 +47,9 @@
       },
       "shouldTranslate" : false
     },
+    "%@..." : {
+      "shouldTranslate" : false
+    },
     "AnimationOverlayDone" : {
       "comment" : "Done",
       "localizations" : {
@@ -145,6 +148,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скопировать кадр"
+          }
+        }
+      }
+    },
+    "ContextMenuCreatingGif" : {
+      "comment" : "Creating GIF",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creating GIF"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создание GIF"
           }
         }
       }

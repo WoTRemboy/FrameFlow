@@ -40,6 +40,11 @@ struct EditorView: View {
                     generateParams
                 }
                 
+                // Overlay for creating gif message
+                if viewModel.isCreatingGIFOverlayVisible {
+                    creatingGIF
+                }
+                
                 // Color and shape pickers
                 if viewModel.showColorPicker {
                     VStack(spacing: 8) {
@@ -129,6 +134,22 @@ struct EditorView: View {
             VStack {
                 Spacer()
                 GenerateParamsView()
+                Spacer()
+            }
+        }
+        .zIndex(1)
+    }
+    
+    // MARK: - Creating GIF Overlay
+    
+    /// An overlay to show creating gif progress.
+    private var creatingGIF: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Spacer()
+                CreatingGIFOverlay()
                 Spacer()
             }
         }
