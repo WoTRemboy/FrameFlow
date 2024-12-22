@@ -38,8 +38,8 @@ struct SpeedSliderOverlay: View {
     /// Displays the title text for the overlay, providing context for the speed adjustment.
     private var title: some View {
         Text(Texts.AnimationOverlay.title)
-            .font(.headline())
-            .padding(.top)
+            .font(.title())
+            .padding(.top, 20)
     }
     
     // MARK: - Speed Display

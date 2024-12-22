@@ -72,7 +72,7 @@ struct CanvasHeaderView: View {
                 (viewModel.isLayersEmpty() ? Image.Header.Modifiers.binInactive : Image.Header.Modifiers.bin)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 32)
+                    .frame(height: 32)
             }
             .disabled(viewModel.isLayersEmpty())
             .contextMenu {
@@ -90,7 +90,7 @@ struct CanvasHeaderView: View {
                 Image.Header.Modifiers.filePlus
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 32)
+                    .frame(height: 32)
             }
             .contextMenu {
                 copyMenu
@@ -103,7 +103,7 @@ struct CanvasHeaderView: View {
                 Image.Header.Modifiers.layers
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 32)
+                    .frame(height: 32)
             }
         }
     }
@@ -111,18 +111,66 @@ struct CanvasHeaderView: View {
     /// Context menu option for deleting all layers.
     private var deleteMenu: some View {
         Group {
-            Button(Texts.ContextMenu.delete, action: {
+            Button {
+                viewModel.deleteCurrentLayer()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.delete)
+                } icon: {
+                    Image.Header.Modifiers.delete
+                }
+
+            }
+            
+            Button {
                 viewModel.deleteAllLayers()
-            })
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.deleteAll)
+                } icon: {
+                    Image.Header.Modifiers.deleteAll
+                }
+
+            }
         }
     }
     
-    /// Context menu option for duplicating the current layer.
+    /// Context menu option for creating, duplicating & generations layers.
     private var copyMenu: some View {
         Group {
-            Button(Texts.ContextMenu.copy, action: {
-                viewModel.duplicateCurrentLayer()
-            })
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.addLayer()
+                }
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.add)
+                } icon: {
+                    Image.Header.Modifiers.add
+                }
+            }
+            
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.duplicateCurrentLayer()
+                }
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.copy)
+                } icon: {
+                    Image.Header.Modifiers.copy
+                }
+            }
+            
+            Button {
+                viewModel.toggleGenerateParams()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.generate)
+                } icon: {
+                    Image.Header.Modifiers.generate
+                }
+            }
         }
     }
     
@@ -163,15 +211,39 @@ struct CanvasHeaderView: View {
     /// Context menu for adjusting animation speed and sharing as GIF.
     private var speedGifMenu: some View {
         Group {
+            // Button to play animation
+            Button {
+                viewModel.startAnimation()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.play)
+                } icon: {
+                    Image.Header.Modifiers.play
+                }
+            }
+            
             // Button to adjust animation speed
-            Button(Texts.ContextMenu.speed, action: {
+            Button {
                 viewModel.toggleSpeedOverlay()
-            })
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.speed)
+                } icon: {
+                    Image.Header.Modifiers.speed
+                }
+            }
             
             // Button to share animation as a GIF
-            Button(Texts.ContextMenu.gif, action: {
+            Button {
                 viewModel.shareGIF()
-            })
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.gif)
+                } icon: {
+                    Image.Header.Modifiers.share
+                }
+
+            }
         }
     }
 }

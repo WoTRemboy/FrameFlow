@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "EraseInactiveLight.svg",
+      "filename" : "eraser 2.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "EraseInactive 1.svg",
+      "filename" : "eraser 1.svg",
       "idiom" : "universal"
     }
   ],

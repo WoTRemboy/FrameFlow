@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "BinInactiveLight.svg",
+      "filename" : "trash 5.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "BinInactiveDark.svg",
+      "filename" : "trash 6.svg",
       "idiom" : "universal"
     }
   ],

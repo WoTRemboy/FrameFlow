@@ -22,12 +22,19 @@ final class CanvasViewModel: ObservableObject {
     /// The size of the canvas, which determines the rendering bounds.
     @Published internal var canvasSize: CGSize = CGSize(width: 0, height: 0)
     
+    // MARK: - Shape Properties
+        
+    /// The initial touch point when starting to draw a shape.
+    @Published internal var initialShapePoint: CGPoint = .zero
+    /// A preview of the shape being adjusted.
+    @Published internal var previewShapeLines: [Line] = []
+    
     // MARK: - Animation Properties
     
     /// Indicates whether an animation is currently playing.
     @Published internal var isAnimating = false
     /// Controls the speed of animation playback.
-    @Published internal var animationSpeed: Double = 0.1
+    @Published internal var animationSpeed: Double = 0.01
     
     // MARK: - Drawing Properties
     
@@ -42,6 +49,11 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var lineWidth: CGFloat = 5.0
     /// Sets the height for shapes added to the canvas.
     @Published internal var shapeHeight: CGFloat = 100.0
+    
+    /// Defines the generation shape.
+    @Published internal var generateShapeSelected: ShapeMode = .triangle
+    /// Defines the generation frames count.
+    @Published internal var generateFramesCount: Float = 100
     
     // MARK: - Mode and Color Properties
     
@@ -68,9 +80,15 @@ final class CanvasViewModel: ObservableObject {
     /// Controls the visibility of the shape picker.
     @Published internal var showShapePicker: Bool = false
     /// Indicates if the layer selection sheet is currently presented.
-    @Published internal var isLayerSheetPresented = false
+    @Published internal var isLayerSheetPresented: Bool = false
     /// Indicates if the speed overlay for animation is currently visible.
-    @Published internal var isSpeedOverlayVisible = false
+    @Published internal var isSpeedOverlayVisible: Bool = false
+    /// Indicates if the generation params overlay is currently visible.
+    @Published internal var isGenerateParamsVisible: Bool = false
+    /// Indicates if the creating gif overlay is currently visible.
+    @Published internal var isCreatingGIFOverlayVisible: Bool = false
+    /// Indicates if the warning gif overlay is currently visible.
+    @Published internal var isCreatingGIFWarningVisible: Bool = false
     
     // MARK: - Undo/Redo Properties
     
@@ -105,6 +123,27 @@ final class CanvasViewModel: ObservableObject {
     internal func toggleSpeedOverlay() {
         withAnimation(.easeInOut(duration: 0.2)) {
             isSpeedOverlayVisible.toggle()
+        }
+    }
+    
+    /// Toggles the visibility of the generation params overlay with an animation.
+    internal func toggleGenerateParams() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            isGenerateParamsVisible.toggle()
+        }
+    }
+    
+    /// Toggles the visibility of the creating gif overlay with an animation.
+    internal func toggleCreatingGIF() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            isCreatingGIFOverlayVisible.toggle()
+        }
+    }
+    
+    /// Toggles the visibility of the warning gif overlay with an animation.
+    internal func toggleGIFWarning() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            isCreatingGIFWarningVisible.toggle()
         }
     }
     

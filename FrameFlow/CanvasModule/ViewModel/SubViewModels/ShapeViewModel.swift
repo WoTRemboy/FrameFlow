@@ -26,21 +26,43 @@ extension CanvasViewModel {
         currentShape = shape
     }
     
-    // MARK: - Shape Creation
+    // MARK: - Shape Interaction
     
-    /// Adds a shape at the specified point on the canvas.
-    /// - Parameter point: The central point where the shape will be drawn.
-    internal func addShape(at point: CGPoint) {
-        guard let shape = currentShape, !isAnimating else { return }
+    /// Updates the preview of the shape as the user drags.
+    /// - Parameter currentPoint: The current touch location during the drag.
+    internal func updateShape(to location: CGPoint, in size: CGSize) {
+        guard let shape = currentShape else { return }
         
-        let shapeLines = createLinesForShape(shape, at: point, color: selectedColor, lineWidth: lineWidth, height: shapeHeight)
-        currentLayer.append(contentsOf: shapeLines)
+        let deltaX = location.x - tapLocation.x
+        let deltaY = location.y - tapLocation.y
+        let maxDelta = max(abs(deltaX), abs(deltaY))
+        let proportionalSize = CGSize(width: maxDelta * 2, height: maxDelta * 2)
+        let angle = atan2(-deltaX, deltaY)
         
-        withAnimation(.easeInOut(duration: 0.2)) {
-            undoStack.append(Action(type: .addShape(shapeLines, layerIndex: currentLayerIndex)))
-            redoStack.removeAll()
-        }
+        previewShapeLines = createPreviewLinesForShape(
+            shape,
+            at: tapLocation,
+            size: proportionalSize,
+            rotation: angle
+        )
     }
+    
+    /// Finalizes the shape drawing by adding it to the current layer.
+    internal func finalizeShape() {
+        let segmentedLines = previewShapeLines.flatMap { line in
+            createSegmentedLine(from: line.points.first!, to: line.points.last!, color: line.color, lineWidth: line.lineWidth)
+        }
+        
+        currentLayer.append(contentsOf: segmentedLines)
+        undoStack.append(Action(type: .addShape(segmentedLines, layerIndex: currentLayerIndex)))
+        redoStack.removeAll()
+        
+        previewShapeLines.removeAll()
+        currentShape = nil
+        currentMode = .shape
+    }
+    
+    // MARK: - Shape Creation
     
     /// Generates lines for different shapes, adjusting properties such as color and line width.
     /// - Parameters:
@@ -50,56 +72,92 @@ extension CanvasViewModel {
     ///   - lineWidth: The line width for each line segment of the shape.
     ///   - height: The size of the shape.
     /// - Returns: An array of `Line` objects representing the shape.
-    private func createLinesForShape(_ shape: ShapeMode, at point: CGPoint, color: Color, lineWidth: CGFloat, height: CGFloat) -> [Line] {
+    internal func createPreviewLinesForShape(_ shape: ShapeMode, at center: CGPoint, size: CGSize, rotation: CGFloat) -> [Line] {
         var lines: [Line] = []
-        let size: CGFloat = height
+        let limitedSize = CGSize(
+            width: max(size.width, 30),
+            height: max(size.height, 30)
+        )
+        
+        let halfWidth = limitedSize.width / 2
+        let halfHeight = limitedSize.height / 2
+        
+        func rotatePoint(_ point: CGPoint, around center: CGPoint, by angle: CGFloat) -> CGPoint {
+            let dx = point.x - center.x
+            let dy = point.y - center.y
+            
+            let rotatedX = center.x + dx * cos(angle) - dy * sin(angle)
+            let rotatedY = center.y + dx * sin(angle) + dy * cos(angle)
+            
+            return CGPoint(x: rotatedX, y: rotatedY)
+        }
         
         switch shape {
         case .square:
-            let topLeft = CGPoint(x: point.x - size / 2, y: point.y - size / 2)
-            let topRight = CGPoint(x: point.x + size / 2, y: point.y - size / 2)
-            let bottomRight = CGPoint(x: point.x + size / 2, y: point.y + size / 2)
-            let bottomLeft = CGPoint(x: point.x - size / 2, y: point.y + size / 2)
+            let topLeft = CGPoint(x: center.x - halfWidth, y: center.y - halfHeight)
+            let topRight = CGPoint(x: center.x + halfWidth, y: center.y - halfHeight)
+            let bottomRight = CGPoint(x: center.x + halfWidth, y: center.y + halfHeight)
+            let bottomLeft = CGPoint(x: center.x - halfWidth, y: center.y + halfHeight)
             
-            lines += createSegmentedLine(from: topLeft, to: topRight, color: color, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: topRight, to: bottomRight, color: color, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: bottomRight, to: bottomLeft, color: color, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: bottomLeft, to: topLeft, color: color, lineWidth: lineWidth)
+            let rotatedPoints = [
+                rotatePoint(topLeft, around: center, by: rotation),
+                rotatePoint(topRight, around: center, by: rotation),
+                rotatePoint(bottomRight, around: center, by: rotation),
+                rotatePoint(bottomLeft, around: center, by: rotation)
+            ]
+            
+            lines.append(Line(points: [rotatedPoints[0], rotatedPoints[1]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[1], rotatedPoints[2]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[2], rotatedPoints[3]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[3], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
             
         case .circle:
-            let segments = Int(height / 2)
-            let radius = size / 2
+            let radius = max(limitedSize.width / 2, 10)
+            let segments = max(Int(radius / 2), 18)
             var circlePoints: [CGPoint] = []
             
             for i in 0...segments {
                 let angle = 2 * .pi * CGFloat(i) / CGFloat(segments)
-                let x = point.x + radius * cos(angle)
-                let y = point.y + radius * sin(angle)
-                circlePoints.append(CGPoint(x: x, y: y))
+                let x = center.x + radius * cos(angle)
+                let y = center.y + radius * sin(angle)
+                circlePoints.append(rotatePoint(CGPoint(x: x, y: y), around: center, by: rotation))
             }
             
             for i in 0..<segments {
-                lines += createSegmentedLine(from: circlePoints[i], to: circlePoints[i + 1], color: color, lineWidth: lineWidth, isCircle: true)
+                lines.append(Line(points: [circlePoints[i], circlePoints[i + 1]], color: selectedColor, lineWidth: lineWidth))
             }
             
         case .triangle:
-            let top = CGPoint(x: point.x, y: point.y - size / 2)
-            let bottomLeft = CGPoint(x: point.x - size / 2, y: point.y + size / 2)
-            let bottomRight = CGPoint(x: point.x + size / 2, y: point.y + size / 2)
+            let top = CGPoint(x: center.x, y: center.y - halfHeight)
+            let bottomLeft = CGPoint(x: center.x - halfWidth, y: center.y + halfHeight)
+            let bottomRight = CGPoint(x: center.x + halfWidth, y: center.y + halfHeight)
             
-            lines += createSegmentedLine(from: top, to: bottomLeft, color: color, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: bottomLeft, to: bottomRight, color: color, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: bottomRight, to: top, color: color, lineWidth: lineWidth)
+            let rotatedPoints = [
+                rotatePoint(top, around: center, by: rotation),
+                rotatePoint(bottomLeft, around: center, by: rotation),
+                rotatePoint(bottomRight, around: center, by: rotation)
+            ]
+            
+            lines.append(Line(points: [rotatedPoints[0], rotatedPoints[1]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[1], rotatedPoints[2]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[2], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
             
         case .arrow:
-            let top = CGPoint(x: point.x, y: point.y - size / 2)
-            let bottom = CGPoint(x: point.x, y: point.y + size / 2)
-            let leftWing = CGPoint(x: point.x - size / 4, y: point.y - size / 4)
-            let rightWing = CGPoint(x: point.x + size / 4, y: point.y - size / 4)
+            let top = CGPoint(x: center.x, y: center.y - halfHeight)
+            let bottom = CGPoint(x: center.x, y: center.y + halfHeight)
+            let leftWing = CGPoint(x: center.x - halfWidth / 2, y: center.y - halfHeight / 2)
+            let rightWing = CGPoint(x: center.x + halfWidth / 2, y: center.y - halfHeight / 2)
             
-            lines += createSegmentedLine(from: top, to: bottom, color: color, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: leftWing, to: top, color: color, lineWidth: lineWidth)
-            lines += createSegmentedLine(from: rightWing, to: top, color: color, lineWidth: lineWidth)
+            let rotatedPoints = [
+                rotatePoint(top, around: center, by: rotation),
+                rotatePoint(bottom, around: center, by: rotation),
+                rotatePoint(leftWing, around: center, by: rotation),
+                rotatePoint(rightWing, around: center, by: rotation)
+            ]
+            
+            lines.append(Line(points: [rotatedPoints[0], rotatedPoints[1]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[2], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
+            lines.append(Line(points: [rotatedPoints[3], rotatedPoints[0]], color: selectedColor, lineWidth: lineWidth))
         }
         
         return lines
@@ -137,11 +195,5 @@ extension CanvasViewModel {
         }
         
         return segments
-    }
-    
-    /// Finalizes the shape drawing process by resetting the current shape selection.
-    internal func finalizeShape() {
-        currentShape = nil
-        currentMode = .shape
     }
 }

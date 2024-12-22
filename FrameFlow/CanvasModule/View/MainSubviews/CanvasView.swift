@@ -54,6 +54,11 @@ struct CanvasView: View {
             }
             .opacity(1.0)
             
+            ForEach(viewModel.previewShapeLines) { line in
+                pencilPath(for: line)
+            }
+            .opacity(1.0)
+            
             // Display either the current drawing line or the eraser path, based on the active tool
             if currentEraserLine.points.isEmpty {
                 if currentLine.lineType == .brush {

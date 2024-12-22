@@ -35,6 +35,21 @@ struct EditorView: View {
                     speedSlider
                 }
                 
+                // Overlay for generate parameters
+                if viewModel.isGenerateParamsVisible {
+                    generateParams
+                }
+                
+                // Overlay for creating gif message
+                if viewModel.isCreatingGIFOverlayVisible {
+                    creatingGIF
+                }
+                
+                // Overlay for warning gif message
+                if viewModel.isCreatingGIFWarningVisible {
+                    warningGIF
+                }
+                
                 // Color and shape pickers
                 if viewModel.showColorPicker {
                     VStack(spacing: 8) {
@@ -47,12 +62,9 @@ struct EditorView: View {
                     .padding(.bottom, hasNotch() ? 110 : 65)
                     .zIndex(1)
                 } else if viewModel.showShapePicker {
-                    VStack(spacing: 8) {
-                        ShapesPickerView()
-                        ShapeHeightSliderView()
-                    }
-                    .padding(.bottom, hasNotch() ? 110 : 65)
-                    .zIndex(1)
+                    ShapesPickerView()
+                        .padding(.bottom, hasNotch() ? 110 : 65)
+                        .zIndex(1)
                 }
             }
             .sheet(isPresented: $viewModel.isLayerSheetPresented) {
@@ -72,15 +84,20 @@ struct EditorView: View {
                 .gesture(DragGesture(minimumDistance: 0)
                     .onChanged { value in
                         if viewModel.currentMode == .shape {
-                            viewModel.addShape(at: value.location)
-                            viewModel.finalizeShape()
+                            viewModel.tapLocation = value.startLocation
+                            viewModel.updateShape(to: value.location, in: geometry.size)
                         } else {
                             viewModel.updateCurrentLine(with: value.location, in: geometry.size)
                         }
                     }
                     .onEnded { _ in
-                        viewModel.finalizeCurrentLine()
+                        if viewModel.currentMode == .shape {
+                            viewModel.finalizeShape()
+                        } else {
+                            viewModel.finalizeCurrentLine()
+                        }
                     }
+                         
                 )
         }
         .padding(.vertical)
@@ -101,6 +118,64 @@ struct EditorView: View {
             VStack {
                 Spacer()
                 SpeedSliderOverlay()
+                Spacer()
+            }
+        }
+        .zIndex(1)
+    }
+    
+    // MARK: - Generate Params Overlay
+    
+    /// An overlay to setup generations params with a tap-to-dismiss background.
+    private var generateParams: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewModel.isGenerateParamsVisible = false
+                    }
+                }
+            VStack {
+                Spacer()
+                GenerateParamsView()
+                Spacer()
+            }
+        }
+        .zIndex(1)
+    }
+    
+    // MARK: - Creating GIF Overlay
+    
+    /// An overlay to show creating gif progress.
+    private var creatingGIF: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Spacer()
+                CreatingGIFOverlay()
+                Spacer()
+            }
+        }
+        .zIndex(1)
+    }
+    
+    // MARK: - Warning GIF Overlay
+    
+    /// An overlay to show frame limit for generating gif.
+    private var warningGIF: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewModel.isCreatingGIFWarningVisible = false
+                    }
+                }
+            VStack {
+                Spacer()
+                GifWarningView()
                 Spacer()
             }
         }
