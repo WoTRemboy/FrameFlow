@@ -38,11 +38,7 @@ extension OnboardingStep {
                                     description: Texts.OnboardingPage.fourthDescription,
                                     image: Image.Opening.OnboardingPage.share)
         
-        let fifth = OnboardingStep(name: Texts.OnboardingPage.fifthTitle,
-                                   description: Texts.OnboardingPage.fifthDescription,
-                                   image: Image.Opening.OnboardingPage.context)
-        
-        return [first, second, third, fourth, fifth]
+        return [first, second, third, fourth]
     }
 }
 

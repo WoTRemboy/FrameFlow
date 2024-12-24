@@ -5,13 +5,6 @@
 //  Created by Roman Tverdokhleb on 11/3/24.
 //
 
-//
-//  GIFShareViewModel.swift
-//  FrameFlow
-//
-//  Created by Roman Tverdokhleb on 11/3/24.
-//
-
 import SwiftUI
 import UniformTypeIdentifiers
 

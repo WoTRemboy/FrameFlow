@@ -17,17 +17,28 @@ struct CanvasTabbarView: View {
     
     /// The main content of the tab bar, displaying tool buttons when animation is not active.
     internal var body: some View {
-        HStack(spacing: 16) {
+        HStack {
             // Show tool buttons only when animation is inactive
             if !viewModel.isAnimating {
-                pencilButton
-                brushButton
-                eraseButton
-                shapeButton
-                colorButton
+                generateButton
+                Spacer()
+                drawingInstruments
+                
+                Spacer()
+                shareButton
             }
         }
         .frame(height: 32)
+    }
+    
+    private var drawingInstruments: some View {
+        HStack(spacing: 16) {
+            pencilButton
+            brushButton
+            eraseButton
+            shapeButton
+            colorButton
+        }
     }
     
     // MARK: - Tool Buttons
@@ -113,6 +124,32 @@ struct CanvasTabbarView: View {
         .onChange(of: viewModel.selectedColor) {
             // Sets the mode to pencil when a new color is selected.
             viewModel.selectMode(.pencil)
+        }
+    }
+    
+    /// Button to share animation as a GIF
+    private var shareButton: some View {
+        Button {
+            viewModel.shareGIF()
+        } label: {
+            (viewModel.isLayersEmpty() ? Image.TabBar.shareInactive : Image.TabBar.shareActive)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 16)
+                .padding(.trailing)
+        }
+        .disabled(viewModel.isLayersEmpty())
+    }
+    
+    private var generateButton: some View {
+        Button {
+            viewModel.toggleGenerateParams()
+        } label: {
+            Image.TabBar.generate
+                .resizable()
+                .scaledToFit()
+                .frame(width: 16)
+                .padding(.leading)
         }
     }
 }

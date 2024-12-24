@@ -73,13 +73,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animation Speed"
+            "value" : "Frame Duration"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Скорость анимации"
+            "value" : "Длительность кадра"
           }
         }
       }
@@ -386,6 +386,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Квадрат"
+          }
+        }
+      }
+    },
+    "GenerateParamsShapeCancel" : {
+      "comment" : "Cancel",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
           }
         }
       }

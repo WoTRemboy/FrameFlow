@@ -5,8 +5,6 @@
 //  Created by Roman Tverdokhleb on 10/29/24.
 //
 
-// CanvasView.swift
-
 import SwiftUI
 
 /// A view that represents the drawing canvas, displaying lines, shapes, and previous layers with customizable drawing and erasing tools.
