@@ -44,6 +44,7 @@ final class Texts {
         static let shapeSelected = NSLocalizedString("GenerateParamsShapeSelected", comment: "Shape selected")
         static let framesCount = NSLocalizedString("GenerateParamsFramesCount", comment: "Frames count")
         static let done = NSLocalizedString("GenerateParamsShapeDone", comment: "Done")
+        static let cancel = NSLocalizedString("GenerateParamsShapeCancel", comment: "Cancel")
         
         static let shape = NSLocalizedString("GenerateParamsShape", comment: "Shape")
         static let triangle = NSLocalizedString("GenerateParamsTriangle", comment: "Triangle")

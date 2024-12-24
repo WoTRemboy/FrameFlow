@@ -24,10 +24,7 @@ extension Image {
             static let binInactive = Image("BinInactive")
             static let filePlus = Image("FilePlus")
             static let layers = Image("Layers")
-            
-            static let play = Image(systemName: "play")
-            static let speed = Image(systemName: "gauge.with.dots.needle.67percent")
-            static let share = Image(systemName: "square.and.arrow.up")
+            static let speed = Image("Speed")
             
             static let add = Image(systemName: "plus.rectangle.portrait")
             static let copy = Image(systemName: "rectangle.portrait.on.rectangle.portrait")
@@ -65,6 +62,9 @@ extension Image {
     // MARK: - Tabbar Images
     
     enum TabBar {
+        static let shareActive = Image("ShareActive")
+        static let shareInactive = Image("ShareInactive")
+
         static let brushInactive = Image("BrushInactive")
         static let brushSelected = Image("BrushSelected")
         
@@ -76,6 +76,8 @@ extension Image {
         
         static let pencilInactive = Image("PencilInactive")
         static let pencilSelected = Image("PencilSelected")
+        
+        static let generate = Image("Generate")
     }
     
     // MARK: - Canvas & Storyboard Images
