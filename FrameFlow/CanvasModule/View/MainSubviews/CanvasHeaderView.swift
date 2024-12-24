@@ -104,6 +104,7 @@ struct CanvasHeaderView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 32)
+                    .padding(.leading, -5)
             }
             
             // Change animation speed overlay button

@@ -20,12 +20,12 @@ struct CanvasTabbarView: View {
         HStack {
             // Show tool buttons only when animation is inactive
             if !viewModel.isAnimating {
-                shareButton
+                generateButton
                 Spacer()
                 drawingInstruments
                 
                 Spacer()
-                rectangle
+                shareButton
             }
         }
         .frame(height: 32)
@@ -132,19 +132,25 @@ struct CanvasTabbarView: View {
         Button {
             viewModel.shareGIF()
         } label: {
-            Image.TabBar.share
+            (viewModel.isLayersEmpty() ? Image.TabBar.shareInactive : Image.TabBar.shareActive)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 28)
-                .padding(.leading)
+                .frame(width: 16)
+                .padding(.trailing)
         }
+        .disabled(viewModel.isLayersEmpty())
     }
     
-    private var rectangle: some View {
-        Rectangle()
-            .frame(width: 28)
-            .foregroundStyle(Color.clear)
-            .padding(.trailing)
+    private var generateButton: some View {
+        Button {
+            viewModel.toggleGenerateParams()
+        } label: {
+            Image.TabBar.generate
+                .resizable()
+                .scaledToFit()
+                .frame(width: 16)
+                .padding(.leading)
+        }
     }
 }
 

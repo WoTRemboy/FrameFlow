@@ -73,13 +73,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animation Speed"
+            "value" : "Frame Duration"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Скорость анимации"
+            "value" : "Длительность кадра"
           }
         }
       }

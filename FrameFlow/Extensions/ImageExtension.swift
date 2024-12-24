@@ -62,7 +62,8 @@ extension Image {
     // MARK: - Tabbar Images
     
     enum TabBar {
-        static let share = Image("Share")
+        static let shareActive = Image("ShareActive")
+        static let shareInactive = Image("ShareInactive")
 
         static let brushInactive = Image("BrushInactive")
         static let brushSelected = Image("BrushSelected")
@@ -75,6 +76,8 @@ extension Image {
         
         static let pencilInactive = Image("PencilInactive")
         static let pencilSelected = Image("PencilSelected")
+        
+        static let generate = Image("Generate")
     }
     
     // MARK: - Canvas & Storyboard Images

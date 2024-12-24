@@ -34,7 +34,7 @@ final class CanvasViewModel: ObservableObject {
     /// Indicates whether an animation is currently playing.
     @Published internal var isAnimating = false
     /// Controls the speed of animation playback.
-    @Published internal var animationSpeed: Double = 0.01
+    @Published internal var animationSpeed: Double = 0.1
     
     // MARK: - Drawing Properties
     
