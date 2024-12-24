@@ -105,6 +105,17 @@ struct CanvasHeaderView: View {
                     .scaledToFit()
                     .frame(height: 32)
             }
+            
+            // Change animation speed overlay button
+            // Button to adjust animation speed
+            Button {
+                viewModel.toggleSpeedOverlay()
+            } label: {
+                Image.Header.Modifiers.speed
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 27)
+            }
         }
     }
     
@@ -200,50 +211,6 @@ struct CanvasHeaderView: View {
                     .frame(width: 32)
             }
             .disabled(viewModel.isAnimating || viewModel.isLayersEmpty())
-            .contextMenu {
-                if !viewModel.isAnimating && !viewModel.isLayersEmpty() {
-                    speedGifMenu
-                }
-            }
-        }
-    }
-    
-    /// Context menu for adjusting animation speed and sharing as GIF.
-    private var speedGifMenu: some View {
-        Group {
-            // Button to play animation
-            Button {
-                viewModel.startAnimation()
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.play)
-                } icon: {
-                    Image.Header.Modifiers.play
-                }
-            }
-            
-            // Button to adjust animation speed
-            Button {
-                viewModel.toggleSpeedOverlay()
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.speed)
-                } icon: {
-                    Image.Header.Modifiers.speed
-                }
-            }
-            
-            // Button to share animation as a GIF
-            Button {
-                viewModel.shareGIF()
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.gif)
-                } icon: {
-                    Image.Header.Modifiers.share
-                }
-
-            }
         }
     }
 }
