@@ -390,6 +390,23 @@
         }
       }
     },
+    "GenerateParamsShapeCancel" : {
+      "comment" : "Cancel",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        }
+      }
+    },
     "GenerateParamsShapeDone" : {
       "comment" : "Done",
       "localizations" : {

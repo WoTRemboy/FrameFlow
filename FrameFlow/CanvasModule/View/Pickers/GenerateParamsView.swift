@@ -23,7 +23,11 @@ struct GenerateParamsView: View {
             slider
             separator
             shapePicker
-            doneButton
+            
+            HStack(spacing: 16) {
+                cancelButton
+                doneButton
+            }
         }
         .frame(width: 300)
         .background(Color.BackColors.backSecondary)
@@ -107,7 +111,23 @@ struct GenerateParamsView: View {
         .tint(Color.PaletteColors.greenPalette)
         .foregroundColor(Color.PaletteColors.greenPalette)
         .buttonStyle(.bordered)
-        .padding([.horizontal, .bottom])
+        .padding([.trailing, .bottom])
+    }
+    
+    private var cancelButton: some View {
+        Button {
+            viewModel.toggleGenerateParams()
+        } label: {
+            Text(Texts.GenerateParams.cancel)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        }
+        .frame(height: 40)
+        .frame(maxWidth: .infinity)
+        
+        .tint(Color.PaletteColors.redPalette)
+        .foregroundColor(Color.PaletteColors.redPalette)
+        .buttonStyle(.bordered)
+        .padding([.leading, .bottom])
     }
     
     private var separator: some View {
