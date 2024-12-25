@@ -83,7 +83,7 @@ extension Image {
     // MARK: - Canvas & Storyboard Images
     
     enum Canvas {
-        static let canvas = Image("Canvas")
+        static let canvas = Image("Canvas1")
     }
     
     enum LayerSheet {
