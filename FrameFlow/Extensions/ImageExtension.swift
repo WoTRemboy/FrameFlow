@@ -39,6 +39,8 @@ extension Image {
             static let pauseInactive = Image("PauseInactive")
             static let playActive = Image("PlayActive")
             static let playInactive = Image("PlayInactive")
+            static let generateActive = Image("GenerateActive")
+            static let generateInactive = Image("GenerateInactive")
         }
     }
     

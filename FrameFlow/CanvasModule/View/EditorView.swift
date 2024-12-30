@@ -196,7 +196,7 @@ struct EditorView: View {
         Rectangle()
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             .foregroundStyle(Color.clear)
-            .background(Color.BackColors.backDefault)
+            .background(Color.BackColors.backPrimary)
     }
 }
 

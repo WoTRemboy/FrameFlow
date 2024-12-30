@@ -22,10 +22,13 @@ struct CanvasHeaderView: View {
             if !viewModel.isAnimating {
                 backForward
                 Spacer()
+            }
+            playStop
+            
+            if !viewModel.isAnimating {
+                Spacer()
                 binNewStory
             }
-            Spacer()
-            playStop
         }
     }
     
@@ -63,38 +66,16 @@ struct CanvasHeaderView: View {
     /// Contains buttons for managing layers: delete current layer, add a new layer, and open layer sheet.
     private var binNewStory: some View {
         HStack(spacing: 16) {
-            // Delete current layer button with a context menu option to delete all layers
+            // Button to share animation as a GIF
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.deleteCurrentLayer()
-                }
+                viewModel.shareGIF()
             } label: {
-                (viewModel.isLayersEmpty() ? Image.Header.Modifiers.binInactive : Image.Header.Modifiers.bin)
+                (viewModel.isLayersEmpty() ? Image.TabBar.shareInactive : Image.TabBar.shareActive)
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 32)
+                    .frame(width: 22)
             }
             .disabled(viewModel.isLayersEmpty())
-            .contextMenu {
-                if !viewModel.isLayersEmpty() {
-                    deleteMenu
-                }
-            }
-            
-            // Add a new layer button with a context menu option to duplicate the current layer
-            Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.addLayer()
-                }
-            } label: {
-                Image.Header.Modifiers.filePlus
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 32)
-            }
-            .contextMenu {
-                copyMenu
-            }
             
             // Open storyboard sheet button
             Button {
@@ -104,7 +85,6 @@ struct CanvasHeaderView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 32)
-                    .padding(.leading, -5)
             }
             
             // Change animation speed overlay button
@@ -116,72 +96,6 @@ struct CanvasHeaderView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 27)
-            }
-        }
-    }
-    
-    /// Context menu option for deleting all layers.
-    private var deleteMenu: some View {
-        Group {
-            Button {
-                viewModel.deleteCurrentLayer()
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.delete)
-                } icon: {
-                    Image.Header.Modifiers.delete
-                }
-
-            }
-            
-            Button {
-                viewModel.deleteAllLayers()
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.deleteAll)
-                } icon: {
-                    Image.Header.Modifiers.deleteAll
-                }
-
-            }
-        }
-    }
-    
-    /// Context menu option for creating, duplicating & generations layers.
-    private var copyMenu: some View {
-        Group {
-            Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.addLayer()
-                }
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.add)
-                } icon: {
-                    Image.Header.Modifiers.add
-                }
-            }
-            
-            Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    viewModel.duplicateCurrentLayer()
-                }
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.copy)
-                } icon: {
-                    Image.Header.Modifiers.copy
-                }
-            }
-            
-            Button {
-                viewModel.toggleGenerateParams()
-            } label: {
-                Label {
-                    Text(Texts.ContextMenu.generate)
-                } icon: {
-                    Image.Header.Modifiers.generate
-                }
             }
         }
     }
@@ -198,7 +112,7 @@ struct CanvasHeaderView: View {
                 (viewModel.isAnimating ? Image.Header.Player.pauseActive : Image.Header.Player.pauseInactive)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 32)
+                    .frame(width: 24)
             }
             .disabled(!viewModel.isAnimating)
             
@@ -212,6 +126,15 @@ struct CanvasHeaderView: View {
                     .frame(width: 32)
             }
             .disabled(viewModel.isAnimating || viewModel.isLayersEmpty())
+            
+            Button {
+                viewModel.toggleGenerateParams()
+            } label: {
+                (viewModel.isAnimating ? Image.Header.Player.generateInactive : Image.Header.Player.generateActive)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            .disabled(viewModel.isAnimating)
         }
     }
 }
