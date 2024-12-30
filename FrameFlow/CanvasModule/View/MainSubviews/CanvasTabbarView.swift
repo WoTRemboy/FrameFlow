@@ -122,7 +122,7 @@ struct CanvasTabbarView: View {
                 .frame(width: 32)
                 .overlay(
                     Circle()
-                        .stroke(viewModel.currentMode == .palette ? Color.PaletteColors.greenPalette : Color.SupportColors.supportIconBorder, lineWidth: 1)
+                        .stroke(viewModel.currentMode == .palette ? Color.PaletteColors.orangePalette : Color.SupportColors.supportIconBorder, lineWidth: 1)
                 )
         }
         .onChange(of: viewModel.selectedColor) {

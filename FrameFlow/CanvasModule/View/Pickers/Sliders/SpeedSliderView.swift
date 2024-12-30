@@ -77,8 +77,8 @@ struct SpeedSliderOverlay: View {
         .frame(height: 40)
         .frame(maxWidth: .infinity)
         
-        .tint(Color.PaletteColors.greenPalette)
-        .foregroundColor(Color.PaletteColors.greenPalette)
+        .tint(Color.PaletteColors.orangePalette)
+        .foregroundColor(Color.PaletteColors.orangePalette)
         .buttonStyle(.bordered)
         .padding([.horizontal, .bottom])
     }
