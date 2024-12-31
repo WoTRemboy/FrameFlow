@@ -27,7 +27,7 @@ struct CanvasHeaderView: View {
             
             if !viewModel.isAnimating {
                 Spacer()
-                binNewStory
+                shareLayersSettings
             }
         }
     }
@@ -64,7 +64,7 @@ struct CanvasHeaderView: View {
     // MARK: - Layer Management Controls
     
     /// Contains buttons for managing layers: delete current layer, add a new layer, and open layer sheet.
-    private var binNewStory: some View {
+    private var shareLayersSettings: some View {
         HStack(spacing: 16) {
             // Button to share animation as a GIF
             Button {
@@ -89,13 +89,11 @@ struct CanvasHeaderView: View {
             
             // Change animation speed overlay button
             // Button to adjust animation speed
-            Button {
-                viewModel.toggleSpeedOverlay()
-            } label: {
-                Image.Header.Modifiers.speed
+            NavigationLink(destination: SettingsView().environmentObject(SettingsViewModel())) {
+                Image.Header.Modifiers.settings
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 27)
+                    .frame(height: 24)
             }
         }
     }

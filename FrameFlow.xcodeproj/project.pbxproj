@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		635FEF172D2430EB007FFBBA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FEF162D2430E8007FFBBA /* SettingsView.swift */; };
+		635FEF1A2D243107007FFBBA /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FEF192D243103007FFBBA /* SettingsViewModel.swift */; };
+		635FEF1C2D24311A007FFBBA /* LinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FEF1B2D243118007FFBBA /* LinkRow.swift */; };
 		637B9CD12D16E7A100FBDAC4 /* GenerateFramesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */; };
 		637B9CD32D1706FA00FBDAC4 /* GenerateParamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */; };
 		63B2AF1D2D184BBC0059E03C /* CreatingGIFOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2AF1C2D184BB00059E03C /* CreatingGIFOverlay.swift */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		63299F652CCFCA23002609CB /* FrameFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		635FEF162D2430E8007FFBBA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		635FEF192D243103007FFBBA /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		635FEF1B2D243118007FFBBA /* LinkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkRow.swift; sourceTree = "<group>"; };
 		6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrameFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		637B9CD02D16E79600FBDAC4 /* GenerateFramesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateFramesViewModel.swift; sourceTree = "<group>"; };
 		637B9CD22D1706F000FBDAC4 /* GenerateParamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateParamsView.swift; sourceTree = "<group>"; };
@@ -143,6 +149,32 @@
 				6374328A2CD8F8E900495572 /* FrameFlowTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		635FEF142D2430D6007FFBBA /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				635FEF152D2430E0007FFBBA /* View */,
+				635FEF182D2430F8007FFBBA /* ViewModel */,
+			);
+			path = SettingsModule;
+			sourceTree = "<group>";
+		};
+		635FEF152D2430E0007FFBBA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				635FEF162D2430E8007FFBBA /* SettingsView.swift */,
+				635FEF1B2D243118007FFBBA /* LinkRow.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		635FEF182D2430F8007FFBBA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				635FEF192D243103007FFBBA /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		63B2AF182D1838DA0059E03C /* ColorsPickers */ = {
@@ -354,6 +386,7 @@
 				63CD35642D084AFC00067343 /* Application */,
 				63CD35932D084AFC00067343 /* OpeningModule */,
 				63CD35842D084AFC00067343 /* CanvasModule */,
+				635FEF142D2430D6007FFBBA /* SettingsModule */,
 				63CD358A2D084AFC00067343 /* Extensions */,
 				63CD35972D084AFC00067343 /* SupportFiles */,
 				63CD35952D084AFC00067343 /* Preview Content */,
@@ -487,10 +520,13 @@
 				63CD35A22D084AFC00067343 /* CanvasTabbarView.swift in Sources */,
 				63CD35A32D084AFC00067343 /* CanvasView.swift in Sources */,
 				637B9CD32D1706FA00FBDAC4 /* GenerateParamsView.swift in Sources */,
+				635FEF1C2D24311A007FFBBA /* LinkRow.swift in Sources */,
 				63B2AF1D2D184BBC0059E03C /* CreatingGIFOverlay.swift in Sources */,
 				63CD35A42D084AFC00067343 /* ColorPaletteView.swift in Sources */,
+				635FEF172D2430EB007FFBBA /* SettingsView.swift in Sources */,
 				63CD35A52D084AFC00067343 /* ColorPickerShortView.swift in Sources */,
 				63CD35A62D084AFC00067343 /* ShapeHeightSliderView.swift in Sources */,
+				635FEF1A2D243107007FFBBA /* SettingsViewModel.swift in Sources */,
 				63CD35A72D084AFC00067343 /* ShapesPickerView.swift in Sources */,
 				63CD35A82D084AFC00067343 /* SpeedSliderView.swift in Sources */,
 				63CD35A92D084AFC00067343 /* WidthSliderView.swift in Sources */,
