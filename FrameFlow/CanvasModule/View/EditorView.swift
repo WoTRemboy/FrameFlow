@@ -17,7 +17,7 @@ struct EditorView: View {
     
     internal var body: some View {
         NavigationStack {
-            ZStack(alignment: .bottom) {
+            ZStack(alignment: .bottomTrailing) {
                 background
                     .ignoresSafeArea()
                 VStack {
@@ -55,10 +55,12 @@ struct EditorView: View {
                         WidthSliderView()
                     }
                     .padding(.bottom, hasNotch() ? 110 : 65)
+                    .padding(.trailing)
                     .zIndex(1)
                 } else if viewModel.showShapePicker {
                     ShapesPickerView()
                         .padding(.bottom, hasNotch() ? 110 : 65)
+                        .padding(.trailing)
                         .zIndex(1)
                 }
             }
