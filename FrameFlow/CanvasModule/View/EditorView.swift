@@ -30,11 +30,6 @@ struct EditorView: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, hasNotch() ? 60 : 16)
                 
-                // Overlay for adjusting animation speed
-                if viewModel.isSpeedOverlayVisible {
-                    speedSlider
-                }
-                
                 // Overlay for generate parameters
                 if viewModel.isGenerateParamsVisible {
                     generateParams
@@ -101,27 +96,6 @@ struct EditorView: View {
                 )
         }
         .padding(.vertical)
-    }
-    
-    // MARK: - Speed Slider Overlay
-    
-    /// An overlay to adjust animation speed with a tap-to-dismiss background.
-    private var speedSlider: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        viewModel.isSpeedOverlayVisible = false
-                    }
-                }
-            VStack {
-                Spacer()
-                SpeedSliderOverlay()
-                Spacer()
-            }
-        }
-        .zIndex(1)
     }
     
     // MARK: - Generate Params Overlay

@@ -883,6 +883,23 @@
         }
       }
     },
+    "SettingsCancel" : {
+      "comment" : "Cancel",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        }
+      }
+    },
     "SettingsContact" : {
       "comment" : "Contact",
       "localizations" : {
@@ -934,24 +951,41 @@
         }
       }
     },
-    "SettingsLanguage" : {
-      "comment" : "Language",
+    "SettingsLanguageAlertContent" : {
+      "comment" : "Select the language you want in Settings.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Language"
+            "value" : "Select the language you want in Settings."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Язык"
+            "value" : "Выберите нужный язык в настройках."
           }
         }
       }
     },
-    "SettingsLanguageContent" : {
+    "SettingsLanguageAlertTitle" : {
+      "comment" : "Change language",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change language"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сменить язык"
+          }
+        }
+      }
+    },
+    "SettingsLanguageDetails" : {
       "comment" : "English",
       "localizations" : {
         "en" : {
@@ -968,19 +1002,36 @@
         }
       }
     },
+    "SettingsLanguageTitle" : {
+      "comment" : "Language",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
+          }
+        }
+      }
+    },
     "SettingsSpeed" : {
       "comment" : "Animation Speed",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animation Speed"
+            "value" : "Frame Duration"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Скорость анимации"
+            "value" : "Длительность кадра"
           }
         }
       }

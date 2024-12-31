@@ -9,11 +9,34 @@ import Foundation
 import SwiftUI
 
 final class SettingsViewModel: ObservableObject {
+
+    @Published internal var showingLanguageAlert: Bool = false
+    @Published internal var showingSpeedOverlay: Bool = false
     
     @Published private(set) var version: String = String()
     
-    internal func dataUpdate() {
+    @AppStorage(Texts.UserDefaults.animationSpeed) var animationSpeed: Double = 0.1
+    @Published internal var speed: Double
+    
+    init(speed: Double) {
+        self.speed = speed
         versionDetect()
+    }
+    
+    internal func showSpeedOverlayToggle() {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            showingSpeedOverlay.toggle()
+        }
+    }
+    
+    internal func showLanguageAlertToggle() {
+        showingLanguageAlert.toggle()
+    }
+    
+    internal func setSpeed(to value: Double) {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            animationSpeed = value
+        }
     }
     
     private func versionDetect() {

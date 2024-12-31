@@ -165,6 +165,7 @@
 			children = (
 				635FEF162D2430E8007FFBBA /* SettingsView.swift */,
 				635FEF1B2D243118007FFBBA /* LinkRow.swift */,
+				63CD35722D084AFC00067343 /* SpeedSliderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,7 +199,6 @@
 		63B2AF1A2D1839050059E03C /* Sliders */ = {
 			isa = PBXGroup;
 			children = (
-				63CD35722D084AFC00067343 /* SpeedSliderView.swift */,
 				63CD35732D084AFC00067343 /* WidthSliderView.swift */,
 			);
 			path = Sliders;

@@ -89,7 +89,7 @@ struct CanvasHeaderView: View {
             
             // Change animation speed overlay button
             // Button to adjust animation speed
-            NavigationLink(destination: SettingsView().environmentObject(SettingsViewModel())) {
+            NavigationLink(destination: SettingsView().environmentObject(SettingsViewModel(speed: viewModel.animationSpeed))) {
                 Image.Header.Modifiers.settings
                     .resizable()
                     .scaledToFit()

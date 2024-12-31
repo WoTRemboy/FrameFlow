@@ -13,14 +13,18 @@ struct SettingsView: View {
     
     internal var body: some View {
         NavigationStack {
-            Form {
-                aboutAppSection
-                content
-                application
-                contact
-            }
-            .onAppear {
-                viewModel.dataUpdate()
+            ZStack {
+                Form {
+                    aboutAppSection
+                    content
+                    application
+                    contact
+                }
+                
+                // Overlay for adjusting animation speed
+                if viewModel.showingSpeedOverlay {
+                    speedSlider
+                }
             }
             .scrollIndicators(.hidden)
             .navigationTitle(Texts.Settings.title)
@@ -52,13 +56,54 @@ struct SettingsView: View {
     
     private var content: some View {
         Section(Texts.Settings.content) {
-            LinkRow(title: Texts.Settings.speed, image: Image.Settings.speed, details: "0.1", chevron: true)
+            Button {
+                viewModel.showSpeedOverlayToggle()
+            } label: {
+                LinkRow(title: Texts.Settings.speed,
+                        image: Image.Settings.speed,
+                        details: String(format: "%.2f", viewModel.animationSpeed),
+                        chevron: true)
+            }
         }
+    }
+    
+    /// An overlay to adjust animation speed with a tap-to-dismiss background.
+    private var speedSlider: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewModel.showSpeedOverlayToggle()
+                    }
+                }
+            VStack {
+                Spacer()
+                SpeedSliderOverlay()
+                Spacer()
+            }
+        }
+        .zIndex(1)
     }
     
     private var application: some View {
         Section(Texts.Settings.application) {
-            LinkRow(title: Texts.Settings.language, image: Image.Settings.language, details: Texts.Settings.languageContent, chevron: true)
+            Button {
+                viewModel.showLanguageAlertToggle()
+            } label: {
+                LinkRow(title: Texts.Settings.Language.title, image: Image.Settings.language, details: Texts.Settings.Language.details, chevron: true)
+            }
+            .alert(isPresented: $viewModel.showingLanguageAlert) {
+                Alert(
+                    title: Text(Texts.Settings.Language.alertTitle),
+                    message: Text(Texts.Settings.Language.alertContent),
+                    primaryButton: .default(Text(Texts.Settings.title)) {
+                        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                        UIApplication.shared.open(url)
+                    },
+                    secondaryButton: .cancel(Text(Texts.Settings.cancel))
+                )
+            }
             
             LinkRow(title: Texts.Settings.Appearance.title, image: Image.Settings.appearance, details: "System", chevron: true)
         }
@@ -75,5 +120,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
-        .environmentObject(SettingsViewModel())
+        .environmentObject(SettingsViewModel(speed: 0.1))
 }

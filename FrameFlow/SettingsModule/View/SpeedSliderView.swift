@@ -11,7 +11,7 @@ import SwiftUI
 struct SpeedSliderOverlay: View {
     
     /// The view model that controls the state and actions of the canvas.
-    @EnvironmentObject private var viewModel: CanvasViewModel
+    @EnvironmentObject private var viewModel: SettingsViewModel
 
     // MARK: - Body
     
@@ -46,7 +46,7 @@ struct SpeedSliderOverlay: View {
     
     /// Shows the current animation speed in a formatted string, updating with slider changes.
     private var units: some View {
-        Text("\(String(format: "%.2f", viewModel.animationSpeed)) \(Texts.AnimationOverlay.units)")
+        Text("\(String(format: "%.2f", viewModel.speed)) \(Texts.AnimationOverlay.units)")
             .font(.subhead())
     }
     
@@ -54,7 +54,7 @@ struct SpeedSliderOverlay: View {
     
     /// A slider for setting animation speed, with a custom track image and step increments.
     private var slider: some View {
-        Slider(value: $viewModel.animationSpeed, in: 0.01...1.0, step: 0.01)
+        Slider(value: $viewModel.speed, in: 0.01...1.0, step: 0.01)
             .background(
                 Image.Panel.Palette.sliderLine
                     .resizable()
@@ -69,7 +69,8 @@ struct SpeedSliderOverlay: View {
     /// A button that toggles the visibility of the overlay.
     private var doneButton: some View {
         Button {
-            viewModel.toggleSpeedOverlay()
+            viewModel.setSpeed(to: viewModel.speed)
+            viewModel.showSpeedOverlayToggle()
         } label: {
             Text(Texts.AnimationOverlay.done)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -88,5 +89,5 @@ struct SpeedSliderOverlay: View {
 
 #Preview {
     SpeedSliderOverlay()
-        .environmentObject(CanvasViewModel())
+        .environmentObject(SettingsViewModel(speed: 0.1))
 }
