@@ -123,5 +123,6 @@ final class Texts {
     enum UserDefaults {
         static let firstLaunch = "firstLaunch"
         static let animationSpeed = "animationSpeed"
+        static let theme = "userTheme"
     }
 }

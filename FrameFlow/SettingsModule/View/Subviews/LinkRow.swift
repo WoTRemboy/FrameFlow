@@ -10,16 +10,18 @@ import SwiftUI
 struct LinkRow: View {
     
     private let title: String
-    private let image: Image
+    private let image: Image?
     private let details: String?
     private let chevron: Bool
+    private let check: Bool
     
-    init(title: String, image: Image,
-         details: String? = nil, chevron: Bool = false) {
+    init(title: String, image: Image? = nil,
+         details: String? = nil, chevron: Bool = false, check: Bool = false) {
         self.title = title
         self.image = image
         self.details = details
         self.chevron = chevron
+        self.check = check
     }
     
     internal var body: some View {
@@ -40,16 +42,24 @@ struct LinkRow: View {
                     .fontWeight(.bold)
                     .foregroundStyle(Color.LabelColors.labelDetails)
             }
+            
+            if check {
+                Image(systemName: "checkmark")
+                    .font(.regularBody())
+                    .foregroundStyle(Color.accentColor)
+            }
         }
     }
     
     private var leftLabel: some View {
         HStack(alignment: .center, spacing: 16) {
-            image
-                .resizable()
-                .scaledToFit()
-                .clipShape(.buttonBorder)
-                .frame(width: 30)
+            if let image {
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 30)
+            }
             
             Text(title)
                 .font(.regularBody())
@@ -60,5 +70,5 @@ struct LinkRow: View {
 
 
 #Preview {
-    LinkRow(title: "Title", image: Image.Settings.appearance, details: "hi", chevron: true)
+    LinkRow(title: "Title", image: Image.Settings.appearance, details: "hi", chevron: true, check: true)
 }

@@ -105,7 +105,9 @@ struct SettingsView: View {
                 )
             }
             
-            LinkRow(title: Texts.Settings.Appearance.title, image: Image.Settings.appearance, details: "System", chevron: true)
+            NavigationLink(destination: AppearanceView().environmentObject(viewModel)) {
+                LinkRow(title: Texts.Settings.Appearance.title, image: Image.Settings.appearance, details: viewModel.userTheme.name)
+            }
         }
     }
     

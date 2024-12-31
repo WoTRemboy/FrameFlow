@@ -14,9 +14,10 @@ final class SettingsViewModel: ObservableObject {
     @Published internal var showingSpeedOverlay: Bool = false
     
     @Published private(set) var version: String = String()
+    @Published internal var speed: Double
     
     @AppStorage(Texts.UserDefaults.animationSpeed) var animationSpeed: Double = 0.1
-    @Published internal var speed: Double
+    @AppStorage(Texts.UserDefaults.theme) var userTheme: Theme = .systemDefault
     
     init(speed: Double) {
         self.speed = speed
@@ -36,6 +37,19 @@ final class SettingsViewModel: ObservableObject {
     internal func setSpeed(to value: Double) {
         withAnimation(.easeInOut(duration: 0.2)) {
             animationSpeed = value
+        }
+    }
+    
+    internal func changeTheme(theme: Theme) {
+        self.userTheme = theme
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                    UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                        window.overrideUserInterfaceStyle = theme.userInterfaceStyle
+                    })
+                }
+            }
         }
     }
     
