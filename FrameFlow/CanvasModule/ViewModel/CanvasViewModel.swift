@@ -34,7 +34,7 @@ final class CanvasViewModel: ObservableObject {
     /// Indicates whether an animation is currently playing.
     @Published internal var isAnimating = false
     /// Controls the speed of animation playback.
-    @Published internal var animationSpeed: Double = 0.1
+    @AppStorage(Texts.UserDefaults.animationSpeed) var animationSpeed: Double = 0.1
     
     // MARK: - Drawing Properties
     
@@ -81,8 +81,6 @@ final class CanvasViewModel: ObservableObject {
     @Published internal var showShapePicker: Bool = false
     /// Indicates if the layer selection sheet is currently presented.
     @Published internal var isLayerSheetPresented: Bool = false
-    /// Indicates if the speed overlay for animation is currently visible.
-    @Published internal var isSpeedOverlayVisible: Bool = false
     /// Indicates if the generation params overlay is currently visible.
     @Published internal var isGenerateParamsVisible: Bool = false
     /// Indicates if the creating gif overlay is currently visible.
@@ -117,13 +115,6 @@ final class CanvasViewModel: ObservableObject {
     /// Toggles the visibility of the layer sheet.
     internal func toggleLayerSheet() {
         isLayerSheetPresented.toggle()
-    }
-    
-    /// Toggles the visibility of the animation speed overlay with an animation.
-    internal func toggleSpeedOverlay() {
-        withAnimation(.easeInOut(duration: 0.2)) {
-            isSpeedOverlayVisible.toggle()
-        }
     }
     
     /// Toggles the visibility of the generation params overlay with an animation.

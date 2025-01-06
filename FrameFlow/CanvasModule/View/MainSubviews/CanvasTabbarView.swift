@@ -20,15 +20,19 @@ struct CanvasTabbarView: View {
         HStack {
             // Show tool buttons only when animation is inactive
             if !viewModel.isAnimating {
-                generateButton
+                layerControl
                 Spacer()
                 drawingInstruments
-                
-                Spacer()
-                shareButton
             }
         }
         .frame(height: 32)
+    }
+    
+    private var layerControl: some View {
+        HStack(spacing: 16) {
+            addNewLayerButton
+            deleteLayerButton
+        }
     }
     
     private var drawingInstruments: some View {
@@ -118,7 +122,7 @@ struct CanvasTabbarView: View {
                 .frame(width: 32)
                 .overlay(
                     Circle()
-                        .stroke(viewModel.currentMode == .palette ? Color.PaletteColors.greenPalette : Color.SupportColors.supportIconBorder, lineWidth: 1)
+                        .stroke(viewModel.currentMode == .palette ? Color.PaletteColors.orangePalette : Color.SupportColors.supportIconBorder, lineWidth: 1)
                 )
         }
         .onChange(of: viewModel.selectedColor) {
@@ -127,29 +131,105 @@ struct CanvasTabbarView: View {
         }
     }
     
-    /// Button to share animation as a GIF
-    private var shareButton: some View {
+    private var addNewLayerButton: some View {
+        // Add a new layer button with a context menu option to duplicate the current layer
         Button {
-            viewModel.shareGIF()
+            withAnimation(.easeInOut(duration: 0.2)) {
+                viewModel.addLayer()
+            }
         } label: {
-            (viewModel.isLayersEmpty() ? Image.TabBar.shareInactive : Image.TabBar.shareActive)
+            Image.Header.Modifiers.filePlus
                 .resizable()
                 .scaledToFit()
-                .frame(width: 16)
-                .padding(.trailing)
+                .frame(height: 32)
         }
-        .disabled(viewModel.isLayersEmpty())
+        .contextMenu {
+            copyMenu
+        }
     }
     
-    private var generateButton: some View {
+    private var deleteLayerButton: some View {
         Button {
-            viewModel.toggleGenerateParams()
+            withAnimation(.easeInOut(duration: 0.2)) {
+                viewModel.deleteCurrentLayer()
+            }
         } label: {
-            Image.TabBar.generate
+            (viewModel.isLayersEmpty() ? Image.Header.Modifiers.binInactive : Image.Header.Modifiers.bin)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 16)
-                .padding(.leading)
+                .frame(height: 32)
+        }
+        .disabled(viewModel.isLayersEmpty())
+        .contextMenu {
+            if !viewModel.isLayersEmpty() {
+                deleteMenu
+            }
+        }
+    }
+    
+    /// Context menu option for deleting all layers.
+    private var deleteMenu: some View {
+        Group {
+            Button {
+                viewModel.deleteCurrentLayer()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.delete)
+                } icon: {
+                    Image.Header.Modifiers.delete
+                }
+
+            }
+            
+            Button {
+                viewModel.deleteAllLayers()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.deleteAll)
+                } icon: {
+                    Image.Header.Modifiers.deleteAll
+                }
+
+            }
+        }
+    }
+    
+    /// Context menu option for creating, duplicating & generations layers.
+    private var copyMenu: some View {
+        Group {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.addLayer()
+                }
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.add)
+                } icon: {
+                    Image.Header.Modifiers.add
+                }
+            }
+            
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    viewModel.duplicateCurrentLayer()
+                }
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.copy)
+                } icon: {
+                    Image.Header.Modifiers.copy
+                }
+            }
+            
+            Button {
+                viewModel.toggleGenerateParams()
+            } label: {
+                Label {
+                    Text(Texts.ContextMenu.generate)
+                } icon: {
+                    Image.Header.Modifiers.generate
+                }
+            }
         }
     }
 }

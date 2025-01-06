@@ -84,9 +84,45 @@ final class Texts {
         static let ok = NSLocalizedString("CreatingGifOk", comment: "OK")
     }
     
+    // MARK: - Settings Texts
+    
+    enum Settings {
+        static let title = NSLocalizedString("SettingsTitle", comment: "Settings")
+        static let cancel = NSLocalizedString("SettingsCancel", comment: "Cancel")
+        
+        static let about = NSLocalizedString("SettingsAbout", comment: "About")
+        static let release = "release"
+        static let appName = NSLocalizedString("SettingsAppName", comment: "Frame Flow")
+        
+        static let content = NSLocalizedString("SettingsContent", comment: "Content")
+        static let speed = NSLocalizedString("SettingsSpeed", comment: "Animation Speed")
+        
+        static let application = NSLocalizedString("SettingsApplication", comment: "Application")
+        
+        static let contact = NSLocalizedString("SettingsContact", comment: "Contact")
+        static let emailTitle = NSLocalizedString("SettingsEmailTitle", comment: "Email")
+        static let emailContent = "contact@avoqode.com"
+        
+        enum Language {
+            static let title = NSLocalizedString("SettingsLanguageTitle", comment: "Language")
+            static let details = NSLocalizedString("SettingsLanguageDetails", comment: "English")
+            static let alertTitle = NSLocalizedString("SettingsLanguageAlertTitle", comment: "Change language")
+            static let alertContent = NSLocalizedString("SettingsLanguageAlertContent", comment: "Select the language you want in Settings.")
+        }
+        
+        enum Appearance {
+            static let title = NSLocalizedString("SettingsAppearanceTitle", comment: "Appearance")
+            static let system = NSLocalizedString("SettingsAppearanceSystem", comment: "System")
+            static let light = NSLocalizedString("SettingsAppearanceLight", comment: "Light")
+            static let dark = NSLocalizedString("SettingsAppearanceDark", comment: "Dark")
+        }
+    }
+    
     // MARK: - UserDefaults Keys
     
     enum UserDefaults {
         static let firstLaunch = "firstLaunch"
+        static let animationSpeed = "animationSpeed"
+        static let theme = "userTheme"
     }
 }

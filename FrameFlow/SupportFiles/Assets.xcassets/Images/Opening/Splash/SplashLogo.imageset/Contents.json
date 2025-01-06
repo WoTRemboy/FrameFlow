@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "SplashLogoLight.svg",
+      "filename" : "SplashLight1.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "SplashLogoDark.svg",
+      "filename" : "SplashDark1.svg",
       "idiom" : "universal"
     }
   ],
