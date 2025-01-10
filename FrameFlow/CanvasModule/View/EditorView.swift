@@ -17,7 +17,7 @@ struct EditorView: View {
     
     internal var body: some View {
         NavigationStack {
-            ZStack(alignment: .bottom) {
+            ZStack(alignment: .bottomTrailing) {
                 background
                     .ignoresSafeArea()
                 VStack {
@@ -29,11 +29,6 @@ struct EditorView: View {
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, hasNotch() ? 60 : 16)
-                
-                // Overlay for adjusting animation speed
-                if viewModel.isSpeedOverlayVisible {
-                    speedSlider
-                }
                 
                 // Overlay for generate parameters
                 if viewModel.isGenerateParamsVisible {
@@ -60,10 +55,12 @@ struct EditorView: View {
                         WidthSliderView()
                     }
                     .padding(.bottom, hasNotch() ? 110 : 65)
+                    .padding(.trailing)
                     .zIndex(1)
                 } else if viewModel.showShapePicker {
                     ShapesPickerView()
                         .padding(.bottom, hasNotch() ? 110 : 65)
+                        .padding(.trailing)
                         .zIndex(1)
                 }
             }
@@ -101,27 +98,6 @@ struct EditorView: View {
                 )
         }
         .padding(.vertical)
-    }
-    
-    // MARK: - Speed Slider Overlay
-    
-    /// An overlay to adjust animation speed with a tap-to-dismiss background.
-    private var speedSlider: some View {
-        ZStack {
-            Color.black.opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        viewModel.isSpeedOverlayVisible = false
-                    }
-                }
-            VStack {
-                Spacer()
-                SpeedSliderOverlay()
-                Spacer()
-            }
-        }
-        .zIndex(1)
     }
     
     // MARK: - Generate Params Overlay
@@ -196,7 +172,7 @@ struct EditorView: View {
         Rectangle()
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             .foregroundStyle(Color.clear)
-            .background(Color.BackColors.backDefault)
+            .background(Color.BackColors.backPrimary)
     }
 }
 

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "PauseActiveLight.svg",
+      "filename" : "StopActiveLight.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "PauseActive 1.svg",
+      "filename" : "StopActiveDark.svg",
       "idiom" : "universal"
     }
   ],

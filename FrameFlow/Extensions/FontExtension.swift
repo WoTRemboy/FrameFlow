@@ -15,8 +15,28 @@ extension Font {
         Font.system(size: 35, weight: .bold)
     }
     
+    static func totalPrice() -> Font? {
+        Font.system(size: 30, weight: .medium)
+    }
+    
+    static func subscriptionTitle() -> Font? {
+        Font.system(size: 25, weight: .semibold)
+    }
+    
     static func segmentTitle() -> Font? {
         Font.system(size: 25, weight: .medium)
+    }
+    
+    static func placeholderTitle() -> Font? {
+        Font.system(size: 22, weight: .bold)
+    }
+    
+    static func ruleTitle() -> Font? {
+        Font.system(size: 22, weight: .medium)
+    }
+    
+    static func emptyCellTitle() -> Font? {
+        Font.system(size: 22, weight: .light)
     }
     
     static func title() -> Font? {
@@ -45,5 +65,9 @@ extension Font {
     
     static func footnote() -> Font? {
         Font.system(size: 13, weight: .medium)
+    }
+    
+    static func lightFootnote() -> Font? {
+        Font.system(size: 13, weight: .light)
     }
 }

@@ -25,6 +25,7 @@ extension Image {
             static let filePlus = Image("FilePlus")
             static let layers = Image("Layers")
             static let speed = Image("Speed")
+            static let settings = Image("Settings")
             
             static let add = Image(systemName: "plus.rectangle.portrait")
             static let copy = Image(systemName: "rectangle.portrait.on.rectangle.portrait")
@@ -39,6 +40,8 @@ extension Image {
             static let pauseInactive = Image("PauseInactive")
             static let playActive = Image("PlayActive")
             static let playInactive = Image("PlayInactive")
+            static let generateActive = Image("GenerateActive")
+            static let generateInactive = Image("GenerateInactive")
         }
     }
     
@@ -83,7 +86,7 @@ extension Image {
     // MARK: - Canvas & Storyboard Images
     
     enum Canvas {
-        static let canvas = Image("Canvas")
+        static let canvas = Image("Canvas1")
     }
     
     enum LayerSheet {
@@ -107,5 +110,16 @@ extension Image {
             static let share = Image("SplashShareGif")
             static let context = Image("SplashContextMenu")
         }
+    }
+    
+    // MARK: - Settings Images
+    
+    enum Settings {
+        static let about = Image("AboutAppIcon")
+        static let canvas = Image("CanvasSetting")
+        static let speed = Image("SpeedSetting")
+        static let appearance = Image("AppearanceSetting")
+        static let language = Image("LanguageSetting")
+        static let email = Image("EmailAbout")
     }
 }

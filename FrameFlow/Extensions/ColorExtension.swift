@@ -37,6 +37,7 @@ extension Color {
         static let blackPalette = Color("BlackPalette")
         static let bluePalette = Color("BluePalette")
         static let greenPalette = Color("GreenPalette")
+        static let orangePalette = Color("OrangePalette")
         static let greyPalette = Color("GreyPalette")
         static let redPalette = Color("RedPalette")
         static let whitePalette = Color("WhitePalette")
