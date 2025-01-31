@@ -7,10 +7,17 @@
 
 import SwiftUI
 
+/// A view presenting the application settings, including app information, speed adjustment, language options, and appearance.
 struct SettingsView: View {
     
+    // MARK: - Properties
+    
+    /// The shared settings view model managing user preferences.
     @EnvironmentObject private var viewModel: SettingsViewModel
     
+    // MARK: - Body
+    
+    /// Main content of the settings screen, structured into sections.
     internal var body: some View {
         NavigationStack {
             ZStack {
@@ -32,6 +39,9 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: - About App Section
+    
+    /// Displays basic information about the application, such as name and version.
     private var aboutAppSection: some View {
         Section(Texts.Settings.about) {
             HStack(spacing: 16) {
@@ -54,6 +64,9 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: - Content Section
+    
+    /// Settings related to content and functionality, such as animation speed.
     private var content: some View {
         Section(Texts.Settings.content) {
             Button {
@@ -66,6 +79,8 @@ struct SettingsView: View {
             }
         }
     }
+    
+    // MARK: - Speed Slider Overlay
     
     /// An overlay to adjust animation speed with a tap-to-dismiss background.
     private var speedSlider: some View {
@@ -86,6 +101,9 @@ struct SettingsView: View {
         .zIndex(1)
     }
     
+    // MARK: - Application Section
+    
+    /// Settings related to the application, such as language and appearance.
     private var application: some View {
         Section(Texts.Settings.application) {
             Button {
@@ -111,6 +129,9 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: - Contact Section
+    
+    /// A section for user feedback or inquiries, providing email contact details.
     private var contact: some View {
         Section(Texts.Settings.contact) {
             Link(destination: URL(string: "mailto:\(Texts.Settings.emailContent)")!, label: {
@@ -119,6 +140,8 @@ struct SettingsView: View {
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     SettingsView()

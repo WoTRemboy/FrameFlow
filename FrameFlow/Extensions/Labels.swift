@@ -101,7 +101,7 @@ final class Texts {
         
         static let contact = NSLocalizedString("SettingsContact", comment: "Contact")
         static let emailTitle = NSLocalizedString("SettingsEmailTitle", comment: "Email")
-        static let emailContent = "contact@avoqode.com"
+        static let emailContent = "tverpokhdeb@icloud.com"
         
         enum Language {
             static let title = NSLocalizedString("SettingsLanguageTitle", comment: "Language")
