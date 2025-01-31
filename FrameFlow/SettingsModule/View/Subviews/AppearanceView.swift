@@ -7,11 +7,21 @@
 
 import SwiftUI
 
+/// A view providing theme selection options (e.g., light, dark, or system default).
+///
+/// Users can pick a theme to override or follow the system’s appearance.
 struct AppearanceView: View {
     
+    // MARK: - Properties
+    
+    /// The current color scheme from the environment (used to display accent colors correctly).
     @Environment(\.colorScheme) private var scheme
+    /// The shared settings view model that manages the user’s theme preference.
     @EnvironmentObject private var viewModel: SettingsViewModel
     
+    // MARK: - Body
+    
+    /// The main content of the appearance settings, rendered in a navigation stack.
     internal var body: some View {
         NavigationStack {
             themePicker
@@ -21,6 +31,9 @@ struct AppearanceView: View {
         }
     }
     
+    // MARK: - Theme Picker
+    
+    /// A form presenting all available `Theme` options, allowing the user to select one.
     private var themePicker: some View {
         Form {
             ForEach(Theme.allCases, id: \.self) { theme in
@@ -33,6 +46,8 @@ struct AppearanceView: View {
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     AppearanceView()

@@ -7,11 +7,18 @@
 
 import SwiftUI
 
+/// Represents the available application themes (system default, light, and dark).
+///
+/// Changing the theme updates the app’s UI style accordingly.
 enum Theme: String, CaseIterable {
+    /// The system default theme, allowing iOS to manage light or dark mode automatically.
     case systemDefault = "Default"
+    /// The light theme, forcing a bright UI regardless of system preferences.
     case light = "Light"
+    /// The dark theme, forcing a dimmed UI regardless of system preferences.
     case dark = "Dark"
     
+    /// A localized string name for each theme to be displayed in the UI.
     internal var name: String {
         switch self {
         case .systemDefault:
@@ -23,6 +30,9 @@ enum Theme: String, CaseIterable {
         }
     }
     
+    /// Determines a representative color for the theme based on the current `ColorScheme`.
+    /// - Parameter scheme: The current `ColorScheme` (light or dark).
+    /// - Returns: A `Color` used as a highlight or accent for the theme.
     internal func color(_ scheme: ColorScheme) -> Color {
         switch self {
         case .systemDefault:
@@ -34,6 +44,9 @@ enum Theme: String, CaseIterable {
         }
     }
     
+    /// Maps the theme to the corresponding `UIUserInterfaceStyle`.
+    ///
+    /// Used when needs to override the entire app's appearance programmatically.
     internal var userInterfaceStyle: UIUserInterfaceStyle {
             switch self {
             case .systemDefault:
@@ -45,6 +58,9 @@ enum Theme: String, CaseIterable {
             }
         }
     
+    /// Maps the theme to a SwiftUI `ColorScheme`, if applicable.
+    ///
+    /// - Returns: The corresponding `ColorScheme` for the theme, or `nil` if using system default.
     internal var colorScheme: ColorScheme? {
         switch self {
         case .systemDefault:
