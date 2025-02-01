@@ -20,7 +20,7 @@ final class CanvasViewModel: ObservableObject {
     /// Tracks the last layer index for reference.
     @Published internal var lastLayerIndex: Int = 0
     /// The size of the canvas, which determines the rendering bounds.
-    @Published internal var canvasSize: CGSize = CGSize(width: 0, height: 0)
+    @Published internal var canvasSize: CGSize = CGSize(width: 300, height: 600)
     
     // MARK: - Shape Properties
         
