@@ -8,26 +8,30 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+
 extension CanvasViewModel {
+    /// A reference to the GIF creation task, allowing it to be cancelled at any time.
+    private var gifTask: Task<Void, Never>? {
+        get { _gifTask }
+        set { _gifTask = newValue }
+    }
     
-    // MARK: - Create GIF from Layers Incrementally
-    
-    /// Creates a GIF from a series of canvas layers and saves it to a temporary file location.
-    /// The process is optimized to reduce memory usage by incrementally processing frames.
+    /// Asynchronously creates a GIF from an array of layers.
+    ///
     /// - Parameters:
-    ///   - layers: The array of layers to convert into GIF frames.
-    ///   - frameDelay: The delay time (in seconds) between frames in the GIF.
-    ///   - completion: A closure called upon completion with the URL of the GIF file, or `nil` if creation failed.
-    @MainActor private func createGIF(from layers: [[Line]], frameDelay: Double, completion: @escaping (URL?) -> Void) {
-        
-        // GIF properties: loop count set to 0 (infinite loop)
+    ///   - layers: An array of layers (each layer is an array of lines) to convert into GIF frames.
+    ///   - frameDelay: The delay between frames in the GIF.
+    /// - Returns: A URL pointing to the temporary file containing the created GIF.
+    /// - Throws: An error if the destination cannot be created or if finalizing the GIF fails.
+    @MainActor
+    private func createGIF(from layers: [[Line]], frameDelay: Double) async throws -> URL {
+        // GIF properties
         let fileProperties: [String: Any] = [
             kCGImagePropertyGIFDictionary as String: [
                 kCGImagePropertyGIFLoopCount as String: 0
             ]
         ]
-        
-        // Frame delay property for each frame in the GIF
+        // Frame properties (delay between frames)
         let frameProperties: [String: Any] = [
             kCGImagePropertyGIFDictionary as String: [
                 kCGImagePropertyGIFDelayTime as String: frameDelay
@@ -37,65 +41,105 @@ extension CanvasViewModel {
         // Temporary URL for saving the GIF file
         let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("FrameFlow.gif")
         
-        guard let destination = CGImageDestinationCreateWithURL(tempURL as CFURL, UTType.gif.identifier as CFString, layers.count, nil) else {
-            completion(nil)
+        // Create a destination for writing the GIF
+        guard let destination = CGImageDestinationCreateWithURL(
+            tempURL as CFURL,
+            UTType.gif.identifier as CFString,
+            layers.count,
+            nil) else {
+            throw GIFCreationError.destinationCreationFailed
+        }
+        CGImageDestinationSetProperties(destination, fileProperties as CFDictionary)
+        
+        // Process each layer (frame) sequentially
+        for layer in layers {
+            // Check if the task has been cancelled
+            try Task.checkCancellation()
+            
+            // Use autoreleasepool to reduce memory usage
+            autoreleasepool {
+                // Render the frame content using SwiftUI's ImageRenderer
+                let renderer = ImageRenderer(content: GIFShareView(lines: layer,
+                                                                   width: self.canvasSize.width,
+                                                                   height: self.canvasSize.height))
+                renderer.scale = UIScreen.main.scale
+                if let cgImage = renderer.cgImage {
+                    CGImageDestinationAddImage(destination,
+                                               cgImage,
+                                               frameProperties as CFDictionary)
+                }
+            }
+            // Yield to allow other tasks to run and check for cancellation
+            await Task.yield()
+        }
+        
+        // Finalize the GIF creation process
+        if CGImageDestinationFinalize(destination) {
+            return tempURL
+        } else {
+            throw GIFCreationError.finalizationFailed
+        }
+    }
+    
+    /// Initiates GIF creation and presents the standard share sheet upon completion.
+    ///
+    /// If the number of layers exceeds a preset limit, a warning overlay is displayed.
+    @MainActor
+    func shareGIF() {
+        // Limit the number of layers to prevent performance issues
+        guard layers.count < 102 else {
+            toggleGIFWarning()
             return
         }
         
-        // Set GIF properties (e.g., looping behavior)
-        CGImageDestinationSetProperties(destination, fileProperties as CFDictionary)
-        let renderGroup = DispatchGroup()
+        // Show the overlay indicating that the GIF is being created
+        toggleCreatingGIF()
         
-        // Process each layer incrementally
-        for layer in layers {
-            DispatchQueue.main.async {
-                autoreleasepool {
-                    let renderer = ImageRenderer(content: GIFShareView(lines: layer, width: self.canvasSize.width, height: self.canvasSize.height))
-                    renderer.scale = UIScreen.main.scale
-                    if let cgImage = renderer.cgImage {
-                        CGImageDestinationAddImage(destination, cgImage, frameProperties as CFDictionary)
-                    }
+        // Cancel any previously running GIF creation task
+        gifTask?.cancel()
+        
+        gifTask = Task {
+            do {
+                // Attempt to create the GIF
+                let gifURL = try await createGIF(from: layers, frameDelay: animationSpeed)
+                // Check for cancellation
+                try Task.checkCancellation()
+                
+                // Hide the GIF creation overlay
+                toggleCreatingGIF()
+                
+                // Present the share sheet to share the created GIF
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootViewController = windowScene.windows.first?.rootViewController {
+                    let activityVC = UIActivityViewController(activityItems: [gifURL], applicationActivities: nil)
+                    rootViewController.present(activityVC, animated: true)
                 }
-            }
-        }
-        
-        // Finalize GIF creation after all frames are processed
-        renderGroup.notify(queue: .main) {
-            if CGImageDestinationFinalize(destination) {
-                completion(tempURL)
-            } else {
-                completion(nil)
+            } catch {
+                if (error as? CancellationError) != nil {
+                    print("GIF creation was cancelled.")
+                } else {
+                    print("Error during GIF creation: \(error)")
+                }
+                
+                // Hide the overlay regardless of the error
+                toggleCreatingGIF()
             }
         }
     }
     
-    // MARK: - Share GIF
-    
-    /// Creates a GIF from the current layers and presents a share sheet for sharing the GIF file.
-    @MainActor internal func shareGIF() {
-        guard layers.count < 102 else {
-            isCreatingGIFWarningVisible = true
-            return
-        }
-        // Shows the creating gif overlay
+    /// Cancels the ongoing GIF creation process.
+    ///
+    /// This method cancels the current GIF creation task and hides the creation overlay.
+    @MainActor
+    internal func cancelGIFCreation() {
+        gifTask?.cancel()
+        gifTask = nil
         toggleCreatingGIF()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.createGIF(from: self.layers,
-                           frameDelay: self.animationSpeed) { url in
-                guard let url = url else { return }
-                
-                DispatchQueue.main.async {
-                    // Hides the creating gif overlay
-                    self.toggleCreatingGIF()
-                    // Retrieve the root view controller to present the share sheet
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                       let rootViewController = windowScene.windows.first?.rootViewController {
-                        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-                        rootViewController.present(activityVC, animated: true, completion: nil)
-                    }
-                }
-            }
-        }
+    }
+    
+    /// Errors that may occur during GIF creation.
+    enum GIFCreationError: Error {
+        case destinationCreationFailed
+        case finalizationFailed
     }
 }

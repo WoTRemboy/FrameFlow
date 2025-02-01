@@ -97,6 +97,9 @@ final class CanvasViewModel: ObservableObject {
     
     /// Stores a cancellable reference for controlling animations.
     internal var animationCancellable: AnyCancellable?
+    /// Stores a cancellable task for controlling gif creation.
+    internal var _gifTask: Task<Void, Never>? = nil
+
     
     // MARK: - Computed Property
     

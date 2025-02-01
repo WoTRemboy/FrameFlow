@@ -82,6 +82,7 @@ final class Texts {
         static let notCreatedGif = NSLocalizedString("CreatingGifNotCreateGif", comment: "Restriction")
         static let notCreatedDescription = NSLocalizedString("CreatingGifNotCreatedDescription", comment: "100 frames is maximum.")
         static let ok = NSLocalizedString("CreatingGifOk", comment: "OK")
+        static let cancel = NSLocalizedString("CreatingGifCancel", comment: "Cancel")
     }
     
     // MARK: - Settings Texts
