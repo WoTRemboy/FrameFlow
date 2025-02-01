@@ -17,7 +17,7 @@ struct CreatingGIFOverlay: View {
     
     /// The main content of the overlay.
     internal var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             content
         }
         .frame(width: 300)
@@ -44,6 +44,25 @@ struct CreatingGIFOverlay: View {
                 .padding([.leading, .trailing])
         }
         .padding([.top, .bottom])
+    }
+    
+    // MARK: - Cancel Button
+    
+    /// A button that toggles the visibility of the overlay.
+    private var cancelButton: some View {
+        Button {
+            viewModel.cancelGIFCreation()
+        } label: {
+            Text(Texts.CreatingGif.cancel)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        }
+        .frame(height: 40)
+        .frame(maxWidth: .infinity)
+        
+        .tint(Color.PaletteColors.redPalette)
+        .foregroundColor(Color.PaletteColors.redPalette)
+        .buttonStyle(.bordered)
+        .padding([.horizontal, .bottom])
     }
 }
 

@@ -271,6 +271,23 @@
         }
       }
     },
+    "CreatingGifCancel" : {
+      "comment" : "Cancel",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        }
+      }
+    },
     "CreatingGifNotCreatedDescription" : {
       "comment" : "100 frames is maximum.",
       "localizations" : {
