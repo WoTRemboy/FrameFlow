@@ -5,6 +5,8 @@
 
 **FrameFlow** is an intuitive iOS application that empowers users to create frame-by-frame animations directly on their device. It allows users to sketch, animate, and share creations seamlessly with support for layers, custom tools, and real-time previews. With **FrameFlow**, creating frame-by-frame animations becomes accessible, fun, and professional.
 
+Find it in [TestFlight](https://testflight.apple.com/join/JnESsmYu). Full Demo available on my [Google Drive](https://drive.google.com/file/d/1Yg0PAA3iBzdOuVMtC8cIpsb5S-7Q0oLw/view).
+
 ## Table of Contents 📋
 
 - [Features](#features)
